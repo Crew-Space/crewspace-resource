@@ -37,6 +37,10 @@ public class SpaceMember extends BaseTimeEntity{
     private String contact;
     private String sns;
 
+    private Boolean noticePush;
+    private Boolean myNoticePush;
+    private Boolean communityPush;
+
     // 생성 메서드
     @Builder
     public SpaceMember(Space space, Member member, String image, String name,
@@ -53,5 +57,15 @@ public class SpaceMember extends BaseTimeEntity{
         this.email = email;
         this.contact = contact;
         this.sns = sns;
+
+        if(member.getPush()){
+            this.noticePush = true;
+            this.myNoticePush = true;
+            this.communityPush = true;
+        }else{
+            this.noticePush = false;
+            this.myNoticePush = false;
+            this.communityPush = false;
+        }
     }
 }
