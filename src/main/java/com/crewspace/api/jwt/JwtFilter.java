@@ -38,23 +38,23 @@ public class JwtFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            request.setAttribute("exception", ExceptionCode.WRONG_TYPE_TOKEN.getCode());
+            request.setAttribute("exception", ExceptionCode.WRONG_TYPE_TOKEN);
             log.info("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
-            request.setAttribute("exception", ExceptionCode.EXPIRED_TOKEN.getCode());
+            request.setAttribute("exception", ExceptionCode.EXPIRED_TOKEN);
             log.info("만료된 JWT 토큰입니다.");
         } catch (UnsupportedJwtException e) {
-            request.setAttribute("exception", ExceptionCode.UNSUPPORTED_TOKEN.getCode());
+            request.setAttribute("exception", ExceptionCode.UNSUPPORTED_TOKEN);
             log.info("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
-            request.setAttribute("exception", ExceptionCode.WRONG_TOKEN.getCode());
+            request.setAttribute("exception", ExceptionCode.WRONG_TOKEN);
             log.info("JWT 토큰이 잘못되었습니다.");
         } catch(Exception e) {
             log.error("===========================================");
             log.error("JwtFilter - doFilterInternal() 오류 발생");
             log.error("Exception message : {}", e.getMessage());
             log.error("===========================================");
-            request.setAttribute("exception", ExceptionCode.UNKNOWN_ERROR.getCode());
+            request.setAttribute("exception", ExceptionCode.UNKNOWN_ERROR);
         }
 
         filterChain.doFilter(request, response);

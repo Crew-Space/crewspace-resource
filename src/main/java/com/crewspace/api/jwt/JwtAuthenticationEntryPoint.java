@@ -17,17 +17,16 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
         AuthenticationException authException) throws IOException {
-
-        String exception = (String)request.getAttribute("exception");
+        String exception = String.valueOf(request.getAttribute("exception"));
 
         if(exception==null){
             log.info("알 수 없는 인증 에러입니다.");
             setResponse(response, ExceptionCode.UNKNOWN_ERROR);
-        }else if(exception.equals(ExceptionCode.WRONG_TYPE_TOKEN.getCode())){
+        }else if(exception.equals("WRONG_TYPE_TOKEN")){
             setResponse(response, ExceptionCode.WRONG_TYPE_TOKEN);
-        }else if(exception.equals(ExceptionCode.EXPIRED_TOKEN.getCode())){
+        }else if(exception.equals("EXPIRED_TOKEN")){
             setResponse(response, ExceptionCode.EXPIRED_TOKEN);
-        }else if(exception.equals(ExceptionCode.UNSUPPORTED_TOKEN.getCode())){
+        }else if(exception.equals("UNSUPPORTED_TOKEN")){
             setResponse(response, ExceptionCode.UNSUPPORTED_TOKEN);
         }else{
             setResponse(response, ExceptionCode.ACCESS_DENIED);
