@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,4 +37,21 @@ public class SpaceMember extends BaseTimeEntity{
     private String contact;
     private String sns;
 
+    // 생성 메서드
+    @Builder
+    public SpaceMember(Space space, Member member, String image, String name,
+        String description, String birthdate, String email, String contact, String sns) {
+
+        this.space = space;
+        this.member = member;
+
+        this.image = image;
+        this.name = name;
+        this.description = description;
+
+        this.birthdate = birthdate;
+        this.email = email;
+        this.contact = contact;
+        this.sns = sns;
+    }
 }
