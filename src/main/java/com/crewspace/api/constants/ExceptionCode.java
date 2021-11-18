@@ -23,6 +23,6 @@ public enum ExceptionCode {
     /* 403 - 허용되지 않은 접근 */
     FORBIDDEN_ACCESS(FORBIDDEN, "허용되지 않은 접근입니다.");
 
-    private final HttpStatus code;
+    private final HttpStatus status;
     private final String msg;
 }
