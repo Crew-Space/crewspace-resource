@@ -26,4 +26,10 @@ public class NoticeTarget {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private NoticePost noticePost;
+
+    // 연관관계 메서드
+    public void setNoticePost(NoticePost post){
+        this.noticePost = post;
+        post.getTargets().add(this);
+    }
 }

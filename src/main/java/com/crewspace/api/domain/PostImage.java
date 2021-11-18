@@ -24,4 +24,10 @@ public class PostImage extends BaseTimeEntity{
 
     private Boolean isThumbnail;
     private String path;
+
+    // 연관관계 메서드
+    public void setPost(Post post){
+        this.post = post;
+        post.getPostImages().add(this);
+    }
 }
