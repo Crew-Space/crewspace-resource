@@ -38,4 +38,11 @@ public abstract class Post extends BaseTimeEntity {
     private List<PostImage> postImages = new ArrayList<>();
 
     private String description;
+
+    // 생성 메서드
+    public Post(SpaceMember author, PostCategory postCategory, String description) {
+        this.author = author;
+        this.postCategory = postCategory;
+        this.description = description;
+    }
 }
