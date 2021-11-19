@@ -9,6 +9,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,4 +30,9 @@ public abstract class MemberPost extends BaseTimeEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "space_member_id")
     private SpaceMember member;
+
+    public MemberPost(Post post, SpaceMember member) {
+        this.post = post;
+        this.member = member;
+    }
 }
