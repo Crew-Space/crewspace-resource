@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,5 +30,13 @@ public class PostImage extends BaseTimeEntity{
     public void setPost(Post post){
         this.post = post;
         post.getPostImages().add(this);
+    }
+
+    // 생성 메서드
+    @Builder
+    public PostImage(Post post, Boolean isThumbnail, String path) {
+        this.isThumbnail = isThumbnail;
+        this.path = path;
+        this.setPost(post);
     }
 }
