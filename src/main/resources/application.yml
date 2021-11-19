@@ -4,3 +4,11 @@ spring:
   web:
     resources:
       add-mappings: false
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+    mvc:
+      hiddenmethod:
+        filter:
+          enabled: true
