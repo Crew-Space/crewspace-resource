@@ -1,14 +1,12 @@
-package com.crewspace.api.domain;
+package com.crewspace.api.domain.post;
 
+import com.crewspace.api.domain.spaceMember.SpaceMember;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class NoticePost extends Post{
+public class NoticePost extends Post {
 
     private String title;
     private Boolean isShowed;

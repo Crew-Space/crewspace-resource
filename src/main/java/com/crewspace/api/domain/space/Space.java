@@ -1,6 +1,6 @@
-package com.crewspace.api.domain;
+package com.crewspace.api.domain.space;
 
-import java.util.Locale;
+import com.crewspace.api.domain.BaseTimeEntity;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Space extends BaseTimeEntity{
+public class Space extends BaseTimeEntity {
 
     @Id @GeneratedValue
     @Column(name = "space_id")

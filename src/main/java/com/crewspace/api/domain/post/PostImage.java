@@ -1,5 +1,6 @@
-package com.crewspace.api.domain;
+package com.crewspace.api.domain.post;
 
+import com.crewspace.api.domain.BaseTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,30 +15,29 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class NoticeTarget {
-
+public class PostImage extends BaseTimeEntity {
     @Id @GeneratedValue
-    @Column(name = "notice_target_id")
+    @Column(name = "post_image_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_category_id")
-    private MemberCategory target;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
-    private NoticePost noticePost;
+    private Post post;
+
+    private Boolean isThumbnail;
+    private String path;
 
     // 연관관계 메서드
-    public void setNoticePost(NoticePost post){
-        this.noticePost = post;
-        post.getTargets().add(this);
+    public void setPost(Post post){
+        this.post = post;
+        post.getPostImages().add(this);
     }
 
     // 생성 메서드
     @Builder
-    public NoticeTarget(MemberCategory target, NoticePost noticePost) {
-        this.target = target;
-        this.setNoticePost(noticePost);
+    public PostImage(Post post, Boolean isThumbnail, String path) {
+        this.isThumbnail = isThumbnail;
+        this.path = path;
+        this.setPost(post);
     }
 }
