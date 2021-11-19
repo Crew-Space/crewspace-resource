@@ -20,6 +20,8 @@ public class Member extends BaseTimeEntity {
 
     private String oauthId;
     private String email;
+    private String image;
+    private String nickname;
     private Boolean push;
 
     @Enumerated(EnumType.STRING)

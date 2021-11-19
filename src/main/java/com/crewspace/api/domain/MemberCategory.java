@@ -32,10 +32,12 @@ public class MemberCategory {
     private List<SpaceMember> spaceMembers = new ArrayList<>();
 
     private String name;
+    private Boolean isAdmin;
 
     @Builder
-    public MemberCategory(Space space, String name) {
+    public MemberCategory(Space space, String name, Boolean isAdmin) {
         this.space = space;
         this.name = name;
+        this.isAdmin = isAdmin;
     }
 }
