@@ -1,6 +1,7 @@
 package com.crewspace.api.constants;
 
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +22,10 @@ public enum ExceptionCode {
     ACCESS_DENIED(UNAUTHORIZED, "접근이 거절되었습니다."),
 
     /* 403 - 허용되지 않은 접근 */
-    FORBIDDEN_ACCESS(FORBIDDEN, "허용되지 않은 접근입니다.");
+    FORBIDDEN_ACCESS(FORBIDDEN, "허용되지 않은 접근입니다."),
+
+    /* 404 - 찾을 수 없는 리소스 */
+    MEMBER_EMAIL_NOT_FOUND(NOT_FOUND, "가입되지 않은 이메일입니다.");
 
     private final HttpStatus status;
     private final String msg;
