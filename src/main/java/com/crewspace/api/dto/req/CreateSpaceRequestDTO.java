@@ -6,18 +6,16 @@ import com.crewspace.api.domain.space.Space;
 import com.crewspace.api.domain.spaceMember.MemberCategory;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateSpaceDTO {
+public class CreateSpaceRequestDTO {
 
     private String memberEmail;
 
@@ -52,7 +50,7 @@ public class CreateSpaceDTO {
     public PostCategory toPostCategory(Space space, String categoryName, Boolean isNotice){
         return PostCategory.of(space, categoryName, isNotice);
     }
-    
+
     public SpaceMember toSpaceMember(Space space, Member member, MemberCategory adminCategory){
         return SpaceMember.builder()
             .space(space)

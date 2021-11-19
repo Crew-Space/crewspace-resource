@@ -3,7 +3,6 @@ package com.crewspace.api.service;
 import com.crewspace.api.constants.ExceptionCode;
 import com.crewspace.api.domain.member.Member;
 import com.crewspace.api.domain.member.MemberRepository;
-import com.crewspace.api.domain.post.PostCategory;
 import com.crewspace.api.domain.post.PostCategoryRepository;
 import com.crewspace.api.domain.space.Space;
 import com.crewspace.api.domain.space.SpaceRepository;
@@ -11,7 +10,8 @@ import com.crewspace.api.domain.spaceMember.MemberCategory;
 import com.crewspace.api.domain.spaceMember.MemberCategoryRepository;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
-import com.crewspace.api.dto.req.CreateSpaceDTO;
+import com.crewspace.api.dto.req.CreateSpaceRequestDTO;
+import com.crewspace.api.dto.res.CreateSpaceResponseDTO;
 import com.crewspace.api.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class SpaceService {
     private final PostCategoryRepository postCategoryRepository;
 
     @Transactional
-    public Space create(CreateSpaceDTO createSpaceDTO) {
+    public CreateSpaceResponseDTO create(CreateSpaceRequestDTO createSpaceDTO) {
 
         Space space = createSpaceDTO.toSpace();
         spaceRepository.save(space);
@@ -42,8 +42,9 @@ public class SpaceService {
         MemberCategory adminCategory = createSpaceDTO.toMemberCategory(space, "운영진", true);
         memberCategoryRepository.save(adminCategory);
 
-        createSpaceDTO.getMemberCategory().stream()
-            .map(categoryName -> memberCategoryRepository.save(createSpaceDTO.toMemberCategory(space, categoryName, false)));
+        createSpaceDTO.getMemberCategory().forEach(
+            categoryName -> memberCategoryRepository.save(createSpaceDTO.toMemberCategory(space, categoryName, false))
+        );
 
         // 동아리_회원 운영진으로 자동 가입
         Member member = memberRepository.findByEmail(createSpaceDTO.getMemberEmail())
@@ -52,6 +53,6 @@ public class SpaceService {
         SpaceMember spaceMember = createSpaceDTO.toSpaceMember(space, member, adminCategory);
         spaceMemberRepository.save(spaceMember);
 
-        return space;
+        return CreateSpaceResponseDTO.toCreateSpaceResponseDTO(space);
     }
 }
