@@ -11,7 +11,9 @@ import com.crewspace.api.domain.spaceMember.MemberCategoryRepository;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
 import com.crewspace.api.dto.req.space.CreateSpaceRequestDTO;
+import com.crewspace.api.dto.req.space.InvitationCodeRequestDTO;
 import com.crewspace.api.dto.res.space.CreateSpaceResponseDTO;
+import com.crewspace.api.dto.res.space.InvitationCodeResponseDTO;
 import com.crewspace.api.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -54,5 +56,13 @@ public class SpaceService {
         spaceMemberRepository.save(spaceMember);
 
         return CreateSpaceResponseDTO.toCreateSpaceResponseDTO(space);
+    }
+
+    public InvitationCodeResponseDTO confirmInvitationCode(InvitationCodeRequestDTO invitationCodeRequestDTO){
+        Space space = spaceRepository.findByInvitationCode(
+                invitationCodeRequestDTO.getInvitationCode())
+            .orElseThrow(() -> new CustomException(ExceptionCode.UNVALID_SPACE_CODE));
+
+        return InvitationCodeResponseDTO.toInvitationCodeResponseDTO(space);
     }
 }
