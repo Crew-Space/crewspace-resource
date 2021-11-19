@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,4 +29,11 @@ public class MemberCategory {
     private SpaceMember spaceMember;
 
     private String name;
+
+    @Builder
+    public MemberCategory(Space space, SpaceMember spaceMember, String name) {
+        this.space = space;
+        this.spaceMember = spaceMember;
+        this.name = name;
+    }
 }

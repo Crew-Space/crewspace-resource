@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +27,11 @@ public class PostCategory extends BaseTimeEntity {
     private String name;
 
     private Boolean isNotice;
+
+    @Builder
+    public PostCategory(Space space, String name, Boolean isNotice) {
+        this.space = space;
+        this.name = name;
+        this.isNotice = isNotice;
+    }
 }
