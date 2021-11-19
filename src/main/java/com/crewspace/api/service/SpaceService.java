@@ -35,8 +35,8 @@ public class SpaceService {
         spaceRepository.save(space);
 
         // 게시글 카테고리 생성 (공지 : 일반공지, 커뮤니티 : 일반)
-        createSpaceDTO.toPostCategory(space, "일반 공지", true);
-        createSpaceDTO.toPostCategory(space, "일반", false);
+        postCategoryRepository.save(createSpaceDTO.toPostCategory(space, "일반 공지", true));
+        postCategoryRepository.save(createSpaceDTO.toPostCategory(space, "일반", false));
 
         // 회원 카테고리 생성 (운영진 + 받은 값)
         MemberCategory adminCategory = createSpaceDTO.toMemberCategory(space, "운영진", true);
