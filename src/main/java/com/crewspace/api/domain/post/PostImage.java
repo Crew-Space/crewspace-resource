@@ -34,10 +34,13 @@ public class PostImage extends BaseTimeEntity {
     }
 
     // 생성 메서드
-    @Builder
-    public PostImage(Post post, Boolean isThumbnail, String path) {
+    private PostImage(Post post, Boolean isThumbnail, String path) {
         this.isThumbnail = isThumbnail;
         this.path = path;
         this.setPost(post);
+    }
+
+    public static PostImage of(Post post, Boolean isThumbnail, String path){
+        return new PostImage(post, isThumbnail, path);
     }
 }

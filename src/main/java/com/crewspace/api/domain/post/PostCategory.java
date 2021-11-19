@@ -30,10 +30,12 @@ public class PostCategory extends BaseTimeEntity {
 
     private Boolean isNotice;
 
-    @Builder
-    public PostCategory(Space space, String name, Boolean isNotice) {
+    private PostCategory(Space space, String name, Boolean isNotice) {
         this.space = space;
         this.name = name;
         this.isNotice = isNotice;
+    }
+    public static PostCategory of(Space space, String name, Boolean isNotice){
+        return new PostCategory(space, name, isNotice);
     }
 }
