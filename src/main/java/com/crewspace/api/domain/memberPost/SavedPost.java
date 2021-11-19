@@ -1,8 +1,8 @@
-package com.crewspace.api.domain;
+package com.crewspace.api.domain.memberPost;
 
+import com.crewspace.api.domain.post.Post;
+import com.crewspace.api.domain.spaceMember.SpaceMember;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class SavedPost extends MemberPost{
+public class SavedPost extends MemberPost {
     @Builder
     public SavedPost(Post post, SpaceMember member) {
         super(post, member);

@@ -1,5 +1,8 @@
-package com.crewspace.api.domain;
+package com.crewspace.api.domain.spaceMember;
 
+import com.crewspace.api.domain.BaseTimeEntity;
+import com.crewspace.api.domain.member.Member;
+import com.crewspace.api.domain.space.Space;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class SpaceMember extends BaseTimeEntity{
+public class SpaceMember extends BaseTimeEntity {
 
     @Id @GeneratedValue
     @Column(name = "space_member_id")

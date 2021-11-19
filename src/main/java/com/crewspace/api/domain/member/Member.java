@@ -1,5 +1,6 @@
-package com.crewspace.api.domain;
+package com.crewspace.api.domain.member;
 
+import com.crewspace.api.domain.BaseTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

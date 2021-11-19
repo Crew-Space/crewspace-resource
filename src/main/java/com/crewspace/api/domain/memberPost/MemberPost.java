@@ -1,5 +1,8 @@
-package com.crewspace.api.domain;
+package com.crewspace.api.domain.memberPost;
 
+import com.crewspace.api.domain.BaseTimeEntity;
+import com.crewspace.api.domain.post.Post;
+import com.crewspace.api.domain.spaceMember.SpaceMember;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +12,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
-public abstract class MemberPost extends BaseTimeEntity{
+public abstract class MemberPost extends BaseTimeEntity {
 
     @Id @GeneratedValue
     @Column(name = "member_post_id")

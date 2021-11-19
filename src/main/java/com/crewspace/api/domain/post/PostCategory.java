@@ -1,5 +1,7 @@
-package com.crewspace.api.domain;
+package com.crewspace.api.domain.post;
 
+import com.crewspace.api.domain.BaseTimeEntity;
+import com.crewspace.api.domain.space.Space;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

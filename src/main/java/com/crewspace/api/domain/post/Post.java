@@ -1,5 +1,7 @@
-package com.crewspace.api.domain;
+package com.crewspace.api.domain.post;
 
+import com.crewspace.api.domain.BaseTimeEntity;
+import com.crewspace.api.domain.spaceMember.SpaceMember;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
