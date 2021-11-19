@@ -1,5 +1,8 @@
 package com.crewspace.api.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,16 +28,14 @@ public class MemberCategory {
     @JoinColumn(name = "space_id")
     private Space space;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "space_member_id")
-    private SpaceMember spaceMember;
+    @OneToMany(mappedBy = "memberCategory", cascade = CascadeType.ALL)
+    private List<SpaceMember> spaceMembers = new ArrayList<>();
 
     private String name;
 
     @Builder
-    public MemberCategory(Space space, SpaceMember spaceMember, String name) {
+    public MemberCategory(Space space, String name) {
         this.space = space;
-        this.spaceMember = spaceMember;
         this.name = name;
     }
 }

@@ -28,6 +28,10 @@ public class SpaceMember extends BaseTimeEntity{
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_category_id")
+    private MemberCategory memberCategory;
+
     private String image;
     private String name;
     private String description;
@@ -41,13 +45,19 @@ public class SpaceMember extends BaseTimeEntity{
     private Boolean myNoticePush;
     private Boolean communityPush;
 
+    // 연관 관계 메서드
+    public void setMemberCategory(MemberCategory memberCategory){
+        this.memberCategory = memberCategory;
+        memberCategory.getSpaceMembers().add(this);
+    }
     // 생성 메서드
     @Builder
-    public SpaceMember(Space space, Member member, String image, String name,
-        String description, String birthdate, String email, String contact, String sns) {
-
+    public SpaceMember(Space space, Member member,
+        MemberCategory memberCategory, String image, String name, String description,
+        String birthdate, String email, String contact, String sns) {
         this.space = space;
         this.member = member;
+        this.setMemberCategory(memberCategory);
 
         this.image = image;
         this.name = name;
