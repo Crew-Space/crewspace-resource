@@ -1,4 +1,4 @@
-package com.crewspace.api.dto.req;
+package com.crewspace.api.dto.req.space;
 
 import com.crewspace.api.domain.member.Member;
 import com.crewspace.api.domain.post.PostCategory;

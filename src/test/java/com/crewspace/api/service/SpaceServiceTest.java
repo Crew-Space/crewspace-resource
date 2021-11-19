@@ -1,7 +1,7 @@
 package com.crewspace.api.service;
 
-import com.crewspace.api.dto.req.CreateSpaceRequestDTO;
-import com.crewspace.api.dto.res.CreateSpaceResponseDTO;
+import com.crewspace.api.dto.req.space.CreateSpaceRequestDTO;
+import com.crewspace.api.dto.res.space.CreateSpaceResponseDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.assertj.core.api.Assertions;

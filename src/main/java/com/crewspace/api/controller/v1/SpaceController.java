@@ -1,9 +1,9 @@
 package com.crewspace.api.controller.v1;
 
 import com.crewspace.api.constants.SuccessCode;
-import com.crewspace.api.dto.req.CreateSpaceRequest;
-import com.crewspace.api.dto.res.CreateSpaceResponse;
-import com.crewspace.api.dto.res.CreateSpaceResponseDTO;
+import com.crewspace.api.dto.req.space.CreateSpaceRequest;
+import com.crewspace.api.dto.res.space.CreateSpaceResponse;
+import com.crewspace.api.dto.res.space.CreateSpaceResponseDTO;
 import com.crewspace.api.service.SpaceService;
 import com.crewspace.api.utils.SecurityUtil;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.crewspace.api.dto.req;
+package com.crewspace.api.dto.req.space;
 
 import java.util.List;
 import javax.validation.constraints.NotBlank;

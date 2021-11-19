@@ -1,4 +1,4 @@
-package com.crewspace.api.dto.res;
+package com.crewspace.api.dto.res.space;
 
 import com.crewspace.api.domain.space.Space;
 import lombok.Getter;

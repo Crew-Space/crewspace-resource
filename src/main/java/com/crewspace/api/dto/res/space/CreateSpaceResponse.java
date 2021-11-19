@@ -1,4 +1,4 @@
-package com.crewspace.api.dto.res;
+package com.crewspace.api.dto.res.space;
 
 import com.crewspace.api.constants.SuccessCode;
 import com.crewspace.api.dto.BaseResponse;
