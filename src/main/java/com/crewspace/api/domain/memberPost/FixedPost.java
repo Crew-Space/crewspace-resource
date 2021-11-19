@@ -3,7 +3,6 @@ package com.crewspace.api.domain.memberPost;
 import com.crewspace.api.domain.post.Post;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
 import javax.persistence.Entity;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,8 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class FixedPost extends MemberPost {
-    @Builder
-    public FixedPost(Post post, SpaceMember member) {
+
+    private FixedPost(Post post, SpaceMember member) {
         super(post, member);
+    }
+
+    public static FixedPost of(Post post, SpaceMember member){
+        return new FixedPost(post, member);
     }
 }

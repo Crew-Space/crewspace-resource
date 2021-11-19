@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,9 +35,12 @@ public class NoticeTarget {
     }
 
     // 생성 메서드
-    @Builder
-    public NoticeTarget(MemberCategory target, NoticePost noticePost) {
+    private NoticeTarget(MemberCategory target, NoticePost noticePost) {
         this.target = target;
         this.setNoticePost(noticePost);
+    }
+
+    public static NoticeTarget of(MemberCategory target, NoticePost noticePost){
+        return new NoticeTarget(target, noticePost);
     }
 }

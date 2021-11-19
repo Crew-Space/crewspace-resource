@@ -35,10 +35,13 @@ public class MemberCategory {
     private String name;
     private Boolean isAdmin;
 
-    @Builder
-    public MemberCategory(Space space, String name, Boolean isAdmin) {
+    private MemberCategory(Space space, String name, Boolean isAdmin) {
         this.space = space;
         this.name = name;
         this.isAdmin = isAdmin;
+    }
+
+    public static MemberCategory of(Space space, String name, Boolean isAdmin){
+        return new MemberCategory(space, name, isAdmin);
     }
 }
