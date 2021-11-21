@@ -1,4 +1,4 @@
-package com.crewspace.api.dto.req.space;
+package com.crewspace.api.dto.req.spaceMember;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

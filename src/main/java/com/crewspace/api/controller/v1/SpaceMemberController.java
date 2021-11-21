@@ -1,15 +1,14 @@
 package com.crewspace.api.controller.v1;
 
 import com.crewspace.api.constants.SuccessCode;
-import com.crewspace.api.dto.req.space.EnteredSpaceRequestDTO;
-import com.crewspace.api.dto.res.space.EnteredSpaceResponse;
-import com.crewspace.api.dto.res.space.EnteredSpaceResponseDTO;
+import com.crewspace.api.dto.req.spaceMember.EnteredSpaceRequestDTO;
+import com.crewspace.api.dto.res.spaceMember.EnteredSpaceResponse;
+import com.crewspace.api.dto.res.spaceMember.EnteredSpaceResponseDTO;
 import com.crewspace.api.service.SpaceMemberService;
 import com.crewspace.api.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
