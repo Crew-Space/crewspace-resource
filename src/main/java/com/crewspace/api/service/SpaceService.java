@@ -2,7 +2,6 @@ package com.crewspace.api.service;
 
 import static com.crewspace.api.constants.ExceptionCode.*;
 
-import com.crewspace.api.constants.ExceptionCode;
 import com.crewspace.api.domain.member.Member;
 import com.crewspace.api.domain.member.MemberRepository;
 import com.crewspace.api.domain.post.PostCategoryRepository;
@@ -15,9 +14,11 @@ import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
 import com.crewspace.api.dto.req.space.CreateSpaceRequestDTO;
 import com.crewspace.api.dto.req.space.InvitationCodeRequestDTO;
 import com.crewspace.api.dto.req.space.RegisterInfoRequestDTO;
+import com.crewspace.api.dto.req.space.SpaceEnterRequestDTO;
 import com.crewspace.api.dto.res.space.CreateSpaceResponseDTO;
 import com.crewspace.api.dto.res.space.InvitationCodeResponseDTO;
 import com.crewspace.api.dto.res.space.RegisterInfoResponseDTO;
+import com.crewspace.api.dto.res.space.SpaceEnterResponseDTO;
 import com.crewspace.api.exception.CustomException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,5 +82,23 @@ public class SpaceService {
             .collect(Collectors.toList());
 
         return RegisterInfoResponseDTO.toRegisterInfoResponseDTO(space, memberCategory);
+    }
+
+    @Transactional
+    public SpaceEnterResponseDTO enterSpace(SpaceEnterRequestDTO spaceEnterRequestDTO){
+        Space space = spaceRepository.findById(spaceEnterRequestDTO.getSpaceId())
+            .orElseThrow(() -> new CustomException(SPACE_NOT_FOUND));
+
+        Member member = memberRepository.findByEmail(spaceEnterRequestDTO.getMemberEmail())
+            .orElseThrow(() -> new CustomException(MEMBER_EMAIL_NOT_FOUND));
+
+        MemberCategory memberCategory = memberCategoryRepository.findByIdAndSpace(
+                spaceEnterRequestDTO.getMemberCategoryId(), space)
+            .orElseThrow(() -> new CustomException(MEMBER_CATEGORY_NOT_FOUND));
+
+        SpaceMember spaceMember = spaceEnterRequestDTO.toSpaceMember(space, member, memberCategory);
+        spaceMemberRepository.save(spaceMember);
+
+        return SpaceEnterResponseDTO.toSpaceEnterResponseDTO(spaceMember);
     }
 }
