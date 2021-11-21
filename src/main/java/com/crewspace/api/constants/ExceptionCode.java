@@ -1,5 +1,6 @@
 package com.crewspace.api.constants;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
@@ -11,6 +12,9 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum ExceptionCode {
+
+    /* 400 - 잘못된 요청 */
+    NO_SPACE_ID_HEADER(BAD_REQUEST, "헤더에 동아리 id 값이 없습니다"),
 
     /* 401 - 인증 실패 */
     // token 관련
@@ -26,7 +30,8 @@ public enum ExceptionCode {
 
     /* 404 - 찾을 수 없는 리소스 */
     MEMBER_EMAIL_NOT_FOUND(NOT_FOUND, "가입되지 않은 이메일입니다."),
-    UNVALID_SPACE_CODE(NOT_FOUND, "유효하지 않은 초대 코드입니다.");
+    UNVALID_SPACE_CODE(NOT_FOUND, "유효하지 않은 초대 코드입니다."),
+    SPACE_NOT_FOUND(NOT_FOUND, "동아리를 찾을 수 없습니다.");
 
     private final HttpStatus status;
     private final String msg;
