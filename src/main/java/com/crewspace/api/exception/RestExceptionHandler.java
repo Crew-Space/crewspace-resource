@@ -1,8 +1,10 @@
 package com.crewspace.api.exception;
 
+import static com.crewspace.api.constants.ExceptionCode.*;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+import com.crewspace.api.constants.ExceptionCode;
 import com.crewspace.api.dto.BaseResponse;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.validation.BindException;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -21,6 +24,11 @@ public class RestExceptionHandler {
     @ExceptionHandler(value = { CustomException.class })
     protected ResponseEntity<BaseResponse> handleCustomException(CustomException e) {
         return BaseResponse.toCustomErrorResponse(e.getExceptionCode());
+    }
+
+    @ExceptionHandler(value = { MissingRequestHeaderException.class })
+    protected ResponseEntity<BaseResponse> handleMissingRequestHeaderException(MissingRequestHeaderException e) {
+        return BaseResponse.toBasicErrorResponse(NO_SPACE_ID_HEADER.getStatus(), NO_SPACE_ID_HEADER.getMsg());
     }
 
     // @RequestBody valid 에러
@@ -46,6 +54,7 @@ public class RestExceptionHandler {
     @ExceptionHandler(value = { Exception.class })
     protected ResponseEntity<BaseResponse> handleException(Exception e, HttpServletRequest request) {
         log.error("[500 Error] : " + request.getMethod() + " " + request.getRequestURI() + " " + e.getMessage());
+        log.error(e.toString());
         return BaseResponse.toBasicErrorResponse(INTERNAL_SERVER_ERROR, request.getRequestURI()+ " 서버 내에서 요청 처리 중 에러가 발생했습니다.");
     }
 }
