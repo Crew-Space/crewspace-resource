@@ -1,7 +1,6 @@
 package com.crewspace.api.controller.v1;
 
 import com.crewspace.api.constants.SuccessCode;
-import com.crewspace.api.dto.BaseResponse;
 import com.crewspace.api.dto.req.space.CreateSpaceRequest;
 import com.crewspace.api.dto.req.space.InvitationCodeRequestDTO;
 import com.crewspace.api.dto.req.space.RegisterInfoRequestDTO;
@@ -30,12 +29,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1")
+@RequestMapping("/v1/space")
 public class SpaceController {
 
     private final SpaceService spaceService;
 
-    @PostMapping("/space")
+    @PostMapping("/")
     public ResponseEntity<CreateSpaceResponse> create(@ModelAttribute @Valid CreateSpaceRequest request) throws IOException {
 
         String imageURL;
@@ -52,7 +51,7 @@ public class SpaceController {
         return CreateSpaceResponse.toResponse(SuccessCode.CREATE_SPACE_SUCCESS, responseDTO);
     }
 
-    @GetMapping("/space/{space-code}")
+    @GetMapping("/{space-code}")
     public ResponseEntity<InvitationCodeResponse> confirmInvitationCode(@PathVariable("space-code") String spaceCode){
 
         InvitationCodeRequestDTO invitationCodeRequestDTO = new InvitationCodeRequestDTO(spaceCode);
@@ -61,7 +60,7 @@ public class SpaceController {
         return InvitationCodeResponse.toResponse(SuccessCode.VALID_SPACE_CODE, responseDTO);
     }
 
-    @GetMapping("/space/register-info")
+    @GetMapping("/register-info")
     public ResponseEntity<RegisterInfoResponse> registerInfo(@Valid @RequestHeader("Space-Id") Long spaceId){
         RegisterInfoRequestDTO registerInfoRequestDTO = new RegisterInfoRequestDTO(spaceId);
         RegisterInfoResponseDTO responseDTO = spaceService.registerInfo(registerInfoRequestDTO);
@@ -69,7 +68,7 @@ public class SpaceController {
         return RegisterInfoResponse.toResponse(SuccessCode.LOAD_REGISTER_INFO_SUCCESS, responseDTO);
     }
 
-    @PostMapping("/space/enter")
+    @PostMapping("/enter")
     public ResponseEntity<SpaceEnterResponse> enterSpace(@Valid @RequestHeader("Space-Id") Long spaceId, @Valid @ModelAttribute
         SpaceEnterRequest request){
 
@@ -87,5 +86,6 @@ public class SpaceController {
 
         return SpaceEnterResponse.toResponse(SuccessCode.ENTER_SPACE_SUCEESS, responseDTO);
     }
+
 
 }
