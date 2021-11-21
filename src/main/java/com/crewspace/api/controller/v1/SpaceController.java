@@ -1,12 +1,16 @@
 package com.crewspace.api.controller.v1;
 
 import com.crewspace.api.constants.SuccessCode;
+import com.crewspace.api.dto.BaseResponse;
 import com.crewspace.api.dto.req.space.CreateSpaceRequest;
 import com.crewspace.api.dto.req.space.InvitationCodeRequestDTO;
+import com.crewspace.api.dto.req.space.RegisterInfoRequestDTO;
 import com.crewspace.api.dto.res.space.CreateSpaceResponse;
 import com.crewspace.api.dto.res.space.CreateSpaceResponseDTO;
 import com.crewspace.api.dto.res.space.InvitationCodeResponse;
 import com.crewspace.api.dto.res.space.InvitationCodeResponseDTO;
+import com.crewspace.api.dto.res.space.RegisterInfoResponse;
+import com.crewspace.api.dto.res.space.RegisterInfoResponseDTO;
 import com.crewspace.api.service.SpaceService;
 import com.crewspace.api.utils.SecurityUtil;
 import java.io.IOException;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,4 +57,13 @@ public class SpaceController {
 
         return InvitationCodeResponse.toResponse(SuccessCode.VALID_SPACE_CODE, responseDTO);
     }
+
+    @GetMapping("/space/register-info")
+    public ResponseEntity<RegisterInfoResponse> registerInfo(@Valid @RequestHeader("Space-Id") Long spaceId){
+        RegisterInfoRequestDTO registerInfoRequestDTO = new RegisterInfoRequestDTO(spaceId);
+        RegisterInfoResponseDTO responseDTO = spaceService.registerInfo(registerInfoRequestDTO);
+
+        return RegisterInfoResponse.toResponse(SuccessCode.LOAD_REGISTER_INFO_SUCCESS, responseDTO);
+    }
+
 }

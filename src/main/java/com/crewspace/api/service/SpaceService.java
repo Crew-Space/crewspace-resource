@@ -1,5 +1,7 @@
 package com.crewspace.api.service;
 
+import static com.crewspace.api.constants.ExceptionCode.*;
+
 import com.crewspace.api.constants.ExceptionCode;
 import com.crewspace.api.domain.member.Member;
 import com.crewspace.api.domain.member.MemberRepository;
@@ -12,9 +14,13 @@ import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
 import com.crewspace.api.dto.req.space.CreateSpaceRequestDTO;
 import com.crewspace.api.dto.req.space.InvitationCodeRequestDTO;
+import com.crewspace.api.dto.req.space.RegisterInfoRequestDTO;
 import com.crewspace.api.dto.res.space.CreateSpaceResponseDTO;
 import com.crewspace.api.dto.res.space.InvitationCodeResponseDTO;
+import com.crewspace.api.dto.res.space.RegisterInfoResponseDTO;
 import com.crewspace.api.exception.CustomException;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +56,7 @@ public class SpaceService {
 
         // 동아리_회원 운영진으로 자동 가입
         Member member = memberRepository.findByEmail(createSpaceDTO.getMemberEmail())
-            .orElseThrow(() -> new CustomException(ExceptionCode.MEMBER_EMAIL_NOT_FOUND));
+            .orElseThrow(() -> new CustomException(MEMBER_EMAIL_NOT_FOUND));
 
         SpaceMember spaceMember = createSpaceDTO.toSpaceMember(space, member, adminCategory);
         spaceMemberRepository.save(spaceMember);
@@ -61,8 +67,19 @@ public class SpaceService {
     public InvitationCodeResponseDTO confirmInvitationCode(InvitationCodeRequestDTO invitationCodeRequestDTO){
         Space space = spaceRepository.findByInvitationCode(
                 invitationCodeRequestDTO.getInvitationCode())
-            .orElseThrow(() -> new CustomException(ExceptionCode.UNVALID_SPACE_CODE));
+            .orElseThrow(() -> new CustomException(UNVALID_SPACE_CODE));
 
         return InvitationCodeResponseDTO.toInvitationCodeResponseDTO(space);
+    }
+
+    public RegisterInfoResponseDTO registerInfo(RegisterInfoRequestDTO registerInfoRequestDTO){
+        Space space = spaceRepository.findById(registerInfoRequestDTO.getSpaceId())
+            .orElseThrow(() -> new CustomException(SPACE_NOT_FOUND));
+
+        List<RegisterInfoResponseDTO.MemberCategory> memberCategory = memberCategoryRepository.findBySpace(space).stream()
+            .map(category -> new RegisterInfoResponseDTO.MemberCategory(category.getId(), category.getName()))
+            .collect(Collectors.toList());
+
+        return RegisterInfoResponseDTO.toRegisterInfoResponseDTO(space, memberCategory);
     }
 }
