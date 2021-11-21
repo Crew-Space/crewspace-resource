@@ -5,12 +5,15 @@ import com.crewspace.api.dto.BaseResponse;
 import com.crewspace.api.dto.req.space.CreateSpaceRequest;
 import com.crewspace.api.dto.req.space.InvitationCodeRequestDTO;
 import com.crewspace.api.dto.req.space.RegisterInfoRequestDTO;
+import com.crewspace.api.dto.req.space.SpaceEnterRequest;
 import com.crewspace.api.dto.res.space.CreateSpaceResponse;
 import com.crewspace.api.dto.res.space.CreateSpaceResponseDTO;
 import com.crewspace.api.dto.res.space.InvitationCodeResponse;
 import com.crewspace.api.dto.res.space.InvitationCodeResponseDTO;
 import com.crewspace.api.dto.res.space.RegisterInfoResponse;
 import com.crewspace.api.dto.res.space.RegisterInfoResponseDTO;
+import com.crewspace.api.dto.res.space.SpaceEnterResponse;
+import com.crewspace.api.dto.res.space.SpaceEnterResponseDTO;
 import com.crewspace.api.service.SpaceService;
 import com.crewspace.api.utils.SecurityUtil;
 import java.io.IOException;
@@ -64,6 +67,25 @@ public class SpaceController {
         RegisterInfoResponseDTO responseDTO = spaceService.registerInfo(registerInfoRequestDTO);
 
         return RegisterInfoResponse.toResponse(SuccessCode.LOAD_REGISTER_INFO_SUCCESS, responseDTO);
+    }
+
+    @PostMapping("/space/enter")
+    public ResponseEntity<SpaceEnterResponse> enterSpace(@Valid @RequestHeader("Space-Id") Long spaceId, @Valid @ModelAttribute
+        SpaceEnterRequest request){
+
+        String imageURL;
+        String memberEmail = SecurityUtil.getCurrentMemberId();
+
+        // REFACTOR
+        if(request.getImage() == null){
+            imageURL = "default image!";
+        }else{
+            imageURL = "upload with S3";
+        }
+        SpaceEnterResponseDTO responseDTO = spaceService.enterSpace(
+            request.toSpaceEnterDTO(spaceId, memberEmail, imageURL));
+
+        return SpaceEnterResponse.toResponse(SuccessCode.ENTER_SPACE_SUCEESS, responseDTO);
     }
 
 }
