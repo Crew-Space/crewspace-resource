@@ -11,7 +11,8 @@ import org.springframework.http.HttpStatus;
 public enum SuccessCode {
     CREATE_SPACE_SUCCESS(OK, "동아리 생성을 성공했습니다."),
     VALID_SPACE_CODE(OK, "올바른 초대 코드입니다."),
-    LOAD_REGISTER_INFO_SUCCESS(OK, "동아리 회원 가입 정보를 로드했습니다.");
+    LOAD_REGISTER_INFO_SUCCESS(OK, "동아리 회원 가입 정보를 로드했습니다."),
+    ENTER_SPACE_SUCEESS(OK, "동아리 가입을 성공했습니다.");
 
     private final HttpStatus status;
     private final String msg;
