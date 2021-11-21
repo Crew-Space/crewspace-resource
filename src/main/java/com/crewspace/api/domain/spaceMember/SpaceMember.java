@@ -43,6 +43,7 @@ public class SpaceMember extends BaseTimeEntity {
     private String email;
     private String contact;
     private String sns;
+    private String etc;
 
     private Boolean noticePush;
     private Boolean myNoticePush;
@@ -57,7 +58,7 @@ public class SpaceMember extends BaseTimeEntity {
     @Builder
     public SpaceMember(Space space, Member member,
         MemberCategory memberCategory, String image, String name, String description,
-        String birthdate, String email, String contact, String sns) {
+        String birthdate, String email, String contact, String sns, String etc) {
         this.space = space;
         this.member = member;
         this.setMemberCategory(memberCategory);
@@ -70,6 +71,7 @@ public class SpaceMember extends BaseTimeEntity {
         this.email = email;
         this.contact = contact;
         this.sns = sns;
+        this.etc = etc;
 
         if(member.getPush()){
             this.noticePush = true;
