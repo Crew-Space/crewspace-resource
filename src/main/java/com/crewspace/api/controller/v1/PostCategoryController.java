@@ -34,7 +34,7 @@ public class PostCategoryController {
 
         postCategoryService.create(request.toCreatePostCategoryDTO(spaceId, memberEmail));
 
-        return CreatePostCategoryResponse.newResponse(CREATE_CATEGORY_SUCCESS);
+        return CreatePostCategoryResponse.newResponse(CREATE_POST_CATEGORY_SUCCESS);
     }
 
     @GetMapping("")
