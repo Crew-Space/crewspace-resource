@@ -21,6 +21,8 @@ public class SpaceEnterRequestDTO {
     private String name;
     private String description;
     private Long memberCategoryId;
+    private Boolean isAdmin;
+
     private String birthdate;
     private String email;
     private String contact;

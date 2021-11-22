@@ -14,6 +14,8 @@ public class SpaceEnterRequest {
     private String description;
     @NotNull(message = "회원 분류 ID는 필수입니다.")
     private Long memberCategoryId;
+    @NotNull(message = "운영진 여부는 필수입니다.")
+    private Boolean isAdmin;
 
     private String birthdate = "";
     private String email = "";
@@ -29,6 +31,7 @@ public class SpaceEnterRequest {
             .name(name)
             .description(description)
             .memberCategoryId(memberCategoryId)
+            .isAdmin(isAdmin)
             .birthdate(birthdate)
             .email(email)
             .contact(contact)

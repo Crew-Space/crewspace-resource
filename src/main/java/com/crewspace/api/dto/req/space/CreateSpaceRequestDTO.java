@@ -56,6 +56,7 @@ public class CreateSpaceRequestDTO {
             .space(space)
             .member(member)
             .memberCategory(adminCategory)
+            .isAdmin(true)
             .image(member.getImage())
             .name(member.getNickname())
             .description(space.getName() + "의 운영진입니다 :)")
