@@ -1,6 +1,7 @@
 package com.crewspace.api.constants;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
@@ -33,7 +34,10 @@ public enum ExceptionCode {
     UNVALID_SPACE_CODE(NOT_FOUND, "유효하지 않은 초대 코드입니다."),
     SPACE_NOT_FOUND(NOT_FOUND, "동아리를 찾을 수 없습니다."),
     MEMBER_CATEGORY_NOT_FOUND(NOT_FOUND, "해당 동아리 내에 존재 하지 않는 멤버 카테고리 ID입니다"),
-    SPACE_OR_MEMBER_CATEGORY_NOT_FOUND(NOT_FOUND, "잘못된 동아리 Id거나, 잘못된 카테고리 Id 입니다.");
+    SPACE_OR_MEMBER_CATEGORY_NOT_FOUND(NOT_FOUND, "잘못된 동아리 Id거나, 잘못된 카테고리 Id 입니다."),
+
+    /* 409 - 중복된 리소스 */
+    DUPLICATE_SPACE(CONFLICT, "이미 가입된 카페입니다.");
 
     private final HttpStatus status;
     private final String msg;
