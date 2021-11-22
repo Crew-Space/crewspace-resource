@@ -34,7 +34,7 @@ public class SpaceController {
 
     private final SpaceService spaceService;
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<CreateSpaceResponse> create(@ModelAttribute @Valid CreateSpaceRequest request) throws IOException {
 
         String imageURL;

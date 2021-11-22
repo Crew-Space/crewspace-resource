@@ -22,9 +22,11 @@ import com.crewspace.api.dto.res.space.SpaceEnterResponseDTO;
 import com.crewspace.api.exception.CustomException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -89,6 +91,13 @@ public class SpaceService {
 
         Member member = memberRepository.findByEmail(spaceEnterRequestDTO.getMemberEmail())
             .orElseThrow(() -> new CustomException(MEMBER_EMAIL_NOT_FOUND));
+
+        Boolean isExist = spaceMemberRepository.existsBySpace_IdAndMember(
+            spaceEnterRequestDTO.getSpaceId(), member);
+
+        if(!isExist){
+            throw new CustomException(DUPLICATE_SPACE);
+        }
 
         MemberCategory memberCategory = memberCategoryRepository.findByIdAndSpaceId(
                 spaceEnterRequestDTO.getMemberCategoryId(), spaceEnterRequestDTO.getSpaceId())
