@@ -35,6 +35,8 @@ public class SpaceMember extends BaseTimeEntity {
     @JoinColumn(name = "member_category_id")
     private MemberCategory memberCategory;
 
+    private Boolean isAdmin;
+
     private String image;
     private String name;
     private String description;
@@ -57,12 +59,13 @@ public class SpaceMember extends BaseTimeEntity {
     // 생성 메서드
     @Builder
     public SpaceMember(Space space, Member member,
-        MemberCategory memberCategory, String image, String name, String description,
+        MemberCategory memberCategory, Boolean isAdmin, String image, String name, String description,
         String birthdate, String email, String contact, String sns, String etc) {
         this.space = space;
         this.member = member;
         this.setMemberCategory(memberCategory);
 
+        this.isAdmin = isAdmin;
         this.image = image;
         this.name = name;
         this.description = description;
