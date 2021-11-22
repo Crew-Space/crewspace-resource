@@ -8,8 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface MemberCategoryRepository extends JpaRepository<MemberCategory, Long> {
-    List<MemberCategory>  findBySpace(Space space);
-    Optional<MemberCategory> findByIdAndSpace(Long id, Space space);
+
+    @Query("select m from MemberCategory m inner join fetch m.space where m.space.id = :spaceId and m.id = :id")
+    Optional<MemberCategory> findByIdAndSpaceId(@Param("id") Long id, @Param("spaceId") Long spaceId);
 
     @Query("select m from MemberCategory m inner join fetch m.space where m.space.id = :spaceId")
     List<MemberCategory> findBySpaceId(@Param("spaceId") Long spaceId);

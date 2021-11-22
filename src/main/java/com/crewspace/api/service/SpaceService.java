@@ -21,7 +21,6 @@ import com.crewspace.api.dto.res.space.RegisterInfoResponseDTO;
 import com.crewspace.api.dto.res.space.SpaceEnterResponseDTO;
 import com.crewspace.api.exception.CustomException;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,23 +80,21 @@ public class SpaceService {
         if(memberCategories.size() == 0 ){
             throw new CustomException(SPACE_NOT_FOUND);
         }
-        
+
         return RegisterInfoResponseDTO.toRegisterInfoResponseDTO(memberCategories);
     }
 
     @Transactional
     public SpaceEnterResponseDTO enterSpace(SpaceEnterRequestDTO spaceEnterRequestDTO){
-        Space space = spaceRepository.findById(spaceEnterRequestDTO.getSpaceId())
-            .orElseThrow(() -> new CustomException(SPACE_NOT_FOUND));
 
         Member member = memberRepository.findByEmail(spaceEnterRequestDTO.getMemberEmail())
             .orElseThrow(() -> new CustomException(MEMBER_EMAIL_NOT_FOUND));
 
-        MemberCategory memberCategory = memberCategoryRepository.findByIdAndSpace(
-                spaceEnterRequestDTO.getMemberCategoryId(), space)
-            .orElseThrow(() -> new CustomException(MEMBER_CATEGORY_NOT_FOUND));
+        MemberCategory memberCategory = memberCategoryRepository.findByIdAndSpaceId(
+                spaceEnterRequestDTO.getMemberCategoryId(), spaceEnterRequestDTO.getSpaceId())
+            .orElseThrow(() -> new CustomException(SPACE_OR_MEMBER_CATEGORY_NOT_FOUND));
 
-        SpaceMember spaceMember = spaceEnterRequestDTO.toSpaceMember(space, member, memberCategory);
+        SpaceMember spaceMember = spaceEnterRequestDTO.toSpaceMember(member, memberCategory);
         spaceMemberRepository.save(spaceMember);
 
         return SpaceEnterResponseDTO.toSpaceEnterResponseDTO(spaceMember);
