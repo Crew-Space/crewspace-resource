@@ -37,6 +37,7 @@ public class SpaceService {
     private final MemberCategoryRepository memberCategoryRepository;
     private final PostCategoryRepository postCategoryRepository;
 
+
     @Transactional
     public CreateSpaceResponseDTO create(CreateSpaceRequestDTO createSpaceDTO) {
 
@@ -74,14 +75,14 @@ public class SpaceService {
     }
 
     public RegisterInfoResponseDTO registerInfo(RegisterInfoRequestDTO registerInfoRequestDTO){
-        Space space = spaceRepository.findById(registerInfoRequestDTO.getSpaceId())
-            .orElseThrow(() -> new CustomException(SPACE_NOT_FOUND));
+        List<MemberCategory> memberCategories = memberCategoryRepository.findBySpaceId(
+            registerInfoRequestDTO.getSpaceId());
 
-        List<RegisterInfoResponseDTO.MemberCategory> memberCategory = memberCategoryRepository.findBySpace(space).stream()
-            .map(category -> new RegisterInfoResponseDTO.MemberCategory(category.getId(), category.getName()))
-            .collect(Collectors.toList());
-
-        return RegisterInfoResponseDTO.toRegisterInfoResponseDTO(space, memberCategory);
+        if(memberCategories.size() == 0 ){
+            throw new CustomException(SPACE_NOT_FOUND);
+        }
+        
+        return RegisterInfoResponseDTO.toRegisterInfoResponseDTO(memberCategories);
     }
 
     @Transactional
