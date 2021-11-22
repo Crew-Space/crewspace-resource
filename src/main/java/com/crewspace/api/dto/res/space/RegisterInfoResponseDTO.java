@@ -1,7 +1,8 @@
 package com.crewspace.api.dto.res.space;
 
-import com.crewspace.api.domain.space.Space;
+import com.crewspace.api.domain.spaceMember.MemberCategory;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,34 +16,38 @@ public class RegisterInfoResponseDTO {
     private Boolean hasContact;
     private Boolean hasSns;
     private Boolean hasEtc;
-    private List<MemberCategory> memberCategory;
+    private List<MemberCategoryList> memberCategoryList;
 
     @Getter
     @AllArgsConstructor
-    public static class MemberCategory{
+    public static class MemberCategoryList{
         private Long categoryId;
         private String categoryName;
     }
 
     @Builder
     public RegisterInfoResponseDTO(Boolean hasBirthdate, Boolean hasEmail, Boolean hasContact,
-        Boolean hasSns, Boolean hasEtc, List<MemberCategory> memberCategory) {
+        Boolean hasSns, Boolean hasEtc, List<MemberCategoryList> memberCategoryList) {
         this.hasBirthdate = hasBirthdate;
         this.hasEmail = hasEmail;
         this.hasContact = hasContact;
         this.hasSns = hasSns;
         this.hasEtc = hasEtc;
-        this.memberCategory = memberCategory;
+        this.memberCategoryList = memberCategoryList;
     }
 
-    public static RegisterInfoResponseDTO toRegisterInfoResponseDTO(Space space, List<MemberCategory> memberCategory){
+    public static RegisterInfoResponseDTO toRegisterInfoResponseDTO(List<MemberCategory> memberCategories){
+        List<MemberCategoryList> memberCategoryList = memberCategories.stream()
+            .map(category -> new MemberCategoryList(category.getId(), category.getName()))
+            .collect(Collectors.toList());
+
         return RegisterInfoResponseDTO.builder()
-            .hasBirthdate(space.getHasBirthdate())
-            .hasContact(space.getHasContact())
-            .hasEmail(space.getHasEmail())
-            .hasSns(space.getHasSns())
-            .hasEtc(space.getHasEtc())
-            .memberCategory(memberCategory)
+            .hasBirthdate(memberCategories.get(0).getSpace().getHasBirthdate())
+            .hasContact(memberCategories.get(0).getSpace().getHasContact())
+            .hasEmail(memberCategories.get(0).getSpace().getHasEmail())
+            .hasSns(memberCategories.get(0).getSpace().getHasSns())
+            .hasEtc(memberCategories.get(0).getSpace().getHasEtc())
+            .memberCategoryList(memberCategoryList)
             .build();
     }
 }

@@ -27,9 +27,9 @@ public class SpaceEnterRequestDTO {
     private String sns;
     private String etc;
 
-    public SpaceMember toSpaceMember(Space space, Member member, MemberCategory memberCategory){
+    public SpaceMember toSpaceMember(Member member, MemberCategory memberCategory){
         return SpaceMember.builder()
-            .space(space)
+            .space(memberCategory.getSpace())
             .member(member)
             .memberCategory(memberCategory)
             .image(profileImage)
