@@ -13,7 +13,8 @@ public enum SuccessCode {
     VALID_SPACE_CODE(OK, "올바른 초대 코드입니다."),
     LOAD_REGISTER_INFO_SUCCESS(OK, "동아리 회원 가입 정보를 로드했습니다."),
     ENTER_SPACE_SUCEESS(OK, "동아리 가입을 성공했습니다."),
-    LOAD_SPACES_SUCCESS(OK, "가입된 동아리 리스트를 불러왔습니다.");
+    LOAD_SPACES_SUCCESS(OK, "가입된 동아리 리스트를 불러왔습니다."),
+    CREATE_CATEGORY_SUCCESS(OK, "카테고리 생성에 성공했습니다");
 
     private final HttpStatus status;
     private final String msg;
