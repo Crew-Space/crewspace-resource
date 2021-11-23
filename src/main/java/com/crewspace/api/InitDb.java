@@ -93,6 +93,9 @@ public class InitDb {
 
             // 공지 게시글 생성
             List<String> noticeImages = new ArrayList<>();
+            noticeImages.add("notice img1");
+            noticeImages.add("notice img2");
+            noticeImages.add("notice img3");
             List<Long> noticeTargets = new ArrayList<>();
             noticeTargets.add(Long.valueOf(6));
 

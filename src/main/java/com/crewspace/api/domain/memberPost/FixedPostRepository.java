@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface FixedPostRepository  extends JpaRepository<FixedPost, Long> {
     Optional<FixedPost> findByPostAndMember(Post post, SpaceMember spaceMember);
     List<FixedPost> deleteByPostAndMember(Post post, SpaceMember spaceMember);
+    Boolean existsByPostAndMember(Post post, SpaceMember spaceMember);
 }

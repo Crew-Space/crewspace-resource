@@ -1,8 +1,6 @@
 package com.crewspace.api.dto.res.post;
 
-import com.crewspace.api.domain.post.Post;
-import com.crewspace.api.domain.post.PostImage;
-import java.util.List;
+import com.crewspace.api.domain.post.CommunityPost;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +15,7 @@ public class CommunityPostDetailResponseDTO extends PostDetail {
     private String authorImage;
 
     @Builder
-    public CommunityPostDetailResponseDTO(Post post, Boolean isAuthor, Boolean isSaved) {
+    public CommunityPostDetailResponseDTO(CommunityPost post, Boolean isAuthor, Boolean isSaved) {
         super(post, isAuthor, isSaved);
         this.author = post.getAuthor().getName();
         this.authorId = post.getAuthor().getId();
