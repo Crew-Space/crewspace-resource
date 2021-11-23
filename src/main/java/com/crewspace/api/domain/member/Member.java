@@ -7,9 +7,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 
 @Getter
 @NoArgsConstructor
@@ -27,4 +27,13 @@ public class Member extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
+
+    // DB Init 용 public 생성자 -> 이후에 지우
+    public Member(String oauthId, String email, String image, String nickname, Boolean push) {
+        this.oauthId = oauthId;
+        this.email = email;
+        this.image = image;
+        this.nickname = nickname;
+        this.push = push;
+    }
 }
