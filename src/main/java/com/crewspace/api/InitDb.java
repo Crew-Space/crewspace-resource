@@ -2,8 +2,10 @@ package com.crewspace.api;
 
 import com.crewspace.api.domain.member.Member;
 import com.crewspace.api.domain.member.MemberRepository;
+import com.crewspace.api.dto.req.post.WriteCommunityRequestDTO;
 import com.crewspace.api.dto.req.space.CreateSpaceRequestDTO;
 import com.crewspace.api.dto.req.space.SpaceEnterRequestDTO;
+import com.crewspace.api.service.CommunityPostService;
 import com.crewspace.api.service.SpaceService;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,8 @@ public class InitDb {
 
         private final SpaceService spaceService;
         private final MemberRepository memberRepository;
+        private final CommunityPostService communityPostService;
+
         public void dbInit() {
             // 유저 생성
             Member member1 = new Member("11", "aa9919@naver.com", "testprofile", "yaewon", true);
@@ -41,9 +45,9 @@ public class InitDb {
 
             // 동아리 생성
             List<String> memberCategory = new ArrayList<>();
-            memberCategory.add("테스트 멤버 카테고리 - 일반");
+            memberCategory.add("개발팀");
             CreateSpaceRequestDTO createSpaceRequest = CreateSpaceRequestDTO.builder()
-                .memberEmail("test@naver.com")
+                .memberEmail("aa9919@naver.com")
                 .image("test img")
                 .name("크루 스페이스2")
                 .memberCategory(memberCategory)
@@ -59,7 +63,7 @@ public class InitDb {
             // 동아리 가입
             SpaceEnterRequestDTO spaceEnterRequest = SpaceEnterRequestDTO.builder()
                 .spaceId(Long.valueOf(3))
-                .memberEmail("aa9919@naver.com")
+                .memberEmail("test@naver.com")
                 .profileImage("동아리 가입 이미지")
                 .name("스페이서 예원")
                 .description("난 예옹이야~")
@@ -72,7 +76,12 @@ public class InitDb {
                 .etc("")
                 .build();
             spaceService.enterSpace(spaceEnterRequest);
- 
+
+            // 커뮤니티 게시글 생성
+            List<String> images = new ArrayList<>();
+            WriteCommunityRequestDTO writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(3),
+                "aa9919@naver.com", Long.valueOf(5), images, "설명설명");
+            communityPostService.write(writeCommunityRequest);
 
         }
     }
