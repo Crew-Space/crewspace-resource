@@ -4,6 +4,7 @@ import static com.crewspace.api.constants.ExceptionCode.POST_NOT_FOUND;
 import static com.crewspace.api.constants.ExceptionCode.SPACE_MEMBER_NOT_FOUND;
 
 import com.crewspace.api.domain.memberPost.FixedPostRepository;
+import com.crewspace.api.domain.memberPost.ReadPostRepository;
 import com.crewspace.api.domain.memberPost.SavedPostRepository;
 import com.crewspace.api.domain.post.CommunityPost;
 import com.crewspace.api.domain.post.NoticePost;
@@ -26,8 +27,11 @@ public class PostService {
 
     private final PostSupportRepository postSupportRepository;
     private final SpaceMemberRepository spaceMemberRepository;
+
     private final SavedPostRepository savedPostRepository;
     private final FixedPostRepository fixedPostRepository;
+    private final ReadPostRepository readPostRepository;
+
     private final NoticeTargetRepository noticeTargetRepository;
 
     public CommunityPostDetailResponseDTO communityDetail(PostRequestDTO request){
@@ -41,6 +45,9 @@ public class PostService {
 
         Boolean isAuthor = communityPost.getAuthor().getMember().getEmail().equals(request.getMemberEmail());
         Boolean isSaved = savedPostRepository.existsByPostAndMember(communityPost, spaceMember);
+
+        // 읽음 처리
+        if(!readPostRepository.existsByPostAndMember(communityPost, spaceMember)) readPostRepository.save(request.toReadPost(communityPost,spaceMember));
 
         return CommunityPostDetailResponseDTO.builder()
             .post(communityPost)
@@ -61,6 +68,9 @@ public class PostService {
         Boolean isAuthor = noticePost.getAuthor().getMember().getEmail().equals(request.getMemberEmail());
         Boolean isSaved = savedPostRepository.existsByPostAndMember(noticePost, spaceMember);
         Boolean isFixed = fixedPostRepository.existsByPostAndMember(noticePost, spaceMember);
+
+        // 읽음 처리
+        if(!readPostRepository.existsByPostAndMember(noticePost, spaceMember)) readPostRepository.save(request.toReadPost(noticePost,spaceMember));
 
         return NoticePostDetailResponseDTO.builder()
             .post(noticePost)

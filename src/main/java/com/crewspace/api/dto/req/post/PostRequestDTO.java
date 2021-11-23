@@ -1,6 +1,7 @@
 package com.crewspace.api.dto.req.post;
 
 import com.crewspace.api.domain.memberPost.FixedPost;
+import com.crewspace.api.domain.memberPost.ReadPost;
 import com.crewspace.api.domain.memberPost.SavedPost;
 import com.crewspace.api.domain.post.Post;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
@@ -31,6 +32,10 @@ public class PostRequestDTO {
 
     public FixedPost toFixedPost(Post post, SpaceMember spaceMember){
         return FixedPost.of(post, spaceMember);
+    }
+
+    public ReadPost toReadPost(Post post, SpaceMember spaceMember){
+        return ReadPost.of(post, spaceMember);
     }
 
 }
