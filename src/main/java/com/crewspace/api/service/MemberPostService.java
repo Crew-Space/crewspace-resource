@@ -1,5 +1,6 @@
 package com.crewspace.api.service;
 
+import static com.crewspace.api.constants.ExceptionCode.ALREADY_SAVED_POST;
 import static com.crewspace.api.constants.ExceptionCode.POST_NOT_FOUND;
 import static com.crewspace.api.constants.ExceptionCode.SPACE_MEMBER_NOT_FOUND;
 
@@ -33,6 +34,9 @@ public class MemberPostService {
 
         Post post = postRepository.findById(request.getPostId())
             .orElseThrow(() -> new CustomException(POST_NOT_FOUND));
+
+        savedPostRepository.findByPostAndMember(post, spaceMember)
+            .ifPresent(savedPost ->{ throw new CustomException(ALREADY_SAVED_POST); });
 
         SavedPost savedPost = request.toSavedPost(post, spaceMember);
         savedPostRepository.save(savedPost);

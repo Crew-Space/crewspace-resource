@@ -41,7 +41,8 @@ public enum ExceptionCode {
     POST_NOT_FOUND(NOT_FOUND, "존재하지 않는 게시글입니다"),
 
     /* 409 - 중복된 리소스 */
-    DUPLICATE_SPACE(CONFLICT, "이미 가입된 카페입니다.");
+    DUPLICATE_SPACE(CONFLICT, "이미 가입된 카페입니다."),
+    ALREADY_SAVED_POST(CONFLICT, "이미 저장된 게시글입니다.");
 
     private final HttpStatus status;
     private final String msg;

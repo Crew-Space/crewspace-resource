@@ -31,4 +31,6 @@ public class MemberPostController {
 
         return MemberPostResponse.newResponse(SAVE_POST_SUCCESS);
     }
+
+
 }
