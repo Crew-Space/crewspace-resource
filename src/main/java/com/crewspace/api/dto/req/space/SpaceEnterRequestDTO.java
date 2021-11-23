@@ -34,7 +34,7 @@ public class SpaceEnterRequestDTO {
             .space(memberCategory.getSpace())
             .member(member)
             .memberCategory(memberCategory)
-            .isAdmin(isAdmin)
+            .isAdmin(memberCategory.getIsAdmin())
             .image(profileImage)
             .name(name)
             .description(description)
