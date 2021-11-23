@@ -1,4 +1,4 @@
-package com.crewspace.api.dto.req.memberPost;
+package com.crewspace.api.dto.req.post;
 
 import com.crewspace.api.domain.memberPost.FixedPost;
 import com.crewspace.api.domain.memberPost.SavedPost;
@@ -9,20 +9,20 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class MemberPostRequestDTO {
+public class PostRequestDTO {
 
     private Long spaceId;
     private String memberEmail;
     private Long postId;
 
-    private MemberPostRequestDTO(Long spaceId, String memberEmail, Long postId) {
+    private PostRequestDTO(Long spaceId, String memberEmail, Long postId) {
         this.spaceId = spaceId;
         this.memberEmail = memberEmail;
         this.postId = postId;
     }
 
-    public static MemberPostRequestDTO of(Long spaceId, String memberEmail, Long postId){
-        return new MemberPostRequestDTO(spaceId, memberEmail, postId);
+    public static PostRequestDTO of(Long spaceId, String memberEmail, Long postId){
+        return new PostRequestDTO(spaceId, memberEmail, postId);
     }
 
     public SavedPost toSavedPost(Post post, SpaceMember spaceMember){
