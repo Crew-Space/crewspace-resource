@@ -17,7 +17,9 @@ public enum SuccessCode {
     CREATE_POST_CATEGORY_SUCCESS(OK, "게시글 카테고리 생성에 성공했습니다"),
     LOAD_POST_CATEGORIES_SUCCES(OK, "게시글 카테고리 조회에 성공했습니다."),
     WRITE_COMMUNITY_POST_SUCCESS(OK, "커뮤니티 게시글 작성을 성공했습니다."),
-    WRITE_NOTICE_POST_SUCCESS(OK, "공지 게시글 작성을 성공했습니다.");
+    WRITE_NOTICE_POST_SUCCESS(OK, "공지 게시글 작성을 성공했습니다."),
+    SAVE_POST_SUCCESS(OK, "게시글 저장을 성공했습니다."),
+    UNSAVE_POST_SUCCESS(OK, "게시글 저장 취소에 성공했습니다.");
 
     private final HttpStatus status;
     private final String msg;
