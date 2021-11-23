@@ -2,11 +2,16 @@ package com.crewspace.api;
 
 import com.crewspace.api.domain.member.Member;
 import com.crewspace.api.domain.member.MemberRepository;
+import com.crewspace.api.domain.post.NoticePostRepository;
 import com.crewspace.api.dto.req.post.WriteCommunityRequestDTO;
+import com.crewspace.api.dto.req.post.WriteNoticeRequestDTO;
 import com.crewspace.api.dto.req.space.CreateSpaceRequestDTO;
 import com.crewspace.api.dto.req.space.SpaceEnterRequestDTO;
 import com.crewspace.api.service.CommunityPostService;
+import com.crewspace.api.service.NoticePostService;
 import com.crewspace.api.service.SpaceService;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -34,6 +39,7 @@ public class InitDb {
         private final SpaceService spaceService;
         private final MemberRepository memberRepository;
         private final CommunityPostService communityPostService;
+        private final NoticePostService noticePostService;
 
         public void dbInit() {
             // 유저 생성
@@ -78,10 +84,28 @@ public class InitDb {
             spaceService.enterSpace(spaceEnterRequest);
 
             // 커뮤니티 게시글 생성
-            List<String> images = new ArrayList<>();
+            List<String> communityImages = new ArrayList<>();
             WriteCommunityRequestDTO writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(3),
-                "aa9919@naver.com", Long.valueOf(5), images, "설명설명");
+                "aa9919@naver.com", Long.valueOf(5), communityImages, "설명설명");
             communityPostService.write(writeCommunityRequest);
+
+            // 공지 게시글 생성
+            List<String> noticeImages = new ArrayList<>();
+            List<Long> noticeTargets = new ArrayList<>();
+            noticeTargets.add(Long.valueOf(6));
+
+            WriteNoticeRequestDTO writeNoticeRequest = WriteNoticeRequestDTO.builder()
+                .spaceId(Long.valueOf(3))
+                .memberEmail("aa9919@naver.com")
+                .postCategoryId(Long.valueOf(4))
+                .targets(noticeTargets)
+                .images(noticeImages)
+                .title("공지 제목입니다")
+                .description("공지 설명설명")
+                .isReserved(false)
+                .reservedTime(LocalDateTime.now())
+                .build();
+            noticePostService.write(writeNoticeRequest);
 
         }
     }
