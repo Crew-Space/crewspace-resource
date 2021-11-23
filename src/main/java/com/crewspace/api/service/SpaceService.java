@@ -95,7 +95,7 @@ public class SpaceService {
         Boolean isExist = spaceMemberRepository.existsBySpace_IdAndMember(
             spaceEnterRequestDTO.getSpaceId(), member);
 
-        if(!isExist){
+        if(isExist){
             throw new CustomException(DUPLICATE_SPACE);
         }
 
