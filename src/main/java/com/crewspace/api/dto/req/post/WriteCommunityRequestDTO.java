@@ -46,8 +46,8 @@ public class WriteCommunityRequestDTO {
         // 0 번째 업로드된건 썸네일이다. t/f로 판단한다. => index 판단은 stream을 쓰기가 어렵구나..
         List<PostImage> postImages = new ArrayList<>();
         for(int i = 0 ; i < images.size() ; i++){
-            if(i == 0) postImages.add(PostImage.of(communityPost, true, description));
-            else postImages.add(PostImage.of(communityPost, false, description));
+            if(i == 0) postImages.add(PostImage.of(communityPost, true, images.get(i)));
+            else postImages.add(PostImage.of(communityPost, false, images.get(i)));
         }
         return postImages;
     }

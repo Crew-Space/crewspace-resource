@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SavedPostRepository extends JpaRepository<SavedPost, Long> {
     Optional<SavedPost> findByPostAndMember(Post post, SpaceMember spaceMember);
     List<SavedPost> deleteByPostAndMember(Post post, SpaceMember spaceMember);
+    Boolean existsByPostAndMember(Post post, SpaceMember spaceMember);
 }

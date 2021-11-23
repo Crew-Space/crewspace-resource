@@ -85,6 +85,8 @@ public class InitDb {
 
             // 커뮤니티 게시글 생성
             List<String> communityImages = new ArrayList<>();
+            communityImages.add("testImg1");
+            communityImages.add("testImg2");
             WriteCommunityRequestDTO writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(3),
                 "aa9919@naver.com", Long.valueOf(5), communityImages, "설명설명");
             communityPostService.write(writeCommunityRequest);

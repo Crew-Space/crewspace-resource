@@ -16,7 +16,7 @@ import com.crewspace.api.domain.post.Post;
 import com.crewspace.api.domain.post.PostRepository;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
-import com.crewspace.api.dto.req.memberPost.MemberPostRequestDTO;
+import com.crewspace.api.dto.req.post.PostRequestDTO;
 import com.crewspace.api.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class MemberPostService {
     private final SavedPostRepository savedPostRepository;
     private final FixedPostRepository fixedPostRepository;
     @Transactional
-    public void save(MemberPostRequestDTO request){
+    public void save(PostRequestDTO request){
         SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
                 request.getSpaceId(), request.getMemberEmail())
             .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
@@ -51,7 +51,7 @@ public class MemberPostService {
     }
 
     @Transactional
-    public void unSave(MemberPostRequestDTO request){
+    public void unSave(PostRequestDTO request){
         SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
                 request.getSpaceId(), request.getMemberEmail())
             .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
@@ -66,7 +66,7 @@ public class MemberPostService {
     }
 
     @Transactional
-    public void fix(MemberPostRequestDTO request){
+    public void fix(PostRequestDTO request){
         SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
                 request.getSpaceId(), request.getMemberEmail())
             .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
@@ -84,7 +84,7 @@ public class MemberPostService {
     }
 
     @Transactional
-    public void unFix(MemberPostRequestDTO request){
+    public void unFix(PostRequestDTO request){
         SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
                 request.getSpaceId(), request.getMemberEmail())
             .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
