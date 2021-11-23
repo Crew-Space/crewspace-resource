@@ -6,7 +6,6 @@ import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 
 @Getter
-
 public class MemberPostResponse extends BaseResponse {
 
     private MemberPostResponse(Boolean success, String msg) {
