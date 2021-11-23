@@ -1,10 +1,10 @@
 package com.crewspace.api.controller.v1;
 
+import static com.crewspace.api.constants.SuccessCode.FIX_POST_SUCCESS;
 import static com.crewspace.api.constants.SuccessCode.SAVE_POST_SUCCESS;
 import static com.crewspace.api.constants.SuccessCode.UNSAVE_POST_SUCCESS;
 
-import com.crewspace.api.constants.SuccessCode;
-import com.crewspace.api.dto.req.memberPost.SavePostRequestDTO;
+import com.crewspace.api.dto.req.memberPost.MemberPostRequestDTO;
 import com.crewspace.api.dto.res.memberPost.MemberPostResponse;
 import com.crewspace.api.service.MemberPostService;
 import com.crewspace.api.utils.SecurityUtil;
@@ -28,7 +28,7 @@ public class MemberPostController {
         @PathVariable("post-id") Long postId, @Valid @RequestHeader("Space-Id") Long spaceId){
 
         String memberEmail = SecurityUtil.getCurrentMemberId();
-        SavePostRequestDTO requestDTO = SavePostRequestDTO.of(spaceId, memberEmail, postId);
+        MemberPostRequestDTO requestDTO = MemberPostRequestDTO.of(spaceId, memberEmail, postId);
         memberPostService.save(requestDTO);
 
         return MemberPostResponse.newResponse(SAVE_POST_SUCCESS);
@@ -39,10 +39,21 @@ public class MemberPostController {
         @PathVariable("post-id") Long postId, @Valid @RequestHeader("Space-Id") Long spaceId){
 
         String memberEmail = SecurityUtil.getCurrentMemberId();
-        SavePostRequestDTO requestDTO = SavePostRequestDTO.of(spaceId, memberEmail, postId);
+        MemberPostRequestDTO requestDTO = MemberPostRequestDTO.of(spaceId, memberEmail, postId);
         memberPostService.unSave(requestDTO);
 
         return MemberPostResponse.newResponse(UNSAVE_POST_SUCCESS);
+    }
+
+    @PostMapping("/v1/posts/{post-id}/fix")
+    public ResponseEntity<MemberPostResponse> fixPost(
+        @PathVariable("post-id") Long postId, @Valid @RequestHeader("Space-Id") Long spaceId){
+
+        String memberEmail = SecurityUtil.getCurrentMemberId();
+        MemberPostRequestDTO requestDTO = MemberPostRequestDTO.of(spaceId, memberEmail, postId);
+        memberPostService.fix(requestDTO);
+
+        return MemberPostResponse.newResponse(FIX_POST_SUCCESS);
     }
 
 }
