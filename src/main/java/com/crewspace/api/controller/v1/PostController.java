@@ -20,18 +20,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/posts")
-public class PostContoller {
+public class PostController {
 
     private final CommunityPostService communityPostService;
     private final NoticePostService noticePostService;
 
-    @PostMapping("/community/{post-category-id}/post")
+    @PostMapping("/v1/posts/community/{post-category-id}/post")
     public ResponseEntity<WritePostResponse> writeCommunityPost(@PathVariable("post-category-id") Long postCategoryId,
         @Valid @RequestHeader("Space-Id") Long spaceId, @Valid @ModelAttribute WriteCommunityRequest request){
 
@@ -51,7 +49,7 @@ public class PostContoller {
         return WritePostResponse.newResponse(WRITE_COMMUNITY_POST_SUCCESS);
     }
 
-    @PostMapping("/notice/{post-category-id}/post")
+    @PostMapping("/v1/posts/notice/{post-category-id}/post")
     public ResponseEntity<WritePostResponse> writeNoticePost(@PathVariable("post-category-id") Long postCategoryId,
         @Valid @RequestHeader("Space-Id") Long spaceId, @Valid @ModelAttribute WriteNoticeRequest request){
 
