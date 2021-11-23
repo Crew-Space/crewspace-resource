@@ -20,7 +20,8 @@ public enum SuccessCode {
     WRITE_NOTICE_POST_SUCCESS(OK, "공지 게시글 작성을 성공했습니다."),
     SAVE_POST_SUCCESS(OK, "게시글 저장을 성공했습니다."),
     UNSAVE_POST_SUCCESS(OK, "게시글 저장 취소에 성공했습니다."),
-    FIX_POST_SUCCESS(OK, "게시글 고정을 성공했습니다.");
+    FIX_POST_SUCCESS(OK, "게시글 고정을 성공했습니다."),
+    UNFIX_POST_SUCCESS(OK, "게시글 고정 취소를 성공했습니다.");
 
     private final HttpStatus status;
     private final String msg;
