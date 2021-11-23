@@ -1,12 +1,12 @@
 package com.crewspace.api.dto.req.post;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data
@@ -24,9 +24,8 @@ public class WriteNoticeRequest {
     @NotNull(message = "예약 여부를 설정해주세요!")
     private Boolean isReserved;
 
-    @JsonFormat
-        (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    public LocalDateTime reservedTime = LocalDateTime.now();
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime reservedTime;
 
     public WriteNoticeRequestDTO toWriteNoticeDTO(Long spaceId, String memberEmail,
         Long postCategoryId, List<String> images){

@@ -47,7 +47,7 @@ public class PostContoller {
             spaceId, memberEmail, postCategoryId, imageURLs);
 
         communityPostService.write(requestDTO);
-
+        
         return WritePostResponse.newResponse(WRITE_COMMUNITY_POST_SUCCESS);
     }
 

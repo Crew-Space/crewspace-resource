@@ -8,7 +8,6 @@ import com.crewspace.api.domain.spaceMember.MemberCategory;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;
@@ -30,7 +29,7 @@ public class WriteNoticeRequestDTO {
     private String description;
 
     private Boolean isReserved;
-    public LocalDateTime reservedTime;
+    private LocalDateTime reservedTime;
 
     @Builder
     public WriteNoticeRequestDTO(Long spaceId, String memberEmail, Long postCategoryId,
