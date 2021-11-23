@@ -61,8 +61,8 @@ public class WriteNoticeRequestDTO {
     public List<PostImage> toPostImages(NoticePost noticePost){
         List<PostImage> postImages = new ArrayList<>();
         for(int i = 0 ; i < images.size() ; i++){
-            if(i == 0) postImages.add(PostImage.of(noticePost, true, description));
-            else postImages.add(PostImage.of(noticePost, false, description));
+            if(i == 0) postImages.add(PostImage.of(noticePost, true, images.get(i)));
+            else postImages.add(PostImage.of(noticePost, false, images.get(i)));
         }
         return postImages;
     }
