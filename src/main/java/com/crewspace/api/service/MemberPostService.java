@@ -2,6 +2,7 @@ package com.crewspace.api.service;
 
 import static com.crewspace.api.constants.ExceptionCode.ALREADY_SAVED_POST;
 import static com.crewspace.api.constants.ExceptionCode.POST_NOT_FOUND;
+import static com.crewspace.api.constants.ExceptionCode.SAVED_POST_NOT_FOUND;
 import static com.crewspace.api.constants.ExceptionCode.SPACE_MEMBER_NOT_FOUND;
 
 import com.crewspace.api.domain.memberPost.SavedPost;
@@ -42,4 +43,20 @@ public class MemberPostService {
         savedPostRepository.save(savedPost);
         return;
     }
+
+    @Transactional
+    public void unSave(SavePostRequestDTO request){
+        SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
+                request.getSpaceId(), request.getMemberEmail())
+            .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
+
+        Post post = postRepository.findById(request.getPostId())
+            .orElseThrow(() -> new CustomException(POST_NOT_FOUND));
+
+        if(savedPostRepository.deleteByPostAndMember(post, spaceMember).size() == 0){
+            throw new CustomException(SAVED_POST_NOT_FOUND);
+        }
+        return;
+    }
+
 }
