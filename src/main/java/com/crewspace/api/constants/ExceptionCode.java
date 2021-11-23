@@ -40,10 +40,12 @@ public enum ExceptionCode {
     POST_CATEGORY_NOT_FOUND(NOT_FOUND, "해당 동아리 내에 존재 하지 않는 게시글 카테고리 id 입니다."),
     POST_NOT_FOUND(NOT_FOUND, "존재하지 않는 게시글입니다"),
     SAVED_POST_NOT_FOUND(NOT_FOUND, "저장되지 않은 게시글입니다."),
+    FIXED_POST_NOT_FOUND(NOT_FOUND, "고정되지 않은 게시글입니다"),
 
     /* 409 - 중복된 리소스 */
     DUPLICATE_SPACE(CONFLICT, "이미 가입된 카페입니다."),
-    ALREADY_SAVED_POST(CONFLICT, "이미 저장된 게시글입니다.");
+    ALREADY_SAVED_POST(CONFLICT, "이미 저장된 게시글입니다."),
+    ALREADY_FIXED_POST(CONFLICT, "이미 고정된 게시글입니다.");
 
     private final HttpStatus status;
     private final String msg;
