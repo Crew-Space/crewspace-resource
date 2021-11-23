@@ -37,6 +37,7 @@ public enum ExceptionCode {
     MEMBER_CATEGORY_NOT_FOUND(NOT_FOUND, "해당 동아리 내에 존재 하지 않는 멤버 카테고리 ID입니다"),
     SPACE_OR_MEMBER_CATEGORY_NOT_FOUND(NOT_FOUND, "잘못된 동아리 Id거나, 잘못된 카테고리 Id 입니다."),
     SPACE_MEMBER_NOT_FOUND(NOT_FOUND, "동아리에 가입된 멤버가 아닙니다."),
+    POST_CATEGORY_NOT_FOUND(NOT_FOUND, "해당 동아리 내에 존재 하지 않는 게시글 카테고리 id 입니다."),
 
     /* 409 - 중복된 리소스 */
     DUPLICATE_SPACE(CONFLICT, "이미 가입된 카페입니다.");
