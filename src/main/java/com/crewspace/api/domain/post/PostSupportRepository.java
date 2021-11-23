@@ -38,5 +38,24 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
             .fetchOne());
     }
 
+    public Optional<NoticePost> findNoticePost(Long postId){
+        QPost post = new QPost("post");
+        QNoticePost noticePost = post.as(QNoticePost.class);
+
+        QMember member = QMember.member;
+        QPostCategory postCategory = QPostCategory.postCategory;
+        QSpaceMember spaceMember = QSpaceMember.spaceMember;
+        QPostImage postImage = QPostImage.postImage;
+
+        return Optional.ofNullable(jpaQueryFactory
+            .selectDistinct(noticePost)
+            .from(noticePost)
+            .join(noticePost.author, spaceMember).fetchJoin()
+            .join(noticePost.postCategory, postCategory).fetchJoin()
+            .leftJoin(noticePost.postImages, postImage).fetchJoin()
+            .join(spaceMember.member, member).fetchJoin()
+            .where(noticePost.id.eq(postId))
+            .fetchOne());
+    }
 
 }
