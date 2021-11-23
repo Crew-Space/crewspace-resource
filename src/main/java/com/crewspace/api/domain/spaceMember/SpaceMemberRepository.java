@@ -1,7 +1,6 @@
 package com.crewspace.api.domain.spaceMember;
 
 import com.crewspace.api.domain.member.Member;
-import com.crewspace.api.domain.space.Space;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
