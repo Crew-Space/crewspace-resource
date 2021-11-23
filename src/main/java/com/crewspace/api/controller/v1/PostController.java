@@ -9,6 +9,8 @@ import com.crewspace.api.dto.req.post.WriteNoticeRequest;
 import com.crewspace.api.dto.req.post.WriteNoticeRequestDTO;
 import com.crewspace.api.dto.res.post.CommunityPostDetailResponse;
 import com.crewspace.api.dto.res.post.CommunityPostDetailResponseDTO;
+import com.crewspace.api.dto.res.post.NoticePostDetailResponse;
+import com.crewspace.api.dto.res.post.NoticePostDetailResponseDTO;
 import com.crewspace.api.dto.res.post.WritePostResponse;
 import com.crewspace.api.service.CommunityPostService;
 import com.crewspace.api.service.NoticePostService;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class PostController {
@@ -88,4 +92,15 @@ public class PostController {
         return CommunityPostDetailResponse.newResponse(READ_COMMUNITY_POST_SUCCESS, responseDTO);
     }
 
+    @GetMapping("/v1/posts/notice/{post-id}")
+    public ResponseEntity<NoticePostDetailResponse> noticePostDetail(@PathVariable("post-id") Long postId,
+        @Valid @RequestHeader("Space-Id") Long spaceId){
+
+        String memberEmail = SecurityUtil.getCurrentMemberId();
+        PostRequestDTO requestDTO = PostRequestDTO.of(spaceId, memberEmail, postId);
+
+        NoticePostDetailResponseDTO responseDTO = postService.noticeDetail(requestDTO);
+
+        return NoticePostDetailResponse.newResponse(READ_NOTICE_POST_SUCCESS, responseDTO);
+    }
 }
