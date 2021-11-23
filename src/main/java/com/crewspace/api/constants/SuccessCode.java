@@ -14,7 +14,7 @@ public enum SuccessCode {
     LOAD_REGISTER_INFO_SUCCESS(OK, "동아리 회원 가입 정보를 로드했습니다."),
     ENTER_SPACE_SUCEESS(OK, "동아리 가입을 성공했습니다."),
     LOAD_SPACES_SUCCESS(OK, "가입된 동아리 리스트를 불러왔습니다."),
-    CREATE_CATEGORY_SUCCESS(OK, "카테고리 생성에 성공했습니다"),
+    CREATE_POST_CATEGORY_SUCCESS(OK, "게시글 카테고리 생성에 성공했습니다"),
     LOAD_POST_CATEGORIES_SUCCES(OK, "게시글 카테고리 조회에 성공했습니다."),
     WRITE_COMMUNITY_POST_SUCCESS(OK, "커뮤니티 게시글 작성을 성공했습니다.");
 
