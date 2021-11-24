@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 @NoArgsConstructor
@@ -33,13 +34,13 @@ public class Space extends BaseTimeEntity {
 
     // 생성 메서드
     @Builder
-    public Space(String image, String name, String description, Boolean hasBirthdate,
+    public Space(String image, String bannerImage, String name, String description, Boolean hasBirthdate,
         Boolean hasEmail, Boolean hasContact, Boolean hasSns, Boolean hasEtc) {
 
         // 초대 코드 랜덤 생성
         String invitationCode = UUID.randomUUID().toString().replaceAll("-", "");
         invitationCode = invitationCode.substring(0, 6).toUpperCase();
-        this.bannerImage = "default banner Image";
+        this.bannerImage = bannerImage;
 
         this.invitationCode = invitationCode;
 

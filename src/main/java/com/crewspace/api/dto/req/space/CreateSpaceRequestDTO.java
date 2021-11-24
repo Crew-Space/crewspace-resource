@@ -20,6 +20,7 @@ public class CreateSpaceRequestDTO {
     private String memberEmail;
 
     private String image;
+    private String bannerImage;
     private String name;
     private String description;
     private List<String> memberCategory;
@@ -33,6 +34,7 @@ public class CreateSpaceRequestDTO {
     public Space toSpace(){
         return Space.builder()
             .image(image)
+            .bannerImage(bannerImage)
             .name(name)
             .description(description)
             .hasBirthdate(hasBirthdate)

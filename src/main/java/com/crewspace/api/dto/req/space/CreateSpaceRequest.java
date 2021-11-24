@@ -25,10 +25,11 @@ public class CreateSpaceRequest {
     private Boolean hasSns = false;
     private Boolean hasEtc = false;
 
-    public CreateSpaceRequestDTO toCreateSpaceDTO(String imageURL, String memberEmail){
+    public CreateSpaceRequestDTO toCreateSpaceDTO(String imageURL, String bannerImage, String memberEmail){
         return CreateSpaceRequestDTO.builder()
             .memberEmail(memberEmail)
             .image(imageURL)
+            .bannerImage(bannerImage)
             .name(name)
             .description(description)
             .memberCategory(memberCategory)

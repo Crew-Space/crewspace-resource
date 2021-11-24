@@ -22,6 +22,7 @@ import com.crewspace.api.utils.SecurityUtil;
 import java.io.IOException;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,6 +39,15 @@ public class SpaceController {
 
     private final SpaceService spaceService;
 
+    @Value("${default_image.space}")
+    private String defaultSpaceImage;
+
+    @Value("${default_image.profile}")
+    private String defaultProfileImage;
+
+    @Value("${default_image.space_banner}")
+    private String defaultSpaceBanner;
+
     @PostMapping("")
     public ResponseEntity<CreateSpaceResponse> create(@ModelAttribute @Valid CreateSpaceRequest request) throws IOException {
 
@@ -46,12 +56,12 @@ public class SpaceController {
 
         // REFACTOR
         if(request.getImage() == null){
-            imageURL = "default image!";
+            imageURL = defaultSpaceImage;
         }else{
             imageURL = "upload with S3";
         }
 
-        CreateSpaceResponseDTO responseDTO = spaceService.create(request.toCreateSpaceDTO(imageURL, memberEmail));
+        CreateSpaceResponseDTO responseDTO = spaceService.create(request.toCreateSpaceDTO(imageURL, defaultSpaceBanner, memberEmail));
         return CreateSpaceResponse.toResponse(CREATE_SPACE_SUCCESS, responseDTO);
     }
 
@@ -81,7 +91,7 @@ public class SpaceController {
 
         // REFACTOR
         if(request.getImage() == null){
-            imageURL = "default image!";
+            imageURL = defaultProfileImage;
         }else{
             imageURL = "upload with S3";
         }
