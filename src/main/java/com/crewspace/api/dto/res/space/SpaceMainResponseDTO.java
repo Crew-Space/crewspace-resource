@@ -79,8 +79,8 @@ public class SpaceMainResponseDTO {
             this.description = post.getDescription();
             this.writtenDate = setWrittenDate(post);
             this.image = post.getPostImages().size() > 0 ? post.getPostImages().get(0).getPath() : "";
-            this.isRead = Objects.isNull(isRead) ? true : false;
-            this.isSaved = Objects.isNull(isSaved) ? true : false;
+            this.isRead = !Objects.isNull(isRead);
+            this.isSaved = !Objects.isNull(isSaved);
         }
     }
 
