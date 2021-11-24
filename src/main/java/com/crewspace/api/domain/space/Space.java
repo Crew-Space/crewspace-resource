@@ -21,6 +21,7 @@ public class Space extends BaseTimeEntity {
 
     private String invitationCode;
     private String image;
+    private String bannerImage;
     private String name;
     private String description;
 
@@ -38,6 +39,7 @@ public class Space extends BaseTimeEntity {
         // 초대 코드 랜덤 생성
         String invitationCode = UUID.randomUUID().toString().replaceAll("-", "");
         invitationCode = invitationCode.substring(0, 6).toUpperCase();
+        this.bannerImage = "default banner Image";
 
         this.invitationCode = invitationCode;
 
