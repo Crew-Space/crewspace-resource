@@ -14,6 +14,8 @@ import com.crewspace.api.dto.res.post.CommunityPostListResponse;
 import com.crewspace.api.dto.res.post.CommunityPostListResponseDTO;
 import com.crewspace.api.dto.res.post.NoticePostDetailResponse;
 import com.crewspace.api.dto.res.post.NoticePostDetailResponseDTO;
+import com.crewspace.api.dto.res.post.NoticePostListResponse;
+import com.crewspace.api.dto.res.post.NoticePostListResponseDTO;
 import com.crewspace.api.dto.res.post.WritePostResponse;
 import com.crewspace.api.service.CommunityPostService;
 import com.crewspace.api.service.NoticePostService;
@@ -119,5 +121,18 @@ public class PostController {
 
         CommunityPostListResponseDTO responseDTO = postService.communityList(requestDTO);
         return CommunityPostListResponse.newResponse(LOAD_COMMUNITY_LIST_SUCCESS, responseDTO);
+    }
+
+    @GetMapping("/v1/posts/notice")
+    public ResponseEntity<NoticePostListResponse> noticeList(@Valid @RequestHeader("Space-Id") Long spaceId,
+        @RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
+        @RequestParam(value = "postCategoryId", defaultValue = "-1", required = false) Long postCategoryId,
+        @RequestParam(value = "type") String type){
+
+        String memberEmail = SecurityUtil.getCurrentMemberId();
+        PostListRequestDTO requestDTO = PostListRequestDTO.of(postCategoryId, offset, type, spaceId, memberEmail);
+
+        NoticePostListResponseDTO responseDTO = postService.noticeList(requestDTO);
+        return NoticePostListResponse.newResponse(LOAD_NOTICE_LIST_SUCCESS, responseDTO);
     }
 }
