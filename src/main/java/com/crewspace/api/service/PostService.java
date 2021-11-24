@@ -1,5 +1,7 @@
 package com.crewspace.api.service;
 
+import static com.crewspace.api.constants.ExceptionCode.BAD_POST_TYPE;
+import static com.crewspace.api.constants.ExceptionCode.POST_CATEGORY_NOT_FOUND;
 import static com.crewspace.api.constants.ExceptionCode.POST_NOT_FOUND;
 import static com.crewspace.api.constants.ExceptionCode.SPACE_MEMBER_NOT_FOUND;
 
@@ -10,18 +12,30 @@ import com.crewspace.api.domain.post.CommunityPost;
 import com.crewspace.api.domain.post.NoticePost;
 import com.crewspace.api.domain.post.NoticeTarget;
 import com.crewspace.api.domain.post.NoticeTargetRepository;
+import com.crewspace.api.domain.post.PostCategory;
+import com.crewspace.api.domain.post.PostCategoryRepository;
 import com.crewspace.api.domain.post.PostSupportRepository;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
+import com.crewspace.api.dto.req.post.PostListRequestDTO;
 import com.crewspace.api.dto.req.post.PostRequestDTO;
 import com.crewspace.api.dto.res.post.CommunityPostDetailResponseDTO;
+import com.crewspace.api.dto.res.post.CommunityPostListResponseDTO;
+import com.crewspace.api.dto.res.post.CommunityPostListResponseDTO.CommunityPostList;
 import com.crewspace.api.dto.res.post.NoticePostDetailResponseDTO;
 import com.crewspace.api.exception.CustomException;
+import com.querydsl.core.Tuple;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostService {
 
@@ -33,6 +47,7 @@ public class PostService {
     private final ReadPostRepository readPostRepository;
 
     private final NoticeTargetRepository noticeTargetRepository;
+    private final PostCategoryRepository postCategoryRepository;
 
     public CommunityPostDetailResponseDTO communityDetail(PostRequestDTO request){
         SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
@@ -45,9 +60,6 @@ public class PostService {
 
         Boolean isAuthor = communityPost.getAuthor().getMember().getEmail().equals(request.getMemberEmail());
         Boolean isSaved = savedPostRepository.existsByPostAndMember(communityPost, spaceMember);
-
-        // 읽음 처리
-        if(!readPostRepository.existsByPostAndMember(communityPost, spaceMember)) readPostRepository.save(request.toReadPost(communityPost,spaceMember));
 
         return CommunityPostDetailResponseDTO.builder()
             .post(communityPost)
@@ -81,4 +93,30 @@ public class PostService {
             .build();
     }
 
+    public CommunityPostListResponseDTO communityList(PostListRequestDTO request){
+        SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
+                request.getSpaceId(), request.getMemberEmail())
+            .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
+
+        if(!request.getPostCategoryId().equals(Long.valueOf(-1))) {
+            PostCategory postCategory = postCategoryRepository.findById(request.getPostCategoryId())
+                .orElseThrow(() -> new CustomException(POST_CATEGORY_NOT_FOUND));
+            if(!postCategory.getIsNotice()){
+                throw new CustomException(POST_CATEGORY_NOT_FOUND);
+            }
+        }
+
+        PageRequest paging = PageRequest.of(request.getOffset(), 2);
+
+        List<CommunityPostList> posts;
+        if(request.getType().equals("ALL")) {
+            posts = postSupportRepository.allCommunityList(spaceMember, paging, request.getPostCategoryId());
+        }else if(request.getType().equals("SAVED")){
+            posts = postSupportRepository.saveCommunityList(spaceMember, paging, request.getPostCategoryId());
+        }else{
+            throw new CustomException(BAD_POST_TYPE);
+        }
+
+        return CommunityPostListResponseDTO.of(request.getOffset(), request.getType(), posts);
+    }
 }
