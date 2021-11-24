@@ -1,10 +1,7 @@
 package com.crewspace.api.dto.res.space;
 
 import com.crewspace.api.domain.post.NoticePost;
-import com.crewspace.api.domain.space.Space;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -58,8 +55,8 @@ public class SpaceMainResponseDTO {
     }
 
     @Getter
-    @JsonInclude(Include.NON_NULL)
     public static class NewNotice {
+        private Long postId;
         private String categoryName;
         private String title;
         private String description;
@@ -72,13 +69,14 @@ public class SpaceMainResponseDTO {
 
         @Builder
         public NewNotice(NoticePost post, Long isRead, Long isSaved){
+            this.postId = post.getId();
             this.categoryName = post.getPostCategory().getName();
             this.title = post.getTitle();
             this.description = post.getDescription();
             this.writtenDate = setWrittenDate(post);
             this.image = post.getPostImages().size() > 0 ? post.getPostImages().get(0).getPath() : "";
-            this.isRead = Objects.isNull(isRead) ? true : false;
-            this.isSaved = Objects.isNull(isSaved) ? true : false;
+            this.isRead = !Objects.isNull(isRead);
+            this.isSaved = !Objects.isNull(isSaved);
         }
     }
 
