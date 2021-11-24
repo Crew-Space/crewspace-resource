@@ -55,6 +55,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
             .join(communityPost.author, spaceMember).fetchJoin()
             .join(communityPost.postCategory, postCategory).fetchJoin()
             .leftJoin(communityPost.postImages, postImage).fetchJoin()
+            .join(spaceMember.memberCategory, memberCategory).fetchJoin()
             .join(spaceMember.member, member).fetchJoin()
             .where(communityPost.id.eq(postId))
             .fetchOne());

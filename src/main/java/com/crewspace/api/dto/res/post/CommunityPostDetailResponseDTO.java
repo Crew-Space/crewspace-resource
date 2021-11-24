@@ -20,6 +20,6 @@ public class CommunityPostDetailResponseDTO extends PostDetail {
         this.author = post.getAuthor().getName();
         this.authorId = post.getAuthor().getId();
         this.authorImage = post.getAuthor().getImage();
-        this.authorCategoryName = post.getPostCategory().getName();
+        this.authorCategoryName = post.getAuthor().getMemberCategory().getName();
     }
 }
