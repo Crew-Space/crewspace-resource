@@ -1,10 +1,12 @@
 package com.crewspace.api.controller.v1;
 
-import com.crewspace.api.constants.SuccessCode;
+import static com.crewspace.api.constants.SuccessCode.*;
+
 import com.crewspace.api.dto.req.space.CreateSpaceRequest;
 import com.crewspace.api.dto.req.space.InvitationCodeRequestDTO;
 import com.crewspace.api.dto.req.space.RegisterInfoRequestDTO;
 import com.crewspace.api.dto.req.space.SpaceEnterRequest;
+import com.crewspace.api.dto.req.space.SpaceMainRequestDTO;
 import com.crewspace.api.dto.res.space.CreateSpaceResponse;
 import com.crewspace.api.dto.res.space.CreateSpaceResponseDTO;
 import com.crewspace.api.dto.res.space.InvitationCodeResponse;
@@ -13,6 +15,8 @@ import com.crewspace.api.dto.res.space.RegisterInfoResponse;
 import com.crewspace.api.dto.res.space.RegisterInfoResponseDTO;
 import com.crewspace.api.dto.res.space.SpaceEnterResponse;
 import com.crewspace.api.dto.res.space.SpaceEnterResponseDTO;
+import com.crewspace.api.dto.res.space.SpaceMainResponse;
+import com.crewspace.api.dto.res.space.SpaceMainResponseDTO;
 import com.crewspace.api.service.SpaceService;
 import com.crewspace.api.utils.SecurityUtil;
 import java.io.IOException;
@@ -48,7 +52,7 @@ public class SpaceController {
         }
 
         CreateSpaceResponseDTO responseDTO = spaceService.create(request.toCreateSpaceDTO(imageURL, memberEmail));
-        return CreateSpaceResponse.toResponse(SuccessCode.CREATE_SPACE_SUCCESS, responseDTO);
+        return CreateSpaceResponse.toResponse(CREATE_SPACE_SUCCESS, responseDTO);
     }
 
     @GetMapping("/{space-code}")
@@ -57,7 +61,7 @@ public class SpaceController {
         InvitationCodeRequestDTO invitationCodeRequestDTO = new InvitationCodeRequestDTO(spaceCode);
         InvitationCodeResponseDTO responseDTO = spaceService.confirmInvitationCode(invitationCodeRequestDTO);
 
-        return InvitationCodeResponse.toResponse(SuccessCode.VALID_SPACE_CODE, responseDTO);
+        return InvitationCodeResponse.toResponse(VALID_SPACE_CODE, responseDTO);
     }
 
     @GetMapping("/register-info")
@@ -65,7 +69,7 @@ public class SpaceController {
         RegisterInfoRequestDTO registerInfoRequestDTO = new RegisterInfoRequestDTO(spaceId);
         RegisterInfoResponseDTO responseDTO = spaceService.registerInfo(registerInfoRequestDTO);
 
-        return RegisterInfoResponse.toResponse(SuccessCode.LOAD_REGISTER_INFO_SUCCESS, responseDTO);
+        return RegisterInfoResponse.toResponse(LOAD_REGISTER_INFO_SUCCESS, responseDTO);
     }
 
     @PostMapping("/enter")
@@ -84,8 +88,18 @@ public class SpaceController {
         SpaceEnterResponseDTO responseDTO = spaceService.enterSpace(
             request.toSpaceEnterDTO(spaceId, memberEmail, imageURL));
 
-        return SpaceEnterResponse.toResponse(SuccessCode.ENTER_SPACE_SUCEESS, responseDTO);
+        return SpaceEnterResponse.toResponse(ENTER_SPACE_SUCEESS, responseDTO);
     }
 
 
+    @GetMapping("")
+    public ResponseEntity<SpaceMainResponse> spaceMain(@Valid @RequestHeader("Space-Id") Long spaceId){
+
+        String memberEmail = SecurityUtil.getCurrentMemberId();
+        SpaceMainRequestDTO requestDTO = SpaceMainRequestDTO.of(memberEmail, spaceId);
+
+        SpaceMainResponseDTO responseDTO = spaceService.spaceMain(requestDTO);
+
+        return SpaceMainResponse.newResponse(ENTER_SPACE_SUCEESS, responseDTO);
+    }
 }
