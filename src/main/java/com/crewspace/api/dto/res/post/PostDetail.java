@@ -30,7 +30,7 @@ public abstract class PostDetail {
         DayOfWeek dayOfWeek = post.getCreatedAt().getDayOfWeek();
         String day = dayOfWeek.getDisplayName(TextStyle.NARROW, Locale.KOREAN);
         String date = post.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
-        this.writtenDate = String.format("%s (%s)", day, date);
+        this.writtenDate = String.format("%s (%s)", date, day);
     }
 
     private void setImages(List<PostImage> images){
