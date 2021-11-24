@@ -150,6 +150,25 @@ public class InitDb {
             // 저장 게시글 추가
             memberPostService.save(postRequest);
 
+            // 커뮤니티 게시글 추가
+            List<String> communityImages2 = new ArrayList<>();
+            communityImages.add("2nd 게시글ㄹㄹㄹ");
+            WriteCommunityRequestDTO writeCommunityRequest2 = WriteCommunityRequestDTO.of(Long.valueOf(3),
+                "aa9919@naver.com", Long.valueOf(5), communityImages2, "설명설명");
+            communityPostService.write(writeCommunityRequest2);
+
+            // 저장 추가
+            PostRequestDTO postRequest3 = PostRequestDTO.of(Long.valueOf(3), "aa9919@naver.com",
+                Long.valueOf(10));
+
+            memberPostService.save(postRequest3);
+
+            //커뮤ㅣ티게시글 추가
+            List<String> communityImages3 = new ArrayList<>();
+            WriteCommunityRequestDTO writeCommunityRequest3 = WriteCommunityRequestDTO.of(Long.valueOf(3),
+                "aa9919@naver.com", Long.valueOf(5), communityImages3, "설명설명");
+            communityPostService.write(writeCommunityRequest3);
+
         }
     }
 

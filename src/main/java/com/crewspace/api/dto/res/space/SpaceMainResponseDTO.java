@@ -76,13 +76,13 @@ public class SpaceMainResponseDTO {
             this.title = post.getTitle();
             this.description = post.getDescription();
             this.writtenDate = setWrittenDate(post);
-            this.image = post.getPostImages().size() > 0 ? post.getPostImages().get(0).getPath() : null;
+            this.image = post.getPostImages().size() > 0 ? post.getPostImages().get(0).getPath() : "";
             this.isRead = Objects.isNull(isRead) ? true : false;
             this.isSaved = Objects.isNull(isSaved) ? true : false;
         }
     }
 
-    public static String setWrittenDate(NoticePost post){
+    private static String setWrittenDate(NoticePost post){
         DayOfWeek dayOfWeek = post.getCreatedAt().getDayOfWeek();
         String day = dayOfWeek.getDisplayName(TextStyle.NARROW, Locale.KOREAN);
         String date = post.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));

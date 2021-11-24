@@ -2,6 +2,7 @@ package com.crewspace.api.controller.v1;
 
 import static com.crewspace.api.constants.SuccessCode.*;
 
+import com.crewspace.api.dto.req.post.PostListRequestDTO;
 import com.crewspace.api.dto.req.post.PostRequestDTO;
 import com.crewspace.api.dto.req.post.WriteCommunityRequest;
 import com.crewspace.api.dto.req.post.WriteCommunityRequestDTO;
@@ -9,6 +10,8 @@ import com.crewspace.api.dto.req.post.WriteNoticeRequest;
 import com.crewspace.api.dto.req.post.WriteNoticeRequestDTO;
 import com.crewspace.api.dto.res.post.CommunityPostDetailResponse;
 import com.crewspace.api.dto.res.post.CommunityPostDetailResponseDTO;
+import com.crewspace.api.dto.res.post.CommunityPostListResponse;
+import com.crewspace.api.dto.res.post.CommunityPostListResponseDTO;
 import com.crewspace.api.dto.res.post.NoticePostDetailResponse;
 import com.crewspace.api.dto.res.post.NoticePostDetailResponseDTO;
 import com.crewspace.api.dto.res.post.WritePostResponse;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -102,5 +106,18 @@ public class PostController {
         NoticePostDetailResponseDTO responseDTO = postService.noticeDetail(requestDTO);
 
         return NoticePostDetailResponse.newResponse(READ_NOTICE_POST_SUCCESS, responseDTO);
+    }
+
+    @GetMapping("/v1/posts/community")
+    public ResponseEntity<CommunityPostListResponse> communityList(@Valid @RequestHeader("Space-Id") Long spaceId,
+        @RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
+        @RequestParam(value = "postCategoryId", defaultValue = "-1", required = false) Long postCategoryId,
+        @RequestParam(value = "type") String type){
+
+        String memberEmail = SecurityUtil.getCurrentMemberId();
+        PostListRequestDTO requestDTO = PostListRequestDTO.of(postCategoryId, offset, type, spaceId, memberEmail);
+
+        CommunityPostListResponseDTO responseDTO = postService.communityList(requestDTO);
+        return CommunityPostListResponse.newResponse(LOAD_COMMUNITY_LIST_SUCCESS, responseDTO);
     }
 }
