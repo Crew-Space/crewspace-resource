@@ -23,6 +23,8 @@ import com.crewspace.api.dto.res.post.CommunityPostDetailResponseDTO;
 import com.crewspace.api.dto.res.post.CommunityPostListResponseDTO;
 import com.crewspace.api.dto.res.post.CommunityPostListResponseDTO.CommunityPostList;
 import com.crewspace.api.dto.res.post.NoticePostDetailResponseDTO;
+import com.crewspace.api.dto.res.post.NoticePostListResponseDTO;
+import com.crewspace.api.dto.res.post.NoticePostListResponseDTO.NoticePostList;
 import com.crewspace.api.exception.CustomException;
 import com.querydsl.core.Tuple;
 import java.util.ArrayList;
@@ -30,7 +32,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,6 +69,7 @@ public class PostService {
             .build();
     }
 
+    @Transactional
     public NoticePostDetailResponseDTO noticeDetail(PostRequestDTO request){
         SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
                 request.getSpaceId(), request.getMemberEmail())
@@ -101,7 +103,7 @@ public class PostService {
         if(!request.getPostCategoryId().equals(Long.valueOf(-1))) {
             PostCategory postCategory = postCategoryRepository.findById(request.getPostCategoryId())
                 .orElseThrow(() -> new CustomException(POST_CATEGORY_NOT_FOUND));
-            if(!postCategory.getIsNotice()){
+            if(postCategory.getIsNotice()){
                 throw new CustomException(POST_CATEGORY_NOT_FOUND);
             }
         }
@@ -118,5 +120,34 @@ public class PostService {
         }
 
         return CommunityPostListResponseDTO.of(request.getOffset(), request.getType(), posts);
+    }
+
+    public NoticePostListResponseDTO noticeList(PostListRequestDTO request){
+        SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
+                request.getSpaceId(), request.getMemberEmail())
+            .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
+
+        if(!request.getPostCategoryId().equals(Long.valueOf(-1))) {
+            PostCategory postCategory = postCategoryRepository.findById(request.getPostCategoryId())
+                .orElseThrow(() -> new CustomException(POST_CATEGORY_NOT_FOUND));
+            if(!postCategory.getIsNotice()){
+                throw new CustomException(POST_CATEGORY_NOT_FOUND);
+            }
+        }
+
+        PageRequest paging = PageRequest.of(request.getOffset(), 2);
+
+        List<NoticePostList> posts;
+        if(request.getType().equals("ALL")) {
+            posts = postSupportRepository.allNoticeList(spaceMember, paging, request.getPostCategoryId());
+        }else if(request.getType().equals("SAVED")){
+            posts = postSupportRepository.saveNoticeList(spaceMember, paging, request.getPostCategoryId());
+        }else if(request.getType().equals("NREAD")){
+            posts = postSupportRepository.notReadNoticeList(spaceMember, paging, request.getPostCategoryId());
+        } else{
+            throw new CustomException(BAD_POST_TYPE);
+        }
+
+        return NoticePostListResponseDTO.of(request.getOffset(), request.getType(), posts);
     }
 }
