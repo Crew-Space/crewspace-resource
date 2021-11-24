@@ -7,6 +7,9 @@
 # test
 /src/test/resources/*
 
+# DB init
+/src/main/java/com/crewspace/api/InitDb.java
+
 .DS_Store
 HELP.md
 .gradle
