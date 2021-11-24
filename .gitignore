@@ -1,6 +1,9 @@
 # env
 /src/main/resources/env.yml
 
+# aws config
+/src/main/resources/aws.yml
+
 # test
 /src/test/resources/*
 
