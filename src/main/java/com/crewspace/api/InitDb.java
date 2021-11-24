@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,8 @@ public class InitDb {
 
     private final SpaceService spaceService;
 
+
+
     @PostConstruct
     public void init() {
         initService.dbInit();
@@ -39,6 +42,15 @@ public class InitDb {
     @Transactional
     @RequiredArgsConstructor
     static class InitService {
+
+        @Value("${default_image.space}")
+        private String defaultSpaceImage;
+
+        @Value("${default_image.profile}")
+        private String defaultProfileImage;
+
+        @Value("${default_image.space_banner}")
+        private String defaultSpaceBanner;
 
         private final SpaceService spaceService;
         private final MemberRepository memberRepository;
@@ -61,7 +73,8 @@ public class InitDb {
             memberCategory.add("개발팀");
             CreateSpaceRequestDTO createSpaceRequest = CreateSpaceRequestDTO.builder()
                 .memberEmail("aa9919@naver.com")
-                .image("test img")
+                .image(defaultSpaceImage)
+                .bannerImage(defaultSpaceBanner)
                 .name("크루 스페이스2")
                 .memberCategory(memberCategory)
                 .description("크루 스페이스 설명설명")
@@ -77,7 +90,7 @@ public class InitDb {
             SpaceEnterRequestDTO spaceEnterRequest = SpaceEnterRequestDTO.builder()
                 .spaceId(Long.valueOf(3))
                 .memberEmail("test@naver.com")
-                .profileImage("동아리 가입 이미지")
+                .profileImage(defaultProfileImage)
                 .name("스페이서 예원")
                 .description("난 예옹이야~")
                 .memberCategoryId(Long.valueOf(7))
