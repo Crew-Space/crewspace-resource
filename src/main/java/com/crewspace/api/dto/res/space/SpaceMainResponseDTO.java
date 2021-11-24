@@ -60,6 +60,7 @@ public class SpaceMainResponseDTO {
     @Getter
     @JsonInclude(Include.NON_NULL)
     public static class NewNotice {
+        private Long postId;
         private String categoryName;
         private String title;
         private String description;
@@ -72,6 +73,7 @@ public class SpaceMainResponseDTO {
 
         @Builder
         public NewNotice(NoticePost post, Long isRead, Long isSaved){
+            this.postId = post.getId();
             this.categoryName = post.getPostCategory().getName();
             this.title = post.getTitle();
             this.description = post.getDescription();
