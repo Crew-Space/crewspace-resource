@@ -16,7 +16,7 @@ public class RegisterInfoResponseDTO {
     private Boolean hasContact;
     private Boolean hasSns;
     private Boolean hasEtc;
-    private List<MemberCategoryList> memberCategoryList;
+    private List<MemberCategoryList> memberCategories;
 
     @Getter
     @AllArgsConstructor
@@ -27,13 +27,13 @@ public class RegisterInfoResponseDTO {
 
     @Builder
     public RegisterInfoResponseDTO(Boolean hasBirthdate, Boolean hasEmail, Boolean hasContact,
-        Boolean hasSns, Boolean hasEtc, List<MemberCategoryList> memberCategoryList) {
+        Boolean hasSns, Boolean hasEtc, List<MemberCategoryList> memberCategories) {
         this.hasBirthdate = hasBirthdate;
         this.hasEmail = hasEmail;
         this.hasContact = hasContact;
         this.hasSns = hasSns;
         this.hasEtc = hasEtc;
-        this.memberCategoryList = memberCategoryList;
+        this.memberCategories = memberCategories;
     }
 
     public static RegisterInfoResponseDTO toRegisterInfoResponseDTO(List<MemberCategory> memberCategories){
@@ -47,7 +47,7 @@ public class RegisterInfoResponseDTO {
             .hasEmail(memberCategories.get(0).getSpace().getHasEmail())
             .hasSns(memberCategories.get(0).getSpace().getHasSns())
             .hasEtc(memberCategories.get(0).getSpace().getHasEtc())
-            .memberCategoryList(memberCategoryList)
+            .memberCategories(memberCategoryList)
             .build();
     }
 }

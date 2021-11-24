@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostCategoryListResponseDTO {
 
-    private List<CategoryList> noticeCategory;
-    private List<CategoryList> communityCategory;
+    private List<CategoryList> noticeCategories;
+    private List<CategoryList> communityCategories;
 
     @Getter
     @AllArgsConstructor
@@ -24,8 +24,8 @@ public class PostCategoryListResponseDTO {
     private PostCategoryListResponseDTO(
         List<CategoryList> noticeCategory,
         List<CategoryList> communityCategory) {
-        this.noticeCategory = noticeCategory;
-        this.communityCategory = communityCategory;
+        this.noticeCategories = noticeCategory;
+        this.communityCategories = communityCategory;
     }
 
     public static PostCategoryListResponseDTO from(List<PostCategory> postCategories){
