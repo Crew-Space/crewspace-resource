@@ -1,10 +1,7 @@
 package com.crewspace.api.dto.res.space;
 
 import com.crewspace.api.domain.post.NoticePost;
-import com.crewspace.api.domain.space.Space;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -58,7 +55,6 @@ public class SpaceMainResponseDTO {
     }
 
     @Getter
-    @JsonInclude(Include.NON_NULL)
     public static class NewNotice {
         private Long postId;
         private String categoryName;
