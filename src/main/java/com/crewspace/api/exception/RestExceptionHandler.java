@@ -23,38 +23,42 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class RestExceptionHandler {
 
     @ExceptionHandler(value = { CustomException.class })
-    protected ResponseEntity<BaseResponse> handleCustomException(CustomException e) {
+    protected ResponseEntity<BaseResponse> handleCustomException(CustomException e, HttpServletRequest request) {
+        log.warn(String.format("[%s Error] : %s %s", e.getExceptionCode().getStatus(), request.getMethod(), request.getRequestURI()));
         return BaseResponse.toCustomErrorResponse(e.getExceptionCode());
     }
 
-
     // request param
     @ExceptionHandler(value = { MissingServletRequestParameterException.class })
-    protected ResponseEntity<BaseResponse> handleMissingRequestParameterException(MissingServletRequestParameterException e) {
+    protected ResponseEntity<BaseResponse> handleMissingRequestParameterException(MissingServletRequestParameterException e, HttpServletRequest request) {
+        log.warn(String.format("[%s Error] : %s %s", NO_REQUIRED_PARAMETER.getStatus(), request.getMethod(), request.getRequestURI()));
         return BaseResponse.toBasicErrorResponse(NO_REQUIRED_PARAMETER.getStatus(), NO_REQUIRED_PARAMETER.getMsg());
     }
 
     @ExceptionHandler(value = { MissingRequestHeaderException.class })
-    protected ResponseEntity<BaseResponse> handleMissingRequestHeaderException(MissingRequestHeaderException e) {
+    protected ResponseEntity<BaseResponse> handleMissingRequestHeaderException(MissingRequestHeaderException e, HttpServletRequest request) {
+        log.warn(String.format("[%s Error] : %s %s", NO_SPACE_ID_HEADER.getStatus(), request.getMethod(), request.getRequestURI()));
         return BaseResponse.toBasicErrorResponse(NO_SPACE_ID_HEADER.getStatus(), NO_SPACE_ID_HEADER.getMsg());
     }
 
     // @RequestBody valid 에러
     @ExceptionHandler(value = { MethodArgumentNotValidException.class })
-    protected ResponseEntity<BaseResponse> handleMethodArgNotValidException(MethodArgumentNotValidException e) {
+    protected ResponseEntity<BaseResponse> handleMethodArgNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
+        log.warn(String.format("[400 Error] : %s %s", request.getMethod(), request.getRequestURI()));
         return BaseResponse.toBasicErrorResponse(HttpStatus.BAD_REQUEST, e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
     }
 
     // @ModelAttribute valid 에러
     @ExceptionHandler(value = { BindException.class })
-    protected ResponseEntity<BaseResponse> handleMethodArgNotValidException(BindException e) {
+    protected ResponseEntity<BaseResponse> handleMethodArgNotValidException(BindException e, HttpServletRequest request) {
+        log.warn(String.format("[400 Error] : %s %s", request.getMethod(), request.getRequestURI()));
         return BaseResponse.toBasicErrorResponse(HttpStatus.BAD_REQUEST, e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
     }
 
     // 404 Error Handler
     @ExceptionHandler(value = { NoHandlerFoundException.class } )
     protected ResponseEntity<BaseResponse> handleNotFoundException(NoHandlerFoundException e, HttpServletRequest request){
-        log.warn("[404 Error] : " + request.getMethod() + " " + request.getRequestURI());
+        log.warn(String.format("[404 Error] : %s %s", request.getMethod(), request.getRequestURI()));
         return BaseResponse.toBasicErrorResponse(NOT_FOUND, request.getMethod()+ " " +request.getRequestURI()+ " 요청을 찾을 수 없습니다.");
     }
 
