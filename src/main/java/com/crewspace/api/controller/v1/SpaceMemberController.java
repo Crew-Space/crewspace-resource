@@ -5,11 +5,14 @@ import static com.crewspace.api.constants.SuccessCode.*;
 import com.crewspace.api.constants.SuccessCode;
 import com.crewspace.api.dto.req.spaceMember.EnteredSpaceRequestDTO;
 import com.crewspace.api.dto.req.spaceMember.MemberListRequestDTO;
+import com.crewspace.api.dto.req.spaceMember.MemberRequestDTO;
 import com.crewspace.api.dto.req.spaceMember.MemberSearchRequestDTO;
 import com.crewspace.api.dto.res.spaceMember.EnteredSpaceResponse;
 import com.crewspace.api.dto.res.spaceMember.EnteredSpaceResponseDTO;
 import com.crewspace.api.dto.res.spaceMember.SpaceMemberListResponse;
 import com.crewspace.api.dto.res.spaceMember.SpaceMemberListResponseDTO;
+import com.crewspace.api.dto.res.spaceMember.SpaceMemberResponse;
+import com.crewspace.api.dto.res.spaceMember.SpaceMemberResponseDTO;
 import com.crewspace.api.dto.res.spaceMember.SpaceMemberSearchResponse;
 import com.crewspace.api.dto.res.spaceMember.SpaceMemberSearchResponseDTO;
 import com.crewspace.api.service.SpaceMemberService;
@@ -19,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,5 +67,18 @@ public class SpaceMemberController {
         SpaceMemberSearchResponseDTO responseDTO = spaceMemberService.memberSearch(requestDTO);
 
         return SpaceMemberSearchResponse.newResponse(SEARCH_MEMBER_LIST_SUCCESS, responseDTO);
+    }
+
+    @GetMapping("/v1/members/{member-id}")
+    public ResponseEntity<SpaceMemberResponse> memberInfo(@Valid @RequestHeader("Space-Id") Long spaceId,
+        @PathVariable(value = "member-id") Long memberId){
+
+        String memberEmail = SecurityUtil.getCurrentMemberId();
+
+        MemberRequestDTO requestDTO = MemberRequestDTO.of(spaceId, memberEmail, memberId);
+
+        SpaceMemberResponseDTO responseDTO = spaceMemberService.memberInfo(requestDTO);
+
+        return SpaceMemberResponse.newResponse(MEMBER_INFO_SUCCESS, responseDTO);
     }
 }
