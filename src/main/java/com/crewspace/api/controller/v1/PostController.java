@@ -20,7 +20,9 @@ import com.crewspace.api.dto.res.post.WritePostResponse;
 import com.crewspace.api.service.CommunityPostService;
 import com.crewspace.api.service.NoticePostService;
 import com.crewspace.api.service.PostService;
+import com.crewspace.api.utils.S3Util;
 import com.crewspace.api.utils.SecurityUtil;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +47,7 @@ public class PostController {
     private final NoticePostService noticePostService;
 
     private final PostService postService;
+    private final S3Util s3Util;
 
     @PostMapping("/v1/posts/community/{post-category-id}/post")
     public ResponseEntity<WritePostResponse> writeCommunityPost(@PathVariable("post-category-id") Long postCategoryId,
@@ -53,8 +56,14 @@ public class PostController {
         String memberEmail = SecurityUtil.getCurrentMemberId();
         List<String> imageURLs = new ArrayList<>();
         if(request.getImage().size() > 0){
-             imageURLs = request.getImage().stream()
-                .map(image -> "upload with S3")
+            imageURLs = request.getImage().stream()
+                .map(image -> {
+                    try{
+                        return s3Util.postUpload(image);
+                    }catch(IOException e){
+                        throw new RuntimeException(e.toString());
+                    }
+                })
                 .collect(Collectors.toList());
         }
 
@@ -68,13 +77,19 @@ public class PostController {
 
     @PostMapping("/v1/posts/notice/{post-category-id}/post")
     public ResponseEntity<WritePostResponse> writeNoticePost(@PathVariable("post-category-id") Long postCategoryId,
-        @Valid @RequestHeader("Space-Id") Long spaceId, @Valid @ModelAttribute WriteNoticeRequest request){
+        @Valid @RequestHeader("Space-Id") Long spaceId, @Valid @ModelAttribute WriteNoticeRequest request) {
 
         String memberEmail = SecurityUtil.getCurrentMemberId();
         List<String> imageURLs = new ArrayList<>();
         if(request.getImage().size() > 0){
             imageURLs = request.getImage().stream()
-                .map(image -> "upload with S3")
+                .map(image -> {
+                    try{
+                        return s3Util.postUpload(image);
+                    }catch(IOException e){
+                        throw new RuntimeException(e.toString());
+                    }
+                })
                 .collect(Collectors.toList());
         }
 
