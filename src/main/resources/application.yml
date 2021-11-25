@@ -12,3 +12,10 @@ spring:
       hiddenmethod:
         filter:
           enabled: true
+  profiles:
+    group:
+      "local" : "test"
+      "dev" : "test"
+      "prod" : "prod"
+
+
