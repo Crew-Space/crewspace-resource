@@ -27,7 +27,8 @@ public enum SuccessCode {
     READ_NOTICE_POST_SUCCESS(OK, "공지 게시글 상세 조회를 성공했습니다."),
     ENTER_SPACE_MAIN(OK, "동아리 입장을 성공했습니다!!!"),
     LOAD_COMMUNITY_LIST_SUCCESS(OK, "커뮤니티 게시글 로딩을 성공했습니다!"),
-    LOAD_NOTICE_LIST_SUCCESS(OK, "공지 게시글 로딩을 성공했습니다!");
+    LOAD_NOTICE_LIST_SUCCESS(OK, "공지 게시글 로딩을 성공했습니다!"),
+    LOAD_MEMBER_LIST_SUCCESS(OK, "회원 리스트 로딩을 성공했습니다!");
 
     private final HttpStatus status;
     private final String msg;
