@@ -18,6 +18,7 @@ import com.crewspace.api.dto.res.space.SpaceEnterResponseDTO;
 import com.crewspace.api.dto.res.space.SpaceMainResponse;
 import com.crewspace.api.dto.res.space.SpaceMainResponseDTO;
 import com.crewspace.api.service.SpaceService;
+import com.crewspace.api.utils.S3Util;
 import com.crewspace.api.utils.SecurityUtil;
 import java.io.IOException;
 import javax.validation.Valid;
@@ -38,6 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SpaceController {
 
     private final SpaceService spaceService;
+    private final S3Util s3Util;
 
     @Value("${default_image.space}")
     private String defaultSpaceImage;
@@ -58,7 +60,7 @@ public class SpaceController {
         if(request.getImage() == null){
             imageURL = defaultSpaceImage;
         }else{
-            imageURL = "upload with S3";
+            imageURL = s3Util.spaceUpload(request.getImage());
         }
 
         CreateSpaceResponseDTO responseDTO = spaceService.create(request.toCreateSpaceDTO(imageURL, defaultSpaceBanner, memberEmail));
@@ -84,7 +86,7 @@ public class SpaceController {
 
     @PostMapping("/enter")
     public ResponseEntity<SpaceEnterResponse> enterSpace(@Valid @RequestHeader("Space-Id") Long spaceId, @Valid @ModelAttribute
-        SpaceEnterRequest request){
+        SpaceEnterRequest request) throws IOException {
 
         String imageURL;
         String memberEmail = SecurityUtil.getCurrentMemberId();
@@ -93,7 +95,7 @@ public class SpaceController {
         if(request.getImage() == null){
             imageURL = defaultProfileImage;
         }else{
-            imageURL = "upload with S3";
+            imageURL = s3Util.profileUpload(request.getImage());
         }
         SpaceEnterResponseDTO responseDTO = spaceService.enterSpace(
             request.toSpaceEnterDTO(spaceId, memberEmail, imageURL));
