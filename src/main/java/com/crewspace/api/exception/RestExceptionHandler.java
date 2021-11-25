@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MissingRequestHeaderException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -24,6 +25,13 @@ public class RestExceptionHandler {
     @ExceptionHandler(value = { CustomException.class })
     protected ResponseEntity<BaseResponse> handleCustomException(CustomException e) {
         return BaseResponse.toCustomErrorResponse(e.getExceptionCode());
+    }
+
+
+    // request param
+    @ExceptionHandler(value = { MissingServletRequestParameterException.class })
+    protected ResponseEntity<BaseResponse> handleMissingRequestParameterException(MissingServletRequestParameterException e) {
+        return BaseResponse.toBasicErrorResponse(NO_REQUIRED_PARAMETER.getStatus(), NO_REQUIRED_PARAMETER.getMsg());
     }
 
     @ExceptionHandler(value = { MissingRequestHeaderException.class })
