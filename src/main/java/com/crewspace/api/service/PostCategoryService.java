@@ -6,8 +6,8 @@ import com.crewspace.api.domain.post.PostCategory;
 import com.crewspace.api.domain.post.PostCategoryRepository;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
-import com.crewspace.api.dto.req.postCategory.PostCategoryListRequestDTO;
-import com.crewspace.api.dto.req.postCategory.CreatePostCategoryRequestDTO;
+import com.crewspace.api.dto.req.category.CategoryListRequestDTO;
+import com.crewspace.api.dto.req.category.postCategory.CreatePostCategoryRequestDTO;
 import com.crewspace.api.dto.res.postCategory.PostCategoryListResponseDTO;
 import com.crewspace.api.exception.CustomException;
 import java.util.List;
@@ -37,7 +37,7 @@ public class PostCategoryService {
         return;
     }
 
-    public PostCategoryListResponseDTO categoryList(PostCategoryListRequestDTO request){
+    public PostCategoryListResponseDTO categoryList(CategoryListRequestDTO request){
         SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
                 request.getSpaceId(), request.getMemberEmail())
             .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));

@@ -2,8 +2,8 @@ package com.crewspace.api.controller.v1;
 
 import static com.crewspace.api.constants.SuccessCode.*;
 
-import com.crewspace.api.dto.req.postCategory.CreatePostCategoryRequest;
-import com.crewspace.api.dto.req.postCategory.PostCategoryListRequestDTO;
+import com.crewspace.api.dto.req.category.postCategory.CreatePostCategoryRequest;
+import com.crewspace.api.dto.req.category.CategoryListRequestDTO;
 import com.crewspace.api.dto.res.postCategory.CreatePostCategoryResponse;
 import com.crewspace.api.dto.res.postCategory.PostCategoryListResponse;
 import com.crewspace.api.dto.res.postCategory.PostCategoryListResponseDTO;
@@ -43,7 +43,7 @@ public class PostCategoryController {
         String memberEmail = SecurityUtil.getCurrentMemberId();
 
         PostCategoryListResponseDTO responseDTO = postCategoryService.categoryList(
-            PostCategoryListRequestDTO.of(spaceId, memberEmail));
+            CategoryListRequestDTO.of(spaceId, memberEmail));
 
         return PostCategoryListResponse.newResponse(LOAD_POST_CATEGORIES_SUCCES, responseDTO);
     }

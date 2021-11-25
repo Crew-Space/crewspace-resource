@@ -1,11 +1,10 @@
-package com.crewspace.api.dto.req.postCategory;
+package com.crewspace.api.dto.req.category.postCategory;
 
 
 import com.crewspace.api.domain.post.PostCategory;
 import com.crewspace.api.domain.space.Space;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
