@@ -1,6 +1,6 @@
-package com.crewspace.api.dto.req.postCategory;
+package com.crewspace.api.dto.req.category.postCategory;
 
-import com.crewspace.api.dto.req.postCategory.CreatePostCategoryRequestDTO.CategoryList;
+import com.crewspace.api.dto.req.category.postCategory.CreatePostCategoryRequestDTO.CategoryList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
