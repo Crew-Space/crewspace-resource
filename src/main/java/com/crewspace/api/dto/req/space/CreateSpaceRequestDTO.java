@@ -62,6 +62,11 @@ public class CreateSpaceRequestDTO {
             .image(member.getImage())
             .name(member.getNickname())
             .description(space.getName() + "의 운영진입니다 :)")
+            .birthdate("")
+            .sns("")
+            .contact("")
+            .email("")
+            .etc("")
             .build();
     }
 
