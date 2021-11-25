@@ -17,6 +17,7 @@ public enum ExceptionCode {
     /* 400 - 잘못된 요청 */
     NO_SPACE_ID_HEADER(BAD_REQUEST, "헤더에 동아리 id 값이 없습니다"),
     BAD_POST_TYPE(BAD_REQUEST, "게시글 타입이 잘못되었습니다."),
+    NO_REQUIRED_PARAMETER(BAD_REQUEST, "필수 요청 파라미터 값이 없습니다"),
 
     /* 401 - 인증 실패 */
     // token 관련

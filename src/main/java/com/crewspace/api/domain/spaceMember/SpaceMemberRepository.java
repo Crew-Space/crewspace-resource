@@ -23,4 +23,7 @@ public interface SpaceMemberRepository extends JpaRepository<SpaceMember, Long> 
 
     @Query("select m from SpaceMember  m join fetch m.memberCategory where m.space = :space and m.memberCategory.id = :memberCategoryId order by m.name")
     List<SpaceMember> findBySpaceAndMemberCategoryIdOrderByName(@Param("space") Space space, @Param("memberCategoryId") Long memberCategoryId);
+
+    @Query("select m from SpaceMember m join fetch m.memberCategory where m.space = :space and m.name like concat('%', :memberName, '%') order by m.name")
+    List<SpaceMember> findBySpaceAndMemberName(@Param("space") Space space, @Param("memberName") String memberName);
 }

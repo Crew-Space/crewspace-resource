@@ -9,8 +9,10 @@ import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
 import com.crewspace.api.dto.req.spaceMember.EnteredSpaceRequestDTO;
 import com.crewspace.api.dto.req.spaceMember.MemberListRequestDTO;
+import com.crewspace.api.dto.req.spaceMember.MemberSearchRequestDTO;
 import com.crewspace.api.dto.res.spaceMember.EnteredSpaceResponseDTO;
 import com.crewspace.api.dto.res.spaceMember.SpaceMemberListResponseDTO;
+import com.crewspace.api.dto.res.spaceMember.SpaceMemberSearchResponseDTO;
 import com.crewspace.api.exception.CustomException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +48,17 @@ public class SpaceMemberService {
         }
 
         return SpaceMemberListResponseDTO.from(spaceMembers);
+    }
+
+    public SpaceMemberSearchResponseDTO memberSearch(MemberSearchRequestDTO request){
+
+        SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
+                request.getSpaceId(), request.getMemberEmail())
+            .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
+
+        List<SpaceMember> spaceMembers = spaceMemberRepository.findBySpaceAndMemberName(
+            spaceMember.getSpace(), request.getKeyword());
+
+        return SpaceMemberSearchResponseDTO.from(spaceMembers);
     }
 }
