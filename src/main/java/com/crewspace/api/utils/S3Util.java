@@ -42,6 +42,10 @@ public class S3Util {
         return upload(file, "space");
     }
 
+    public String bannerUpload(MultipartFile file) throws IOException {
+        return upload(file, "spaceBanner");
+    }
+
     public void delete(String url){
         String key = url.split("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/")[1];
         DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket, key);
