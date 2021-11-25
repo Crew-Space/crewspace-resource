@@ -17,4 +17,10 @@ public interface SpaceMemberRepository extends JpaRepository<SpaceMember, Long> 
     Optional<SpaceMember> findBySpaceIdAndMemberEmail(@Param("spaceId") Long spaceI, @Param("memberEmail") String memberEmail);
 
     long countBySpace(Space space);
+
+    @Query("select m from SpaceMember  m join fetch m.memberCategory where m.space = :space order by m.name")
+    List<SpaceMember> findBySpaceOrderByName(@Param("space") Space space);
+
+    @Query("select m from SpaceMember  m join fetch m.memberCategory where m.space = :space and m.memberCategory.id = :memberCategoryId order by m.name")
+    List<SpaceMember> findBySpaceAndMemberCategoryIdOrderByName(@Param("space") Space space, @Param("memberCategoryId") Long memberCategoryId);
 }
