@@ -1,6 +1,7 @@
 package com.crewspace.api.service;
 
 import static com.crewspace.api.constants.ExceptionCode.MEMBER_EMAIL_NOT_FOUND;
+import static com.crewspace.api.constants.ExceptionCode.MEMBER_NOT_FOUND;
 import static com.crewspace.api.constants.ExceptionCode.SPACE_MEMBER_NOT_FOUND;
 
 import com.crewspace.api.domain.member.Member;
@@ -9,9 +10,11 @@ import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
 import com.crewspace.api.dto.req.spaceMember.EnteredSpaceRequestDTO;
 import com.crewspace.api.dto.req.spaceMember.MemberListRequestDTO;
+import com.crewspace.api.dto.req.spaceMember.MemberRequestDTO;
 import com.crewspace.api.dto.req.spaceMember.MemberSearchRequestDTO;
 import com.crewspace.api.dto.res.spaceMember.EnteredSpaceResponseDTO;
 import com.crewspace.api.dto.res.spaceMember.SpaceMemberListResponseDTO;
+import com.crewspace.api.dto.res.spaceMember.SpaceMemberResponseDTO;
 import com.crewspace.api.dto.res.spaceMember.SpaceMemberSearchResponseDTO;
 import com.crewspace.api.exception.CustomException;
 import java.util.List;
@@ -60,5 +63,17 @@ public class SpaceMemberService {
             spaceMember.getSpace(), request.getKeyword());
 
         return SpaceMemberSearchResponseDTO.from(spaceMembers);
+    }
+
+    public SpaceMemberResponseDTO memberInfo(MemberRequestDTO request){
+        SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
+                request.getSpaceId(), request.getMemberEmail())
+            .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
+
+        SpaceMember member = spaceMemberRepository.findBySpaceAndMemberId(
+                spaceMember.getSpace(), request.getMemberId())
+            .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+
+        return SpaceMemberResponseDTO.from(member);
     }
 }
