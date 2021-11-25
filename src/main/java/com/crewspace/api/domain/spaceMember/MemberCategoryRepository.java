@@ -17,4 +17,6 @@ public interface MemberCategoryRepository extends JpaRepository<MemberCategory, 
 
     @Query("select m from MemberCategory m where m.id in (:ids)")
     List<MemberCategory> findByIds(@Param("ids")List<Long> ids);
+
+    List<MemberCategory> findBySpace(Space space);
 }
