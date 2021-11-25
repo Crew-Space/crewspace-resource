@@ -5,14 +5,18 @@ import static com.crewspace.api.constants.SuccessCode.*;
 import com.crewspace.api.constants.SuccessCode;
 import com.crewspace.api.dto.req.spaceMember.EnteredSpaceRequestDTO;
 import com.crewspace.api.dto.req.spaceMember.MemberListRequestDTO;
+import com.crewspace.api.dto.req.spaceMember.MemberSearchRequestDTO;
 import com.crewspace.api.dto.res.spaceMember.EnteredSpaceResponse;
 import com.crewspace.api.dto.res.spaceMember.EnteredSpaceResponseDTO;
 import com.crewspace.api.dto.res.spaceMember.SpaceMemberListResponse;
 import com.crewspace.api.dto.res.spaceMember.SpaceMemberListResponseDTO;
+import com.crewspace.api.dto.res.spaceMember.SpaceMemberSearchResponse;
+import com.crewspace.api.dto.res.spaceMember.SpaceMemberSearchResponseDTO;
 import com.crewspace.api.service.SpaceMemberService;
 import com.crewspace.api.utils.SecurityUtil;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -46,5 +50,18 @@ public class SpaceMemberController {
         SpaceMemberListResponseDTO responseDTO = spaceMemberService.memberList(requestDTO);
 
         return SpaceMemberListResponse.newResponse(LOAD_MEMBER_LIST_SUCCESS, responseDTO);
+    }
+
+    @GetMapping("/v1/members/search")
+    public ResponseEntity<SpaceMemberSearchResponse> memberSearch(@Valid @RequestHeader("Space-Id") Long spaceId,
+        @RequestParam(value = "keyword") String keyword){
+
+        String memberEmail = SecurityUtil.getCurrentMemberId();
+
+        MemberSearchRequestDTO requestDTO = MemberSearchRequestDTO.of(spaceId, memberEmail, keyword);
+
+        SpaceMemberSearchResponseDTO responseDTO = spaceMemberService.memberSearch(requestDTO);
+
+        return SpaceMemberSearchResponse.newResponse(SEARCH_MEMBER_LIST_SUCCESS, responseDTO);
     }
 }
