@@ -43,6 +43,7 @@ public enum ExceptionCode {
     POST_NOT_FOUND(NOT_FOUND, "존재하지 않는 게시글입니다"),
     SAVED_POST_NOT_FOUND(NOT_FOUND, "저장되지 않은 게시글입니다."),
     FIXED_POST_NOT_FOUND(NOT_FOUND, "고정되지 않은 게시글입니다"),
+    MEMBER_NOT_FOUND(NOT_FOUND, "동아리에 존재하지 않는 유저입니다."),
 
     /* 409 - 중복된 리소스 */
     DUPLICATE_SPACE(CONFLICT, "이미 가입된 카페입니다."),
