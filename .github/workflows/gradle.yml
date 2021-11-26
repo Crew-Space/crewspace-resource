@@ -38,4 +38,4 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
         
     - name: Upload S3
-      run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3:://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+      run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3:://crewspace-server/crewspace/$GITHUB_SHA.zip
