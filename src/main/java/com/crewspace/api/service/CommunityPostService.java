@@ -40,9 +40,6 @@ public class CommunityPostService {
         PostCategory postCategory = postCategoryRepository.findById(request.getPostCategoryId())
             .orElseThrow(() -> new CustomException(POST_CATEGORY_NOT_FOUND));
 
-        if(postCategory.getIsNotice()){
-            throw new CustomException(SPACE_ADMIN_ONLY);
-        }
 
         // 커뮤니티 게시글 저장
         CommunityPost communityPost = request.toCommunityPost(spaceMember, postCategory);

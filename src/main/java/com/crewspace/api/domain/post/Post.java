@@ -39,6 +39,7 @@ public abstract class Post extends BaseTimeEntity {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<PostImage> postImages = new ArrayList<>();
 
+    @Column(length = 3000)
     private String description;
 
     // 생성 메서드
