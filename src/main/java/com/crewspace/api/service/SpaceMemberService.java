@@ -44,7 +44,7 @@ public class SpaceMemberService {
             .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
 
         List<SpaceMember> spaceMembers;
-        if(request.getMemberCategoryId().equals(-1)){
+        if(request.getMemberCategoryId().equals(Long.valueOf(-1))){
             spaceMembers = spaceMemberRepository.findBySpaceOrderByName(spaceMember.getSpace());
         }else{
             spaceMembers = spaceMemberRepository.findBySpaceAndMemberCategoryIdOrderByName(spaceMember.getSpace(), request.getMemberCategoryId());
