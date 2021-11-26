@@ -31,7 +31,10 @@ jobs:
 
     - name : Copy Jar
       run : cp ./build/libs/*.jar ./deploy
-      
+
+    - name: Copy appspec.yml
+        run: cp appspec.yml ./deploy
+
     - name: Make zip file
       run: zip -r ./crewspace-jar.zip ./deploy
       shell: bash
@@ -47,4 +50,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
         
     - name: Upload S3
-      run: aws s3 cp --region ap-northeast-2 --acl private ./crewspace-jar.zip s3://crewspace-server/crewspace
+      run: aws s3 cp --region ap-northeast-2 --acl private ./crewspace-jar.zip s3://crewspace-server/deploy/crewspace.zip
+
+    - name: Code Deploy
+      run: aws deploy create-deployment --application-name crew-server --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name crew --s3-location bucket=crewspace-server,bundleType=zip,key=deploy/crewspace.zip
