@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface SpaceMemberRepository extends JpaRepository<SpaceMember, Long> {
     @Query("select m from SpaceMember m join fetch m.space where m.member = :member")
-    List<SpaceMember> findByMember(Member member);
+    List<SpaceMember> findByMember(@Param("member") Member member);
     Boolean existsBySpace_IdAndMember(Long spaceId, Member member);
 
     @Query("select m from SpaceMember m join fetch m.space where m.space.id = :spaceId and m.member.email = :memberEmail")
