@@ -58,15 +58,13 @@ public class InitDb {
         private final NoticePostService noticePostService;
         private final MemberPostService memberPostService;
 
-        private final ReadPostRepository readPostRepository;
-
         public void dbInit() {
             // 유저 생성
-            Member member1 = new Member("11", "aa9919@naver.com", "testprofile", "yaewon", true);
-            memberRepository.save(member1);
+            Member member = new Member("11", "aa9919@naver.com", "카카오 이미지-예원", "예원", true);
+            memberRepository.save(member);
 
-            Member member2 = new Member("22", "test@naver.com", "이미지", "spaceOwner", false);
-            memberRepository.save(member2);
+            member = new Member("22", "test@naver.com", "카카오 이미지-테스트 유저", "테스트 유저", false);
+            memberRepository.save(member);
 
             // 동아리 생성
             List<String> memberCategory = new ArrayList<>();
@@ -77,7 +75,7 @@ public class InitDb {
                 .bannerImage(defaultSpaceBanner)
                 .name("크루 스페이스2")
                 .memberCategory(memberCategory)
-                .description("크루 스페이스 설명설명")
+                .description("크루 스페이스 설명설명\n크루설명이유")
                 .hasBirthdate(false)
                 .hasEmail(false)
                 .hasContact(false)
@@ -91,8 +89,8 @@ public class InitDb {
                 .spaceId(Long.valueOf(3))
                 .memberEmail("test@naver.com")
                 .profileImage(defaultProfileImage)
-                .name("스페이서 예원")
-                .description("난 예옹이야~")
+                .name("테스트 가입자(토큰x)")
+                .description("테스트 가입자입니다.")
                 .memberCategoryId(Long.valueOf(7))
                 .isAdmin(false)
                 .birthdate("")
@@ -108,7 +106,7 @@ public class InitDb {
             communityImages.add("testImg1");
             communityImages.add("testImg2");
             WriteCommunityRequestDTO writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(3),
-                "aa9919@naver.com", Long.valueOf(5), communityImages, "설명설명");
+                "aa9919@naver.com", Long.valueOf(5), communityImages, "커뮤니티 게시글 작성 by 예원");
             communityPostService.write(writeCommunityRequest);
 
             // 공지 게시글 생성
@@ -125,8 +123,8 @@ public class InitDb {
                 .postCategoryId(Long.valueOf(4))
                 .targets(noticeTargets)
                 .images(noticeImages)
-                .title("공지 제목입니다")
-                .description("공지 설명설명")
+                .title("공지 제목입니다 by 예원")
+                .description("공지 설명입니다 by 예원")
                 .isReserved(false)
                 .reservedTime(LocalDateTime.now())
                 .build();
@@ -145,8 +143,8 @@ public class InitDb {
                 .postCategoryId(Long.valueOf(4))
                 .targets(noticeTargets)
                 .images(noticeImages)
-                .title("공지 제목입니다222")
-                .description("공지 설명설명22222")
+                .title("공지 제목입니다2222 by 예원")
+                .description("공지 설명입니다2222 by 예원")
                 .isReserved(false)
                 .reservedTime(LocalDateTime.now())
                 .build();
@@ -167,7 +165,7 @@ public class InitDb {
             List<String> communityImages2 = new ArrayList<>();
             communityImages.add("2nd 게시글ㄹㄹㄹ");
             WriteCommunityRequestDTO writeCommunityRequest2 = WriteCommunityRequestDTO.of(Long.valueOf(3),
-                "aa9919@naver.com", Long.valueOf(5), communityImages2, "설명설명");
+                "aa9919@naver.com", Long.valueOf(5), communityImages2, "커뮤니티 게시글222 by 예원");
             communityPostService.write(writeCommunityRequest2);
 
             // 저장 추가
@@ -179,9 +177,15 @@ public class InitDb {
             //커뮤ㅣ티게시글 추가
             List<String> communityImages3 = new ArrayList<>();
             WriteCommunityRequestDTO writeCommunityRequest3 = WriteCommunityRequestDTO.of(Long.valueOf(3),
-                "aa9919@naver.com", Long.valueOf(5), communityImages3, "설명설명");
+                "aa9919@naver.com", Long.valueOf(5), communityImages3, "커뮤니티 게시글333 by 예원");
             communityPostService.write(writeCommunityRequest3);
 
+            // new 유저~
+            member = new Member("33", "one9872@naver.com", "카카오 이미지-은성", "은성", true);
+            memberRepository.save(member);
+
+            member = new Member("44", "aas9919@naver.com", "카카오 이미지-예진", "예진", false);
+            memberRepository.save(member);
         }
     }
 
