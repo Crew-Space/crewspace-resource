@@ -26,9 +26,18 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build -x test
       
+    - name: Make directory
+      run : mkdir -p deploy
+
+    - name : Copy Jar
+      run : cp ./build/libs/*.jar ./deploy
+      
     - name: Make zip file
-      run: zip -r ./$GITHUB_SHA.zip .
+      run: zip -r ./crewspace-jar.zip ./deploy
       shell: bash
+      
+    - name : Check zip file
+      run : ls
       
     - name: Configure AWS credential
       uses: aws-actions/configure-aws-credentials@v1
@@ -38,4 +47,4 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
         
     - name: Upload S3
-      run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3:://crewspace-server/crewspace/$GITHUB_SHA.zip
+      run: aws s3 cp --region ap-northeast-2 --acl private ./crewspace-jar.zip s3://crewspace-server/crewspace
