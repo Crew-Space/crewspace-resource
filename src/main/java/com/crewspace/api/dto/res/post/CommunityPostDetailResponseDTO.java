@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommunityPostDetailResponseDTO extends PostDetail {
 
-    private String author;
+    private String authorName;
     private Long authorId;
     private String authorCategoryName;
     private String authorImage;
@@ -17,7 +17,7 @@ public class CommunityPostDetailResponseDTO extends PostDetail {
     @Builder
     public CommunityPostDetailResponseDTO(CommunityPost post, Boolean isAuthor, Boolean isSaved) {
         super(post, isAuthor, isSaved);
-        this.author = post.getAuthor().getName();
+        this.authorName = post.getAuthor().getName();
         this.authorId = post.getAuthor().getId();
         this.authorImage = post.getAuthor().getImage();
         this.authorCategoryName = post.getAuthor().getMemberCategory().getName();
