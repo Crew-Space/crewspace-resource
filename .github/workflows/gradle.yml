@@ -18,7 +18,13 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: gradle
-        
+
+    - name: Decrypt ENV
+      run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase=${{ secrets.ENV_SECRET }} --output ./src/main/resources/env.tar ./src/main/resources/env.tar.gpg
+
+    - name: Unzip env
+      run: tar xvf ./src/main/resources/env.tar
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
