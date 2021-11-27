@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
-    @Query("select p from Post p join fetch p.postImages where p.id = :id")
+    @Query("select p from Post p where p.id = :id")
     Optional<Post> findById(@Param("id") Long Id);
 }
