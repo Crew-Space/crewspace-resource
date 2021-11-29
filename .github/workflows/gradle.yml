@@ -9,9 +9,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -20,18 +18,36 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: gradle
-        
+
+    - name: Decrypt ENV
+      run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase=${{ secrets.ENV_SECRET }} --output ./src/main/resources/env.tar ./src/main/resources/env.tar.gpg
+
+    - name: Unzip env
+      run: tar xvf ./src/main/resources/env.tar
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: ./gradlew bootJar
       
     - name: Make directory
       run : mkdir -p deploy
 
     - name : Copy Jar
       run : cp ./build/libs/*.jar ./deploy
-      
+
+    - name : Copy Dockerfile
+      run : cp Dockerfile ./deploy
+
+    - name: Copy appspec.yml
+      run : cp appspec.yml ./deploy
+
+    - name: make excutable
+      run : chmod +x ./scripts/*.sh
+
+    - name : Copy scripts
+      run : cp -r ./scripts ./deploy
+
     - name: Make zip file
       run: zip -r ./crewspace-jar.zip ./deploy
       shell: bash
@@ -47,4 +63,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
         
     - name: Upload S3
-      run: aws s3 cp --region ap-northeast-2 --acl private ./crewspace-jar.zip s3://crewspace-server/crewspace
+      run: aws s3 cp --region ap-northeast-2 --acl private ./crewspace-jar.zip s3://crewspace-server/deploy/crewspace.zip
+
+    - name: Code Deploy
+      run: aws deploy create-deployment --application-name crew-server --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name crew --s3-location bucket=crewspace-server,bundleType=zip,key=deploy/crewspace.zip
