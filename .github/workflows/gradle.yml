@@ -28,7 +28,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: ./gradlew bootJar
       
     - name: Make directory
       run : mkdir -p deploy
@@ -36,8 +36,17 @@ jobs:
     - name : Copy Jar
       run : cp ./build/libs/*.jar ./deploy
 
+    - name : Copy Dockerfile
+      run : cp Dockerfile ./deploy
+
     - name: Copy appspec.yml
       run : cp appspec.yml ./deploy
+
+    - name: make excutable
+      run : chmod +x ./scripts/*.sh
+
+    - name : Copy scripts
+      run : cp -r ./scripts ./deploy
 
     - name: Make zip file
       run: zip -r ./crewspace-jar.zip ./deploy

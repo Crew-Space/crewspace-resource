@@ -7,3 +7,14 @@ files:
     destination: /home/ubuntu/resource
     overwrite: yes
 
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+
+hooks:
+  ApplicationStart:
+    - location: scripts/deploy.sh
+      timeout: 120
+      runas: ubuntu
