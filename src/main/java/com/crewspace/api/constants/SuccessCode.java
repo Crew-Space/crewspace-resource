@@ -13,6 +13,7 @@ public enum SuccessCode {
     VALID_SPACE_CODE(OK, "올바른 초대 코드입니다."),
     LOAD_REGISTER_INFO_SUCCESS(OK, "동아리 회원 가입 정보를 로드했습니다."),
     ENTER_SPACE_SUCEESS(OK, "동아리 가입을 성공했습니다."),
+    LOAD_SPACE_MAIN_SUCEESS(OK, "동아리 메인 화면 로딩을 성공했습니다."),
     LOAD_SPACES_SUCCESS(OK, "가입된 동아리 리스트를 불러왔습니다."),
     CREATE_POST_CATEGORY_SUCCESS(OK, "게시글 카테고리 생성에 성공했습니다"),
     LOAD_POST_CATEGORIES_SUCCES(OK, "게시글 카테고리 조회에 성공했습니다."),

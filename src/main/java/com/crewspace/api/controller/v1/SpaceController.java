@@ -112,6 +112,6 @@ public class SpaceController {
 
         SpaceMainResponseDTO responseDTO = spaceService.spaceMain(requestDTO);
 
-        return SpaceMainResponse.newResponse(ENTER_SPACE_SUCEESS, responseDTO);
+        return SpaceMainResponse.newResponse(LOAD_SPACE_MAIN_SUCEESS, responseDTO);
     }
 }
