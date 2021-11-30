@@ -47,7 +47,7 @@ public class S3Util {
     }
 
     public void delete(String url){
-        String key = url.split("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/")[1];
+        String key = url.split("https://crewspace.s3.ap-northeast-2.amazonaws.com/")[1];
         DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket, key);
         amazonS3Client.deleteObject(deleteObjectRequest);
     }
