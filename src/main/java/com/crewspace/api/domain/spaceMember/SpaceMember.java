@@ -70,11 +70,11 @@ public class SpaceMember extends BaseTimeEntity {
         this.name = name;
         this.description = description;
 
-        this.birthdate = birthdate;
-        this.email = email;
-        this.contact = contact;
-        this.sns = sns;
-        this.etc = etc;
+        this.birthdate = birthdate != null ? birthdate : "";
+        this.email = email != null ? email : "";
+        this.contact = contact != null ? contact : "";
+        this.sns = sns != null ? sns : "";
+        this.etc = etc != null ? etc : "";
 
         if(member.getPush()){
             this.noticePush = true;
