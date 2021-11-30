@@ -42,12 +42,14 @@ public class SpaceMainResponseDTO {
 
     @Getter
     public static class FixedNotice {
+        private Long postId;
         private String categoryName;
         private String title;
         private String writtenDate;
 
         @Builder
         public FixedNotice(NoticePost post){
+            this.postId = post.getId();
             this.categoryName = post.getPostCategory().getName();
             this.title = post.getTitle();
             this.writtenDate = setWrittenDate(post);

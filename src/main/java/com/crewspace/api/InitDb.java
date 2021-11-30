@@ -106,7 +106,7 @@ public class InitDb {
                 .bannerImage("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/heyj_banner.png")
                 .name("HEYJ")
                 .memberCategory(memberCategory)
-                .description("안녕하세요! 대학생 연합 IT 동아리 HEYJ 헤이제이 입니다! \\n 기획, 디자인, 개발 파트 여러분 모두 한 기수 동안 많은 추억과 인연 가져가시길 바랍니다 :)")
+                .description("안녕하세요! 대학생 연합 IT 동아리 HEYJ 헤이제이 입니다! \n 기획, 디자인, 개발 파트 여러분 모두 한 기수 동안 많은 추억과 인연 가져가시길 바랍니다 :)")
                 .hasBirthdate(true)
                 .hasEmail(true)
                 .hasSns(true)
@@ -300,7 +300,7 @@ public class InitDb {
                 .targets(noticeTargetsAll)
                 .images(noImages)
                 .title("HEYJ 임원진 연락처")
-                .description("회장 김수한 : 010-9184-0000\\n부회장 이선호 : 010-3443-0000\\n총무 김재영 : 010-4244-0000\\n운영팀장 박지은 : 010-9301-0000\\n미디어팀장 한정민 : 010-5627-0000\\n기획 파트장 권혁수 : 010-0000-5702\\n디자인 파트장 김지영 : 010-0000-3858/n서버 파트장 김성권 : 010-0000-7226\\n안드로이드 파트장 박진형 : 010-2287-0000/niOS 파트장 박지훈 : 010-0000-7236\\n웹파트장 권진희 : 010-0000-1928")
+                .description("회장 김수한 : 010-9184-0000\n부회장 이선호 : 010-3443-0000\n총무 김재영 : 010-4244-0000\n운영팀장 박지은 : 010-9301-0000\n미디어팀장 한정민 : 010-5627-0000\n기획 파트장 권혁수 : 010-0000-5702\n디자인 파트장 김지영 : 010-0000-3858/n서버 파트장 김성권 : 010-0000-7226\n안드로이드 파트장 박진형 : 010-2287-0000/niOS 파트장 박지훈 : 010-0000-7236\n웹파트장 권진희 : 010-0000-1928")
                 .isReserved(false)
                 .reservedTime(LocalDateTime.now())
                 .build();
@@ -313,7 +313,7 @@ public class InitDb {
                 .targets(noticeTargetsAll)
                 .images(noImages)
                 .title("오리엔테이션 안내")
-                .description("이번주 토요일에 진행되는 OT에 대해 공지드립니다! 아래 내용을 참고해주세요~\\n✅ 타임라인\\n15:00 - 15:30OT 줌 접속, 출석체크\\n15:30 - 16:00 SOPT 소개, 임원진 소개\\n16:00 - 16:30 SOPT 운영진 공지\\n16:30 - 16:45 쉬는 시간\\n16:45 - 17:30 운영팀 레크레이\\n17:30 - 18:00 파트별 시간\\n✅ 출석체크를 꼭 제시간에 부탁드립니다.\\n출석 체크 시 자리에 없으시면 출석으로 인정받으실 수 없습니다. \\n출석은 불시에 여러 차례 진행됨으로 본인의 와이파이 상태, 주변 상황을 항상 체크해주세요.")
+                .description("이번주 토요일에 진행되는 OT에 대해 공지드립니다! 아래 내용을 참고해주세요~\n✅ 타임라인\n15:00 - 15:30OT 줌 접속, 출석체크\n15:30 - 16:00 SOPT 소개, 임원진 소개\n16:00 - 16:30 SOPT 운영진 공지\n16:30 - 16:45 쉬는 시간\n16:45 - 17:30 운영팀 레크레이\n17:30 - 18:00 파트별 시간\n✅ 출석체크를 꼭 제시간에 부탁드립니다.\n출석 체크 시 자리에 없으시면 출석으로 인정받으실 수 없습니다. \n출석은 불시에 여러 차례 진행됨으로 본인의 와이파이 상태, 주변 상황을 항상 체크해주세요.")
                 .isReserved(false)
                 .reservedTime(LocalDateTime.now())
                 .build();
@@ -352,7 +352,7 @@ public class InitDb {
                 .targets(noticeTargetsAll)
                 .images(noImages)
                 .title("스터디 안내")
-                .description("HEYJ 28기 스터디 개설 및 모집과 관련한 노션 페이지를 공개합니다.\\n(https://www.notion.so/28-c079e68c63a84eb287288ed92b32593e)\\n(28기 스터디 노션 페이지 편집권한은 오늘중으로 각파트장님들이 사용자 추가를 해드릴 예정입니다)")
+                .description("HEYJ 28기 스터디 개설 및 모집과 관련한 노션 페이지를 공개합니다.\n(https://www.notion.so/28-c079e68c63a84eb287288ed92b32593e)\n(28기 스터디 노션 페이지 편집권한은 오늘중으로 각파트장님들이 사용자 추가를 해드릴 예정입니다)")
                 .isReserved(false)
                 .reservedTime(LocalDateTime.now())
                 .build();
