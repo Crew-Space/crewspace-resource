@@ -85,7 +85,7 @@ public class InitDb {
             memberRepository.save(member10);
 
             // 운영진
-            Member member11 = new Member("11", "suhan123@spacer.com", "https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/profile_suhan.png", "김수한", false);
+            Member member11 = new Member("11", "suhan123@spacer.com", "https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_suhan.png", "김수한", false);
             memberRepository.save(member11);
 
             // 시연자
@@ -102,8 +102,8 @@ public class InitDb {
             memberCategory.add("개발팀");
             CreateSpaceRequestDTO createSpaceRequest = CreateSpaceRequestDTO.builder()
                 .memberEmail("suhan123@spacer.com")
-                .image("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/heyj_profile_image.png")
-                .bannerImage("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/heyj_banner.png")
+                .image("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/heyj_profile_image.png")
+                .bannerImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/heyj_banner.png")
                 .name("HEYJ")
                 .memberCategory(memberCategory)
                 .description("안녕하세요! 대학생 연합 IT 동아리 HEYJ 헤이제이 입니다! \n 기획, 디자인, 개발 파트 여러분 모두 한 기수 동안 많은 추억과 인연 가져가시길 바랍니다 :)")
@@ -121,7 +121,7 @@ public class InitDb {
             SpaceEnterRequestDTO spaceEnterRequest = SpaceEnterRequestDTO.builder()
                 .spaceId(Long.valueOf(13))
                 .memberEmail("suhan124@spacer.com")
-                .profileImage("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_1.png")
+                .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_1.png")
                 .name("이정일")
                 .description("헤이제이 회장 김수한 입니다! 반가워요~")
                 .memberCategoryId(Long.valueOf(16))
@@ -135,7 +135,7 @@ public class InitDb {
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
                 .spaceId(Long.valueOf(13))
                 .memberEmail("suhan125@spacer.com")
-                .profileImage("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_2.png")
+                .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_2.png")
                 .name("김정이")
                 .description("잘부탁드립니다")
                 .memberCategoryId(Long.valueOf(18))
@@ -149,7 +149,7 @@ public class InitDb {
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
                 .spaceId(Long.valueOf(13))
                 .memberEmail("suhan126@spacer.com")
-                .profileImage("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_3.png")
+                .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_3.png")
                 .name("삼동식")
                 .description("다들 반갑습니다!")
                 .memberCategoryId(Long.valueOf(18))
@@ -163,7 +163,7 @@ public class InitDb {
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
                 .spaceId(Long.valueOf(13))
                 .memberEmail("suhan127@spacer.com")
-                .profileImage("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_4.png")
+                .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_4.png")
                 .name("사동식")
                 .description("저는 고기를 좋아해요")
                 .memberCategoryId(Long.valueOf(19))
@@ -177,7 +177,7 @@ public class InitDb {
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
                 .spaceId(Long.valueOf(13))
                 .memberEmail("suhan128@spacer.com")
-                .profileImage("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_5.png")
+                .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_5.png")
                 .name("이민영")
                 .description("개발은 잘 못하지만 열심히 하겠습니다")
                 .memberCategoryId(Long.valueOf(17))
@@ -192,7 +192,7 @@ public class InitDb {
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
                 .spaceId(Long.valueOf(13))
                 .memberEmail("suhan129@spacer.com")
-                .profileImage("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_6.png")
+                .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_6.png")
                 .name("안은희")
                 .description("스터디 10개 하는중")
                 .memberCategoryId(Long.valueOf(18))
@@ -206,7 +206,7 @@ public class InitDb {
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
                 .spaceId(Long.valueOf(13))
                 .memberEmail("suhan1210@spacer.com")
-                .profileImage("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_7.png")
+                .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_7.png")
                 .name("한소희")
                 .description("힘들다 지금은 몇시지")
                 .memberCategoryId(Long.valueOf(18))
@@ -398,7 +398,7 @@ public class InitDb {
             noticePostService.write(writeNoticeRequest);
 
             List<String> images = new ArrayList<>();
-            images.add("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/notice_9.png");
+            images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/notice_9.png");
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
                 .spaceId(Long.valueOf(13))
@@ -419,7 +419,7 @@ public class InitDb {
             noticeTargetsAll.add(Long.valueOf(17));
 
             images = new ArrayList<>();
-            images.add("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/notice_10.png");
+            images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/notice_10.png");
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
                 .spaceId(Long.valueOf(13))
@@ -491,8 +491,8 @@ public class InitDb {
             communityPostService.write(writeCommunityRequest);
 
             List<String> images = new ArrayList<>();
-            images.add("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/community_10-1.png");
-            images.add("https://crewspace-server.s3.ap-northeast-2.amazonaws.com/dummy/community_10-2.png");
+            images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/community_10-1.png");
+            images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/community_10-2.png");
 
             writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
                 "suhan1213@spacer.com", Long.valueOf(32), noImages, "애플 컨퍼런스 정보 공유합니다~ \n 애플에서 2021 하반기 컨퍼런스를 한대요! \n 디자인, 개발 세션이 있으니 관심있는 분들 신청하시면 좋을거 같아요 \n 대학교 재학중이신 분들은 무료로 참석이 가능하고, 졸업생 분들은 사전신청하면 1만원에 가능합니다! \n 아래 정보 확인하시구 다들 컨퍼런스 참여해보세요~ \n \n \n ▶행사명 : 2021 애플 오픈 컨퍼런스 KOREA\n ▶일시 : 2021년 12월 15일\n ▶개요 : 애플최고 애플사랑해 \n ▶후원 : 이희원 대표이사, spacer, 원티드\n <이벤트>\n 사전신청자 대상으로 이벤트를 진행합니다! \n -이벤트 참여자 전원 상품 증정! \n 참여방법 : 선착순 사전신청(200명) \n 상품 \n 맥프로 : 1명 \n 아이폰13 : 2명 \n 애플워치 : 3명 \n 에어팟 프로 : 5명 \n 참여자 전원 2021 애플 굿즈 증정! \n \n \n 문의 : 010-2021-2021");

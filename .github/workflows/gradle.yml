@@ -63,7 +63,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
         
     - name: Upload S3
-      run: aws s3 cp --region ap-northeast-2 --acl private ./crewspace-jar.zip s3://crewspace-server/deploy/crewspace.zip
+      run: aws s3 cp --region ap-northeast-2 --acl private ./crewspace-jar.zip s3://crewspace/deploy/crewspace.zip
 
     - name: Code Deploy
-      run: aws deploy create-deployment --application-name crew-server --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name crew --s3-location bucket=crewspace-server,bundleType=zip,key=deploy/crewspace.zip
+      run: aws deploy create-deployment --application-name crewspace --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name crew --s3-location bucket=crewspace-server,bundleType=zip,key=deploy/crewspace.zip
