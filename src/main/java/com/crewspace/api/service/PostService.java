@@ -108,7 +108,7 @@ public class PostService {
             }
         }
 
-        PageRequest paging = PageRequest.of(request.getOffset(), 2);
+        PageRequest paging = PageRequest.of(request.getOffset(), 10);
 
         List<CommunityPostList> posts;
         if(request.getType().equals("ALL")) {
@@ -135,7 +135,7 @@ public class PostService {
             }
         }
 
-        PageRequest paging = PageRequest.of(request.getOffset(), 2);
+        PageRequest paging = PageRequest.of(request.getOffset(), 10);
 
         List<NoticePostList> posts;
         if(request.getType().equals("ALL")) {
