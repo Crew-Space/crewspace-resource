@@ -116,43 +116,43 @@ public class InitDb {
             spaceService.create(createSpaceRequest);
         }
 
-        // 동아리 가입
+        // 동아리 가입 // 운영(16,4) 기획(17,5) 디쟌(18,6) 개발(19,7)
         public void spaceEnter(){
             SpaceEnterRequestDTO spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan124@spacer.com")
                 .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_1.png")
                 .name("이정일")
                 .description("헤이제이 회장 김수한 입니다! 반가워요~")
-                .memberCategoryId(Long.valueOf(16))
+                .memberCategoryId(Long.valueOf(4))
                 .isAdmin(true)
-                .birthdate("1996/03/03")
+                .birthdate("796/03/03")
                 .email("suhan123@spacer.com")
                 .sns("jung2")
                 .build();
             spaceService.enterSpace(spaceEnterRequest);
 
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan125@spacer.com")
                 .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_2.png")
                 .name("김정이")
                 .description("잘부탁드립니다")
-                .memberCategoryId(Long.valueOf(18))
+                .memberCategoryId(Long.valueOf(6))
                 .isAdmin(false)
-                .birthdate("1996/03/03")
+                .birthdate("796/03/03")
                 .email("suhan124@spacer.com")
                 .sns("jung2")
                 .build();
             spaceService.enterSpace(spaceEnterRequest);
 
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan126@spacer.com")
                 .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_3.png")
                 .name("삼동식")
                 .description("다들 반갑습니다!")
-                .memberCategoryId(Long.valueOf(18))
+                .memberCategoryId(Long.valueOf(6))
                 .isAdmin(false)
                 .birthdate("1996/03/03")
                 .email("suhan124@spacer.com")
@@ -161,12 +161,12 @@ public class InitDb {
             spaceService.enterSpace(spaceEnterRequest);
 
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan127@spacer.com")
                 .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_4.png")
                 .name("사동식")
                 .description("저는 고기를 좋아해요")
-                .memberCategoryId(Long.valueOf(19))
+                .memberCategoryId(Long.valueOf(7))
                 .isAdmin(false)
                 .birthdate("1996/06/06")
                 .email("suhan125@spacer.com")
@@ -175,12 +175,12 @@ public class InitDb {
             spaceService.enterSpace(spaceEnterRequest);
 
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan128@spacer.com")
                 .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_5.png")
                 .name("이민영")
                 .description("개발은 잘 못하지만 열심히 하겠습니다")
-                .memberCategoryId(Long.valueOf(17))
+                .memberCategoryId(Long.valueOf(5))
                 .isAdmin(false)
                 .birthdate("1999/06/06")
                 .email("suhan12dafa5@spacer.com")
@@ -190,12 +190,12 @@ public class InitDb {
 
 
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan129@spacer.com")
                 .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_6.png")
                 .name("안은희")
                 .description("스터디 10개 하는중")
-                .memberCategoryId(Long.valueOf(18))
+                .memberCategoryId(Long.valueOf(6))
                 .isAdmin(false)
                 .birthdate("2001/06/06")
                 .email("suhan12dafa5@spacer.com")
@@ -204,12 +204,12 @@ public class InitDb {
             spaceService.enterSpace(spaceEnterRequest);
 
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan1210@spacer.com")
                 .profileImage("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_et_7.png")
                 .name("한소희")
                 .description("힘들다 지금은 몇시지")
-                .memberCategoryId(Long.valueOf(18))
+                .memberCategoryId(Long.valueOf(6))
                 .isAdmin(false)
                 .birthdate("2011/06/06")
                 .email("aa9919dd5@spacer.com")
@@ -218,12 +218,12 @@ public class InitDb {
             spaceService.enterSpace(spaceEnterRequest);
 
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan1211@spacer.com")
                 .profileImage(defaultProfileImage)
                 .name("오지희")
                 .description("잘부탁!!")
-                .memberCategoryId(Long.valueOf(18))
+                .memberCategoryId(Long.valueOf(6))
                 .isAdmin(false)
                 .birthdate("1967/06/06")
                 .email("aa9on35@spacer.com")
@@ -232,12 +232,12 @@ public class InitDb {
             spaceService.enterSpace(spaceEnterRequest);
 
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan1212@spacer.com")
                 .profileImage(defaultProfileImage)
                 .name("김나연")
                 .description("나연나연")
-                .memberCategoryId(Long.valueOf(19))
+                .memberCategoryId(Long.valueOf(7))
                 .isAdmin(false)
                 .birthdate("1967/06/06")
                 .email("aa9on35@spacer.com")
@@ -246,12 +246,12 @@ public class InitDb {
             spaceService.enterSpace(spaceEnterRequest);
 
             spaceEnterRequest = SpaceEnterRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan1213@spacer.com")
                 .profileImage(defaultProfileImage)
                 .name("고창석")
                 .description("나 싱글인디 창석이여")
-                .memberCategoryId(Long.valueOf(18))
+                .memberCategoryId(Long.valueOf(6))
                 .isAdmin(false)
                 .birthdate("1970/06/06")
                 .email("aa9on35@spacer.com")
@@ -267,7 +267,7 @@ public class InitDb {
             categoryLists.add(new CategoryList("정보공유", false));
 
             CreatePostCategoryRequestDTO categoryRequest = CreatePostCategoryRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .categoryList(categoryLists)
                 .memberEmail("suhan123@spacer.com")
                 .build();
@@ -275,28 +275,28 @@ public class InitDb {
             postCategoryService.create(categoryRequest);
         }
 
-        // 공지 게시글 작성
+        // 공지 게시글 작성 // 운영(16,4) 기획(17,5) 디쟌(18,6) 개발(19,7)
         public void noticePost(){
             List<String> noImages = new ArrayList<>();
             List<Long> noticeTargetsAll = new ArrayList<>();
-            noticeTargetsAll.add(Long.valueOf(16));
-            noticeTargetsAll.add(Long.valueOf(17));
-            noticeTargetsAll.add(Long.valueOf(18));
-            noticeTargetsAll.add(Long.valueOf(19));
+            noticeTargetsAll.add(Long.valueOf(4));
+            noticeTargetsAll.add(Long.valueOf(5));
+            noticeTargetsAll.add(Long.valueOf(6));
+            noticeTargetsAll.add(Long.valueOf(7));
 
             List<Long> noticeTargetsDesign = new ArrayList<>();
-            noticeTargetsAll.add(Long.valueOf(18));
+            noticeTargetsAll.add(Long.valueOf(6));
 
             List<Long> noticeTargetsPM = new ArrayList<>();
-            noticeTargetsAll.add(Long.valueOf(17));
+            noticeTargetsAll.add(Long.valueOf(5));
 
             List<Long> noticeTargetsDeveloper = new ArrayList<>();
-            noticeTargetsAll.add(Long.valueOf(19));
+            noticeTargetsAll.add(Long.valueOf(7));
 
             WriteNoticeRequestDTO writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(14))
+                .postCategoryId(Long.valueOf(2))
                 .targets(noticeTargetsAll)
                 .images(noImages)
                 .title("HEYJ 임원진 연락처")
@@ -307,9 +307,9 @@ public class InitDb {
             noticePostService.write(writeNoticeRequest);
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(14))
+                .postCategoryId(Long.valueOf(2))
                 .targets(noticeTargetsAll)
                 .images(noImages)
                 .title("오리엔테이션 안내")
@@ -320,9 +320,9 @@ public class InitDb {
             noticePostService.write(writeNoticeRequest);
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(31))
+                .postCategoryId(Long.valueOf(19))
                 .targets(noticeTargetsAll)
                 .images(noImages)
                 .title("버디버디 미션 공지")
@@ -333,9 +333,9 @@ public class InitDb {
             noticePostService.write(writeNoticeRequest);
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(14))
+                .postCategoryId(Long.valueOf(2))
                 .targets(noticeTargetsAll)
                 .images(noImages)
                 .title("OT ZOOM 접속 안내")
@@ -346,9 +346,9 @@ public class InitDb {
             noticePostService.write(writeNoticeRequest);
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(14))
+                .postCategoryId(Long.valueOf(2))
                 .targets(noticeTargetsAll)
                 .images(noImages)
                 .title("스터디 안내")
@@ -359,9 +359,9 @@ public class InitDb {
             noticePostService.write(writeNoticeRequest);
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(31))
+                .postCategoryId(Long.valueOf(19))
                 .targets(noticeTargetsAll)
                 .images(noImages)
                 .title("버디버디 2차 미션")
@@ -372,9 +372,9 @@ public class InitDb {
             noticePostService.write(writeNoticeRequest);
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(31))
+                .postCategoryId(Long.valueOf(19))
                 .targets(noticeTargetsDesign)
                 .images(noImages)
                 .title("디자인 1차 과제 공지")
@@ -385,9 +385,9 @@ public class InitDb {
             noticePostService.write(writeNoticeRequest);
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(31))
+                .postCategoryId(Long.valueOf(19))
                 .targets(noticeTargetsDeveloper)
                 .images(noImages)
                 .title("개발 1차 과제")
@@ -401,9 +401,9 @@ public class InitDb {
             images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/notice_9.png");
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(14))
+                .postCategoryId(Long.valueOf(2))
                 .targets(noticeTargetsAll)
                 .images(images)
                 .title("중간고사 휴식 안내")
@@ -415,16 +415,16 @@ public class InitDb {
 
 
             List<Long> noticeTargetsPMDesign = new ArrayList<>();
-            noticeTargetsAll.add(Long.valueOf(18));
-            noticeTargetsAll.add(Long.valueOf(17));
+            noticeTargetsAll.add(Long.valueOf(5));
+            noticeTargetsAll.add(Long.valueOf(6));
 
             images = new ArrayList<>();
             images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/notice_10.png");
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(14))
+                .postCategoryId(Long.valueOf(2))
                 .targets(noticeTargetsPMDesign)
                 .images(images)
                 .title("기획/디자인 특별 세미나")
@@ -435,9 +435,9 @@ public class InitDb {
             noticePostService.write(writeNoticeRequest);
 
             writeNoticeRequest = WriteNoticeRequestDTO.builder()
-                .spaceId(Long.valueOf(13))
+                .spaceId(Long.valueOf(1))
                 .memberEmail("suhan123@spacer.com")
-                .postCategoryId(Long.valueOf(31))
+                .postCategoryId(Long.valueOf(19))
                 .targets(noticeTargetsDesign)
                 .images(noImages)
                 .title("디자인 특별 자료 공유")
@@ -454,54 +454,54 @@ public class InitDb {
             // 커뮤니티 게시글 생성
             List<String> noImages = new ArrayList<>();
 
-            WriteCommunityRequestDTO writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan124@spacer.com", Long.valueOf(14), noImages, "안녕하세요 기획팀 이정일입니다! 요즘날씨가 추워졌는데 방어 좋아하시나요?");
+            WriteCommunityRequestDTO writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan124@spacer.com", Long.valueOf(3), noImages, "안녕하세요 기획팀 이정일입니다! 요즘날씨가 추워졌는데 방어 좋아하시나요?");
             communityPostService.write(writeCommunityRequest);
 
-            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan125@spacer.com", Long.valueOf(32), noImages, "IT 컨퍼런스 초대권이 2장 생겼어요 관심있으신분 있나요? 방가방가 햄톨스~~~");
+            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan125@spacer.com", Long.valueOf(20), noImages, "IT 컨퍼런스 초대권이 2장 생겼어요 관심있으신분 있나요? 방가방가 햄톨스~~~");
             communityPostService.write(writeCommunityRequest);
 
-            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan126@spacer.com", Long.valueOf(14), noImages, "방어파티 4명 구합니다! 저랑 방어 먹으로 가실분? 장소는 홍대 바다회사랑입니다~~ 배고프다");
+            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan126@spacer.com", Long.valueOf(3), noImages, "방어파티 4명 구합니다! 저랑 방어 먹으로 가실분? 장소는 홍대 바다회사랑입니다~~ 배고프다");
             communityPostService.write(writeCommunityRequest);
 
-            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan127@spacer.com", Long.valueOf(32), noImages, "안녕하세요~ 디자인팀 동식입니다! 제가 일하는 곳에서 알바를 구해요 저 대신 일할래요?");
+            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan127@spacer.com", Long.valueOf(20), noImages, "안녕하세요~ 디자인팀 동식입니다! 제가 일하는 곳에서 알바를 구해요 저 대신 일할래요?");
             communityPostService.write(writeCommunityRequest);
 
-            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan128@spacer.com", Long.valueOf(15), noImages, "여러분 내일 홍대에서 모각공 하실래요?! 근데 전 안가요 ㅎㅎ");
+            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan128@spacer.com", Long.valueOf(3), noImages, "여러분 내일 홍대에서 모각공 하실래요?! 근데 전 안가요 ㅎㅎ");
             communityPostService.write(writeCommunityRequest);
 
-            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan129@spacer.com", Long.valueOf(32), noImages, "[spacer 이희원 대표님 온라인 강연] 제가 너무 좋아하는 기업의 대표님 강연이 있어요! 듣던가 말던가");
+            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan129@spacer.com", Long.valueOf(20), noImages, "[spacer 이희원 대표님 온라인 강연] 제가 너무 좋아하는 기업의 대표님 강연이 있어요! 듣던가 말던가");
             communityPostService.write(writeCommunityRequest);
 
-            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan1210@spacer.com", Long.valueOf(32), noImages, "정보공유 합니다 ! 노트북 중에 애플이 가장 좋은거 아시나요? 왤까요");
+            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan1210@spacer.com", Long.valueOf(20), noImages, "정보공유 합니다 ! 노트북 중에 애플이 가장 좋은거 아시나요? 왤까요");
             communityPostService.write(writeCommunityRequest);
 
-            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan1211@spacer.com", Long.valueOf(32), noImages, "안녕하세요 개발팀 오지희입니다! 지인이 프로젝트 팀원을 구하고 있어서 공유합니다");
+            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan1211@spacer.com", Long.valueOf(20), noImages, "안녕하세요 개발팀 오지희입니다! 지인이 프로젝트 팀원을 구하고 있어서 공유합니다");
             communityPostService.write(writeCommunityRequest);
 
-            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan1212@spacer.com", Long.valueOf(32), noImages, "figma의 flame 기능을 아시나요?! 디자인을 완전 편하게 할 수 있는 개꿀팁! 대방출출출");
+            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan1212@spacer.com", Long.valueOf(20), noImages, "figma의 flame 기능을 아시나요?! 디자인을 완전 편하게 할 수 있는 개꿀팁! 대방출출출");
             communityPostService.write(writeCommunityRequest);
 
             List<String> images = new ArrayList<>();
             images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/community_10-1.png");
             images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/community_10-2.png");
 
-            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(13),
-                "suhan1213@spacer.com", Long.valueOf(32), noImages, "애플 컨퍼런스 정보 공유합니다~ \n 애플에서 2021 하반기 컨퍼런스를 한대요! \n 디자인, 개발 세션이 있으니 관심있는 분들 신청하시면 좋을거 같아요 \n 대학교 재학중이신 분들은 무료로 참석이 가능하고, 졸업생 분들은 사전신청하면 1만원에 가능합니다! \n 아래 정보 확인하시구 다들 컨퍼런스 참여해보세요~ \n \n \n ▶행사명 : 2021 애플 오픈 컨퍼런스 KOREA\n ▶일시 : 2021년 12월 15일\n ▶개요 : 애플최고 애플사랑해 \n ▶후원 : 이희원 대표이사, spacer, 원티드\n <이벤트>\n 사전신청자 대상으로 이벤트를 진행합니다! \n -이벤트 참여자 전원 상품 증정! \n 참여방법 : 선착순 사전신청(200명) \n 상품 \n 맥프로 : 1명 \n 아이폰13 : 2명 \n 애플워치 : 3명 \n 에어팟 프로 : 5명 \n 참여자 전원 2021 애플 굿즈 증정! \n \n \n 문의 : 010-2021-2021");
+            writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
+                "suhan1213@spacer.com", Long.valueOf(20), noImages, "애플 컨퍼런스 정보 공유합니다~ \n 애플에서 2021 하반기 컨퍼런스를 한대요! \n 디자인, 개발 세션이 있으니 관심있는 분들 신청하시면 좋을거 같아요 \n 대학교 재학중이신 분들은 무료로 참석이 가능하고, 졸업생 분들은 사전신청하면 1만원에 가능합니다! \n 아래 정보 확인하시구 다들 컨퍼런스 참여해보세요~ \n \n \n ▶행사명 : 2021 애플 오픈 컨퍼런스 KOREA\n ▶일시 : 2021년 12월 15일\n ▶개요 : 애플최고 애플사랑해 \n ▶후원 : 이희원 대표이사, spacer, 원티드\n <이벤트>\n 사전신청자 대상으로 이벤트를 진행합니다! \n -이벤트 참여자 전원 상품 증정! \n 참여방법 : 선착순 사전신청(200명) \n 상품 \n 맥프로 : 1명 \n 아이폰13 : 2명 \n 애플워치 : 3명 \n 에어팟 프로 : 5명 \n 참여자 전원 2021 애플 굿즈 증정! \n \n \n 문의 : 010-2021-2021");
             communityPostService.write(writeCommunityRequest);
         }
 
         public void dbInit() {
             member();
-            createSpace();// 운영(16) 기획(17) 디쟌(18) 개발(19)
+            createSpace();// 운영(16,4) 기획(17,5) 디쟌(18,6) 개발(19,7)
             spaceEnter();
             makeCategory();
             noticePost();
