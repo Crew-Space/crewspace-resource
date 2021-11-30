@@ -12,6 +12,7 @@ public class SpaceMemberResponseDTO {
     private String name;
     private String description;
     private String memberCategory;
+    private Long memberCategoryId;
 
     private String birthdate;
     private String email;
@@ -24,6 +25,7 @@ public class SpaceMemberResponseDTO {
         this.name = spaceMember.getName();
         this.description = spaceMember.getDescription();
         this.memberCategory = spaceMember.getMemberCategory().getName();
+        this.memberCategoryId = spaceMember.getMemberCategory().getId();
         this.birthdate = spaceMember.getBirthdate();
         this.email = spaceMember.getEmail();
         this.contact = spaceMember.getContact();
