@@ -31,7 +31,8 @@ public enum SuccessCode {
     LOAD_NOTICE_LIST_SUCCESS(OK, "공지 게시글 로딩을 성공했습니다!"),
     LOAD_MEMBER_LIST_SUCCESS(OK, "회원 리스트 로딩을 성공했습니다!"),
     SEARCH_MEMBER_LIST_SUCCESS(OK, "회원 검색을 성공했습니다!"),
-    MEMBER_INFO_SUCCESS(OK, "회원 프로필 상세 조회를 성공했습니다~!");
+    MEMBER_INFO_SUCCESS(OK, "회원 프로필 상세 조회를 성공했습니다~!"),
+    MODIFY_MEMBER_SUCCESS(OK, "회원 프로필 수정을 성공했습니다!");
 
     private final HttpStatus status;
     private final String msg;

@@ -3,6 +3,7 @@ package com.crewspace.api.domain.spaceMember;
 import com.crewspace.api.domain.BaseTimeEntity;
 import com.crewspace.api.domain.member.Member;
 import com.crewspace.api.domain.space.Space;
+import com.crewspace.api.dto.req.spaceMember.ModifyMemberRequestDTO;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -85,5 +86,19 @@ public class SpaceMember extends BaseTimeEntity {
             this.myNoticePush = false;
             this.communityPush = false;
         }
+    }
+
+    // 업데이트 메서드
+    public void update(ModifyMemberRequestDTO requestDTO, MemberCategory memberCategory){
+        this.image = requestDTO.getProfileImage().length() > 0 ? requestDTO.getProfileImage() : this.image;
+        this.name = requestDTO.getName() ;
+        this.description = requestDTO.getDescription();
+        this.memberCategory = memberCategory;
+        this.isAdmin = memberCategory.getIsAdmin();
+        this.birthdate = requestDTO.getBirthdate();
+        this.email = requestDTO.getEmail();
+        this.contact = requestDTO.getContact();
+        this.sns = requestDTO.getSns();
+        this.etc = requestDTO.getEtc();
     }
 }
