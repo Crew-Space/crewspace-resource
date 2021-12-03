@@ -147,7 +147,7 @@ public class PostController {
     @GetMapping("/v1/posts/notice")
     public ResponseEntity<NoticePostListResponse> noticeList(@Valid @RequestHeader("Space-Id") Long spaceId,
         @RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
-        @RequestParam(value = "postCategoryId", defaultValue = "-1", required = false) Long postCategoryId,
+        @RequestParam(value = "postCategoryId", defaultValue = "-2", required = false) Long postCategoryId,
         @RequestParam(value = "type") String type){
 
         String memberEmail = SecurityUtil.getCurrentMemberId();
