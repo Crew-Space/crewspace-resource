@@ -2,6 +2,7 @@ package com.crewspace.api.controller.v1;
 
 import static com.crewspace.api.constants.SuccessCode.*;
 
+import com.crewspace.api.constants.ExceptionCode;
 import com.crewspace.api.dto.req.post.PostListRequestDTO;
 import com.crewspace.api.dto.req.post.PostRequestDTO;
 import com.crewspace.api.dto.req.post.WriteCommunityRequest;
@@ -17,6 +18,7 @@ import com.crewspace.api.dto.res.post.NoticePostDetailResponseDTO;
 import com.crewspace.api.dto.res.post.NoticePostListResponse;
 import com.crewspace.api.dto.res.post.NoticePostListResponseDTO;
 import com.crewspace.api.dto.res.post.WritePostResponse;
+import com.crewspace.api.exception.CustomException;
 import com.crewspace.api.service.CommunityPostService;
 import com.crewspace.api.service.NoticePostService;
 import com.crewspace.api.service.PostService;
@@ -52,6 +54,10 @@ public class PostController {
     @PostMapping("/v1/posts/community/{post-category-id}/post")
     public ResponseEntity<WritePostResponse> writeCommunityPost(@PathVariable("post-category-id") Long postCategoryId,
         @Valid @RequestHeader("Space-Id") Long spaceId, @Valid @ModelAttribute WriteCommunityRequest request){
+
+        if(request.getImage().size() == 0 && request.getDescription() == null){
+            throw new CustomException(ExceptionCode.AT_LEAST_ONE_VALUE);
+        }
 
         String memberEmail = SecurityUtil.getCurrentMemberId();
         List<String> imageURLs = new ArrayList<>();
