@@ -18,7 +18,7 @@ public enum ExceptionCode {
     NO_SPACE_ID_HEADER(BAD_REQUEST, "헤더에 동아리 id 값이 없습니다"),
     BAD_POST_TYPE(BAD_REQUEST, "게시글 타입이 잘못되었습니다."),
     NO_REQUIRED_PARAMETER(BAD_REQUEST, "필수 요청 파라미터 값이 없습니다"),
-
+    AT_LEAST_ONE_VALUE(BAD_REQUEST, "한 가지 요소는 꼭 넣어주세요!"),
     /* 401 - 인증 실패 */
     // token 관련
     WRONG_TYPE_TOKEN(UNAUTHORIZED, "잘못된 JWT 서명을 가진 토큰입니다."),
