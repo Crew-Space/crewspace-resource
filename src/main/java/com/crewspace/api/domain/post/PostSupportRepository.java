@@ -98,6 +98,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
             .leftJoin(readPost)
             .on(noticePost.id.eq(readPost.post.id))
             .on(readPost.member.eq(spaceMember))
+            .where(postCategory.space.eq(spaceMember.getSpace()))
             .orderBy(post.createdAt.desc())
             .limit(10)
             .fetch();
