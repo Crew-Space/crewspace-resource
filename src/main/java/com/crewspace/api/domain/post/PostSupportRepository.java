@@ -113,6 +113,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(spaceMember.memberCategory, memberCategory).fetchJoin()
                 .join(spaceMember.member, member).fetchJoin()
                 .leftJoin(savedPost).on(communityPost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
+                .where(postCategory.space.eq(reader.getSpace()))
                 .orderBy(communityPost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -126,7 +127,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(spaceMember.memberCategory, memberCategory).fetchJoin()
                 .join(spaceMember.member, member).fetchJoin()
                 .leftJoin(savedPost).on(communityPost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
-                .where(communityPost.postCategory.id.eq(postCategoryId))
+                .where(communityPost.postCategory.id.eq(postCategoryId).and(postCategory.space.eq(reader.getSpace())))
                 .orderBy(communityPost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -145,6 +146,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(spaceMember.memberCategory, memberCategory).fetchJoin()
                 .join(spaceMember.member, member).fetchJoin()
                 .join(savedPost).on(communityPost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
+                .where(postCategory.space.eq(reader.getSpace()))
                 .orderBy(communityPost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -158,7 +160,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(spaceMember.memberCategory, memberCategory).fetchJoin()
                 .join(spaceMember.member, member).fetchJoin()
                 .join(savedPost).on(communityPost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
-                .where(communityPost.postCategory.id.eq(postCategoryId))
+                .where(communityPost.postCategory.id.eq(postCategoryId).and(postCategory.space.eq(reader.getSpace())))
                 .orderBy(communityPost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -167,6 +169,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
 
     }
 
+    // notice post 의 postcategory의 space와 spacemember space가 같아야함
     public List<NoticePostList> allNoticeList(SpaceMember reader, Pageable pageable, Long postCategoryId){
 
         if(postCategoryId.equals(Long.valueOf(-1))){
@@ -177,6 +180,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(noticePost.postCategory, postCategory).fetchJoin()
                 .leftJoin(readPost).on(noticePost.id.eq(readPost.post.id)).on(readPost.member.eq(reader))
                 .leftJoin(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
+                .where(postCategory.space.eq(reader.getSpace()))
                 .orderBy(noticePost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -189,7 +193,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(noticePost.postCategory, postCategory).fetchJoin()
                 .leftJoin(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
                 .leftJoin(readPost).on(noticePost.id.eq(readPost.post.id)).on(readPost.member.eq(reader))
-                .where(noticePost.postCategory.id.eq(postCategoryId))
+                .where(noticePost.postCategory.id.eq(postCategoryId).and(postCategory.space.eq(reader.getSpace())))
                 .orderBy(noticePost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -208,6 +212,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(noticePost.postCategory, postCategory).fetchJoin()
                 .join(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
                 .leftJoin(readPost).on(noticePost.id.eq(readPost.post.id)).on(readPost.member.eq(reader))
+                .where(postCategory.space.eq(reader.getSpace()))
                 .orderBy(noticePost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -220,7 +225,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(noticePost.postCategory, postCategory).fetchJoin()
                 .join(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
                 .leftJoin(readPost).on(noticePost.id.eq(readPost.post.id)).on(readPost.member.eq(reader))
-                .where(noticePost.postCategory.id.eq(postCategoryId))
+                .where(noticePost.postCategory.id.eq(postCategoryId).and(postCategory.space.eq(reader.getSpace())))
                 .orderBy(noticePost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -238,6 +243,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(noticePost.postCategory, postCategory).fetchJoin()
                 .leftJoin(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
                 .where(noticePost.id.notIn(JPAExpressions.select(readPost.post.id).from(readPost).where(readPost.member.eq(reader))))
+                .where(postCategory.space.eq(reader.getSpace()))
                 .orderBy(noticePost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -250,7 +256,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(noticePost.postCategory, postCategory).fetchJoin()
                 .leftJoin(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
                 .where(noticePost.id.notIn(JPAExpressions.select(readPost.post.id).from(readPost).where(readPost.member.eq(reader))))
-                .where(noticePost.postCategory.id.eq(postCategoryId))
+                .where(noticePost.postCategory.id.eq(postCategoryId).and(postCategory.space.eq(reader.getSpace())))
                 .orderBy(noticePost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
