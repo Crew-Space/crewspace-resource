@@ -91,6 +91,9 @@ public class InitDb {
             // 시연자
             Member member12 = new Member("12", "one9872@naver.com", "카카오 이미지-테스트 유저", "테스트 유저", false);
             memberRepository.save(member12);
+
+            Member member13 = new Member("13", "aa9919@naver.com", "카카오 이미지-테스트 유저", "테스트 유저", false);
+            memberRepository.save(member13);
         }
 
         // 동아리 생성(13) - 동아리 배너, 이미지 삽입
@@ -285,13 +288,13 @@ public class InitDb {
             noticeTargetsAll.add(Long.valueOf(7));
 
             List<Long> noticeTargetsDesign = new ArrayList<>();
-            noticeTargetsAll.add(Long.valueOf(6));
+            noticeTargetsDesign.add(Long.valueOf(6));
 
             List<Long> noticeTargetsPM = new ArrayList<>();
-            noticeTargetsAll.add(Long.valueOf(5));
+            noticeTargetsPM.add(Long.valueOf(5));
 
             List<Long> noticeTargetsDeveloper = new ArrayList<>();
-            noticeTargetsAll.add(Long.valueOf(7));
+            noticeTargetsDeveloper.add(Long.valueOf(7));
 
             WriteNoticeRequestDTO writeNoticeRequest = WriteNoticeRequestDTO.builder()
                 .spaceId(Long.valueOf(1))
@@ -415,8 +418,8 @@ public class InitDb {
 
 
             List<Long> noticeTargetsPMDesign = new ArrayList<>();
-            noticeTargetsAll.add(Long.valueOf(5));
-            noticeTargetsAll.add(Long.valueOf(6));
+            noticeTargetsPMDesign.add(Long.valueOf(5));
+            noticeTargetsPMDesign.add(Long.valueOf(6));
 
             images = new ArrayList<>();
             images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/notice_10.png");
@@ -495,7 +498,7 @@ public class InitDb {
             images.add("https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/community_10-2.png");
 
             writeCommunityRequest = WriteCommunityRequestDTO.of(Long.valueOf(1),
-                "suhan1213@spacer.com", Long.valueOf(20), noImages, "애플 컨퍼런스 정보 공유합니다~ \n 애플에서 2021 하반기 컨퍼런스를 한대요! \n 디자인, 개발 세션이 있으니 관심있는 분들 신청하시면 좋을거 같아요 \n 대학교 재학중이신 분들은 무료로 참석이 가능하고, 졸업생 분들은 사전신청하면 1만원에 가능합니다! \n 아래 정보 확인하시구 다들 컨퍼런스 참여해보세요~ \n \n \n ▶행사명 : 2021 애플 오픈 컨퍼런스 KOREA\n ▶일시 : 2021년 12월 15일\n ▶개요 : 애플최고 애플사랑해 \n ▶후원 : 이희원 대표이사, spacer, 원티드\n <이벤트>\n 사전신청자 대상으로 이벤트를 진행합니다! \n -이벤트 참여자 전원 상품 증정! \n 참여방법 : 선착순 사전신청(200명) \n 상품 \n 맥프로 : 1명 \n 아이폰13 : 2명 \n 애플워치 : 3명 \n 에어팟 프로 : 5명 \n 참여자 전원 2021 애플 굿즈 증정! \n \n \n 문의 : 010-2021-2021");
+                "suhan1213@spacer.com", Long.valueOf(20), images, "애플 컨퍼런스 정보 공유합니다~ \n 애플에서 2021 하반기 컨퍼런스를 한대요! \n 디자인, 개발 세션이 있으니 관심있는 분들 신청하시면 좋을거 같아요 \n 대학교 재학중이신 분들은 무료로 참석이 가능하고, 졸업생 분들은 사전신청하면 1만원에 가능합니다! \n 아래 정보 확인하시구 다들 컨퍼런스 참여해보세요~ \n \n \n ▶행사명 : 2021 애플 오픈 컨퍼런스 KOREA\n ▶일시 : 2021년 12월 15일\n ▶개요 : 애플최고 애플사랑해 \n ▶후원 : 이희원 대표이사, spacer, 원티드\n <이벤트>\n 사전신청자 대상으로 이벤트를 진행합니다! \n -이벤트 참여자 전원 상품 증정! \n 참여방법 : 선착순 사전신청(200명) \n 상품 \n 맥프로 : 1명 \n 아이폰13 : 2명 \n 애플워치 : 3명 \n 에어팟 프로 : 5명 \n 참여자 전원 2021 애플 굿즈 증정! \n \n \n 문의 : 010-2021-2021");
             communityPostService.write(writeCommunityRequest);
         }
 
