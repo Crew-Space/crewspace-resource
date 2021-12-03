@@ -89,7 +89,7 @@ public class InitDb {
             memberRepository.save(member11);
 
             // 시연자
-            Member member12 = new Member("12", "one9872@naver.com", "카카오 이미지-테스트 유저", "테스트 유저", false);
+            Member member12 = new Member("12", "one9872@naver.com", "https://crewspace.s3.ap-northeast-2.amazonaws.com/dummy/profile_jieun.png", "테스트 유저", false);
             memberRepository.save(member12);
 
             Member member13 = new Member("13", "aa9919@naver.com", "카카오 이미지-테스트 유저", "테스트 유저", false);

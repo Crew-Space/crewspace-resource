@@ -127,7 +127,7 @@ public class PostService {
                 request.getSpaceId(), request.getMemberEmail())
             .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
 
-        if(!request.getPostCategoryId().equals(Long.valueOf(-1))) {
+        if(!request.getPostCategoryId().equals(Long.valueOf(-1)) && !request.getPostCategoryId().equals(Long.valueOf(-2))) {
             PostCategory postCategory = postCategoryRepository.findById(request.getPostCategoryId())
                 .orElseThrow(() -> new CustomException(POST_CATEGORY_NOT_FOUND));
             if(!postCategory.getIsNotice()){

@@ -5,6 +5,7 @@ import com.crewspace.api.domain.memberPost.QFixedPost;
 import com.crewspace.api.domain.memberPost.QMemberPost;
 import com.crewspace.api.domain.memberPost.QReadPost;
 import com.crewspace.api.domain.memberPost.QSavedPost;
+import com.crewspace.api.domain.spaceMember.MemberCategory;
 import com.crewspace.api.domain.spaceMember.QMemberCategory;
 import com.crewspace.api.domain.spaceMember.QSpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMember;
@@ -41,6 +42,8 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
     QFixedPost fixedPost = memberPost.as(QFixedPost.class);
     QSavedPost savedPost = memberPost1.as(QSavedPost.class);
     QReadPost readPost = memberPost2.as(QReadPost.class);
+
+    QNoticeTarget noticeTarget = QNoticeTarget.noticeTarget;
 
 
     public PostSupportRepository(JPAQueryFactory jpaQueryFactory) {
@@ -173,7 +176,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
     // notice post 의 postcategory의 space와 spacemember space가 같아야함
     public List<NoticePostList> allNoticeList(SpaceMember reader, Pageable pageable, Long postCategoryId){
 
-        if(postCategoryId.equals(Long.valueOf(-1))){
+        if(postCategoryId.equals(Long.valueOf(-2))){
             return jpaQueryFactory
                 .select(Projections.constructor(NoticePostList.class, noticePost, savedPost.post.id, readPost.post.id))
                 .from(noticePost)
@@ -182,6 +185,21 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .leftJoin(readPost).on(noticePost.id.eq(readPost.post.id)).on(readPost.member.eq(reader))
                 .leftJoin(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
                 .where(postCategory.space.eq(reader.getSpace()))
+                .orderBy(noticePost.createdAt.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+        }else if(postCategoryId.equals(Long.valueOf(-1))){
+            return jpaQueryFactory
+                .select(Projections.constructor(NoticePostList.class, noticePost, savedPost.post.id, readPost.post.id))
+                .from(noticePost)
+                .join(noticePost.author, spaceMember).fetchJoin()
+                .join(noticePost.postCategory, postCategory).fetchJoin()
+                .join(noticePost.targets, noticeTarget).fetchJoin()
+                .leftJoin(readPost).on(noticePost.id.eq(readPost.post.id)).on(readPost.member.eq(reader))
+                .leftJoin(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
+                .where(postCategory.space.eq(reader.getSpace()))
+                .where(noticeTarget.target.eq(reader.getMemberCategory()))
                 .orderBy(noticePost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -205,7 +223,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
 
     public List<NoticePostList> saveNoticeList(SpaceMember reader, Pageable pageable, Long postCategoryId){
 
-        if(postCategoryId.equals(Long.valueOf(-1))){
+        if(postCategoryId.equals(Long.valueOf(-2))){
             return jpaQueryFactory
                 .select(Projections.constructor(NoticePostList.class, noticePost, savedPost.post.id, readPost.post.id))
                 .from(noticePost)
@@ -214,6 +232,21 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .join(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
                 .leftJoin(readPost).on(noticePost.id.eq(readPost.post.id)).on(readPost.member.eq(reader))
                 .where(postCategory.space.eq(reader.getSpace()))
+                .orderBy(noticePost.createdAt.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+        }else if(postCategoryId.equals(Long.valueOf(-1))){
+            return jpaQueryFactory
+                .select(Projections.constructor(NoticePostList.class, noticePost, savedPost.post.id, readPost.post.id))
+                .from(noticePost)
+                .join(noticePost.author, spaceMember).fetchJoin()
+                .join(noticePost.postCategory, postCategory).fetchJoin()
+                .join(noticePost.targets, noticeTarget).fetchJoin()
+                .join(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
+                .leftJoin(readPost).on(noticePost.id.eq(readPost.post.id)).on(readPost.member.eq(reader))
+                .where(postCategory.space.eq(reader.getSpace()))
+                .where(noticeTarget.target.eq(reader.getMemberCategory()))
                 .orderBy(noticePost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -236,7 +269,7 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
     }
 
     public List<NoticePostList> notReadNoticeList(SpaceMember reader, Pageable pageable, Long postCategoryId){
-        if(postCategoryId.equals(Long.valueOf(-1))){
+        if(postCategoryId.equals(Long.valueOf(-2))){
             return jpaQueryFactory
                 .select(Projections.constructor(NoticePostList.class, noticePost, savedPost.post.id))
                 .from(noticePost)
@@ -245,6 +278,21 @@ public class PostSupportRepository extends QuerydslRepositorySupport {
                 .leftJoin(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
                 .where(noticePost.id.notIn(JPAExpressions.select(readPost.post.id).from(readPost).where(readPost.member.eq(reader))))
                 .where(postCategory.space.eq(reader.getSpace()))
+                .orderBy(noticePost.createdAt.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+        }else if(postCategoryId.equals(Long.valueOf(-1))){
+            return jpaQueryFactory
+                .select(Projections.constructor(NoticePostList.class, noticePost, savedPost.post.id))
+                .from(noticePost)
+                .join(noticePost.author, spaceMember).fetchJoin()
+                .join(noticePost.postCategory, postCategory).fetchJoin()
+                .join(noticePost.targets, noticeTarget).fetchJoin()
+                .leftJoin(savedPost).on(noticePost.id.eq(savedPost.post.id)).on(savedPost.member.eq(reader))
+                .where(noticePost.id.notIn(JPAExpressions.select(readPost.post.id).from(readPost).where(readPost.member.eq(reader))))
+                .where(postCategory.space.eq(reader.getSpace()))
+                .where(noticeTarget.target.eq(reader.getMemberCategory()))
                 .orderBy(noticePost.createdAt.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
