@@ -7,6 +7,9 @@
 # aws config
 /src/main/resources/aws.yml
 
+# Firebase SDK
+/src/main/resources/crew-space-admin-sdk.json
+
 # test
 /src/test/resources/*
 
