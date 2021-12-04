@@ -27,7 +27,9 @@ public class S3Util {
 
         amazonS3Client.putObject(new PutObjectRequest(bucket, path+"/"+fileName, file.getInputStream(), null)
             .withCannedAcl(CannedAccessControlList.PublicRead));
-        return amazonS3Client.getUrl(bucket, path+"/"+fileName).toString();
+
+        String imageURL = amazonS3Client.getUrl(bucket, path+"/"+fileName).toString();
+        return imageURL.replace(path, "thumb/"+path);
     }
 
     public String postUpload(MultipartFile file) throws IOException {
