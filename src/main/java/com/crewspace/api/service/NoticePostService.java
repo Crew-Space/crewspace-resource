@@ -18,8 +18,13 @@ import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
 import com.crewspace.api.dto.req.post.WriteNoticeRequestDTO;
 import com.crewspace.api.exception.CustomException;
+import com.crewspace.api.fcm.FireBaseUtil;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +41,16 @@ public class NoticePostService {
     private final PostImageRepository postImageRepository;
     private final NoticeTargetRepository noticeTargetRepository;
 
+    private final FireBaseUtil fireBaseUtil;
+
+    @Value("${fcm.token}")
+    private String token;
+    @Value("${default_image.space}")
+    private String defaultSpaceImage;
+
+
     @Transactional
-    public void write(WriteNoticeRequestDTO request){
+    public void write(WriteNoticeRequestDTO request) {
         SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
                 request.getSpaceId(), request.getMemberEmail())
             .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
@@ -56,6 +69,18 @@ public class NoticePostService {
         // 공지 게시글 저장
         NoticePost noticePost = request.toNoticePost(spaceMember, postCategory);
         noticePostRepository.save(noticePost);
+
+        // 푸시 전송
+        Map<String, String> pushData = new HashMap<String, String>();;
+        pushData.put("spaceId", spaceMember.getSpace().getId().toString());
+        pushData.put("postId", noticePost.getId().toString());
+        pushData.put("title", spaceMember.getSpace().getName() + "의 새로운 공지가 도착했어요💌");
+        try{
+            fireBaseUtil.sendMessageTo(token, pushData, spaceMember.getSpace().getName() + "의 새로운 공지가 도착했어요💌", defaultSpaceImage);
+        }catch(IOException e){
+            throw new RuntimeException("푸시 전송 !!!! 실패!");
+        }
+
 
         // 게시글 이미지 저장
         List<PostImage> postImages = request.toPostImages(noticePost);

@@ -45,6 +45,9 @@ public class InitDb {
         @Value("${default_image.space_banner}")
         private String defaultSpaceBanner;
 
+        @Value("${fcm.token}")
+        private String token;
+
         private final SpaceService spaceService;
         private final MemberRepository memberRepository;
         private final CommunityPostService communityPostService;
