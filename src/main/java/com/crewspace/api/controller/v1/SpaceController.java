@@ -4,6 +4,8 @@ import static com.crewspace.api.constants.SuccessCode.*;
 
 import com.crewspace.api.dto.req.space.CreateSpaceRequest;
 import com.crewspace.api.dto.req.space.InvitationCodeRequestDTO;
+import com.crewspace.api.dto.req.space.ModifyBannerRequest;
+import com.crewspace.api.dto.req.space.ModifyBannerRequestDTO;
 import com.crewspace.api.dto.req.space.RegisterInfoRequestDTO;
 import com.crewspace.api.dto.req.space.SpaceEnterRequest;
 import com.crewspace.api.dto.req.space.SpaceMainRequestDTO;
@@ -11,12 +13,14 @@ import com.crewspace.api.dto.res.space.CreateSpaceResponse;
 import com.crewspace.api.dto.res.space.CreateSpaceResponseDTO;
 import com.crewspace.api.dto.res.space.InvitationCodeResponse;
 import com.crewspace.api.dto.res.space.InvitationCodeResponseDTO;
+import com.crewspace.api.dto.res.space.ModifyBannerResponse;
 import com.crewspace.api.dto.res.space.RegisterInfoResponse;
 import com.crewspace.api.dto.res.space.RegisterInfoResponseDTO;
 import com.crewspace.api.dto.res.space.SpaceEnterResponse;
 import com.crewspace.api.dto.res.space.SpaceEnterResponseDTO;
 import com.crewspace.api.dto.res.space.SpaceMainResponse;
 import com.crewspace.api.dto.res.space.SpaceMainResponseDTO;
+import com.crewspace.api.dto.res.spaceMember.ModifyMemberResponse;
 import com.crewspace.api.service.SpaceService;
 import com.crewspace.api.utils.S3Util;
 import com.crewspace.api.utils.SecurityUtil;
@@ -27,6 +31,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -114,4 +119,26 @@ public class SpaceController {
 
         return SpaceMainResponse.newResponse(LOAD_SPACE_MAIN_SUCEESS, responseDTO);
     }
+
+    @PatchMapping("/banner")
+    public ResponseEntity<ModifyBannerResponse> modifyBanner(@Valid @RequestHeader("Space-Id") Long spaceId,
+        @Valid @ModelAttribute ModifyBannerRequest request) throws IOException{
+
+        String imageURL;
+        String memberEmail = SecurityUtil.getCurrentMemberId();
+
+
+        imageURL = s3Util.spaceUpload(request.getImage());
+
+        ModifyBannerRequestDTO requestDTO = ModifyBannerRequestDTO.builder()
+            .spaceId(spaceId)
+            .memberEmail(memberEmail)
+            .bannerImage(imageURL)
+            .build();
+
+        spaceService.modifyBanner(requestDTO);
+
+        return ModifyBannerResponse.newResponse(MODIFY_BANNER_SUCCESS);
+    }
+
 }
