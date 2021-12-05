@@ -15,6 +15,7 @@ import com.crewspace.api.domain.spaceMember.SpaceMember;
 import com.crewspace.api.domain.spaceMember.SpaceMemberRepository;
 import com.crewspace.api.dto.req.space.CreateSpaceRequestDTO;
 import com.crewspace.api.dto.req.space.InvitationCodeRequestDTO;
+import com.crewspace.api.dto.req.space.ModifyBannerRequestDTO;
 import com.crewspace.api.dto.req.space.RegisterInfoRequestDTO;
 import com.crewspace.api.dto.req.space.SpaceEnterRequestDTO;
 import com.crewspace.api.dto.req.space.SpaceMainRequestDTO;
@@ -137,5 +138,14 @@ public class SpaceService {
             .fixedNotices(fixedPosts)
             .newNotices(newNotices)
             .build();
+    }
+
+    @Transactional
+    public void modifyBanner(ModifyBannerRequestDTO request){
+        SpaceMember spaceMember = spaceMemberRepository.findBySpaceIdAndMemberEmail(
+                request.getSpaceId(), request.getMemberEmail())
+            .orElseThrow(() -> new CustomException(SPACE_MEMBER_NOT_FOUND));
+
+        spaceMember.getSpace().updateBanner(request.getBannerImage());
     }
 }
