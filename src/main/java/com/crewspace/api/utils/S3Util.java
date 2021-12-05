@@ -25,11 +25,12 @@ public class S3Util {
 
         String fileName = LocalDateTime.now().format(formatter);
 
-        amazonS3Client.putObject(new PutObjectRequest(bucket, path+"/"+fileName, file.getInputStream(), null)
+        amazonS3Client.putObject(new PutObjectRequest(bucket, path+"/"+fileName+".jpg", file.getInputStream(), null)
             .withCannedAcl(CannedAccessControlList.PublicRead));
 
-        String imageURL = amazonS3Client.getUrl(bucket, path+"/"+fileName).toString();
-        return imageURL.replace(path, "thumb/"+path);
+        String imageURL = amazonS3Client.getUrl(bucket, path+"/"+fileName+".jpg").toString();
+        //imageURL.replace(path, "thumb/"+path);
+        return imageURL;
     }
 
     public String postUpload(MultipartFile file) throws IOException {
@@ -41,7 +42,7 @@ public class S3Util {
     }
 
     public String spaceUpload(MultipartFile file) throws IOException {
-        return upload(file, "space");
+        return upload(file, "spaces");
     }
 
     public String bannerUpload(MultipartFile file) throws IOException {
