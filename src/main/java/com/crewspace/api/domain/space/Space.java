@@ -54,4 +54,9 @@ public class Space extends BaseTimeEntity {
         this.hasSns = hasSns;
         this.hasEtc = hasEtc;
     }
+
+    // 배너 업데이트 메서드
+    public void updateBanner(String bannerImage){
+        this.bannerImage = bannerImage;
+    }
 }
